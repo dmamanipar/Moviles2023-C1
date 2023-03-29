@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">IntroduccionJPC</string>
+    <string name="app_nombre_saludo">Olá %1$s</string>
+    <string name="app_tiempo">3 minutos atrás</string>
+</resources>
