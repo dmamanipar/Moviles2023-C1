@@ -5,9 +5,11 @@ import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.currentBackStackEntryAsState
 import pe.edu.upeu.ui.navigation.Destinations
 import pe.edu.upeu.ui.navigation.currentRoute
 
@@ -17,8 +19,15 @@ fun BottomNavigationBar(
     navController: NavHostController,
     items: List<Destinations>
 ) {
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRouteX = navBackStackEntry?.destination?.route
+    if (currentRouteX == null || currentRouteX == Destinations.Login.route) {
+        return
+    }
+
     val currentRoute = currentRoute(navController)
     BottomNavigation(
+
         backgroundColor = Color(0.0f, 0.8f, 0.8f),
         contentColor = Color.White
     ) {

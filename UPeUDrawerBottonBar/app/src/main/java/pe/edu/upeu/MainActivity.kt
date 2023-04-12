@@ -20,6 +20,7 @@ import pe.edu.upeu.ui.presentation.components.Dialog
 import pe.edu.upeu.ui.presentation.components.Drawer
 import pe.edu.upeu.ui.presentation.components.TopBar
 import pe.edu.upeu.ui.theme.BLUE800
+import pe.edu.upeu.ui.theme.LightRedColorPalette
 import pe.edu.upeu.ui.theme.UPeUDrawerBottonBarTheme
 
 class MainActivity : ComponentActivity() {
@@ -33,8 +34,8 @@ class MainActivity : ComponentActivity() {
                     color = BLUE800
                 )
             }
-
-            UPeUDrawerBottonBarTheme (darkTheme = darkMode.value){
+            val colors = LightRedColorPalette
+            UPeUDrawerBottonBarTheme (colors = colors){
                 MainScreen(darkMode = darkMode)
             }
 
@@ -69,6 +70,7 @@ fun MainScreen(
     )
     Scaffold(
         scaffoldState = scaffoldState,
+
         bottomBar = {
             BottomNavigationBar(navController = navController, items = navigationItems2) },
         /*floatingActionButton = { FloatingActionButton(onClick = {}) {
@@ -120,7 +122,8 @@ fun Greeting(name: String) {
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    UPeUDrawerBottonBarTheme {
+    val colors = LightRedColorPalette
+    UPeUDrawerBottonBarTheme(colors) {
         Greeting("Android")
     }
 }

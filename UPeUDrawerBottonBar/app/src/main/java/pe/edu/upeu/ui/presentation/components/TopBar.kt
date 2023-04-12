@@ -17,6 +17,7 @@ fun TopBar(
     openDialog: () -> Unit,
     displaySnackBar: () -> Unit
 ) {
+
     TopAppBar(
         title = {
             Text(LocalContext.current.getString(R.string.app_name))

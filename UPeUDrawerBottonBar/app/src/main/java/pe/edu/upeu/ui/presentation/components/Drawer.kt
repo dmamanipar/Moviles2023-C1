@@ -94,6 +94,21 @@ fun Drawer(
                 }
             }
         }
+        Spacer(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(15.dp)
+        )
+        DrawerItem(item = Destinations.Login, selected = currentRoute ==
+                Destinations.Login.route
+        ) {
+            navController.popBackStack(Destinations.Login.route, inclusive =
+            false)
+            scope.launch {
+                scaffoldState.drawerState.close()
+            }
+        }
+
     }
 }
 
