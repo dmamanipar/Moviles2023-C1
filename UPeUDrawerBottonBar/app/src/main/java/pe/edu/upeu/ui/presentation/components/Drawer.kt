@@ -99,7 +99,7 @@ fun Drawer(
                 .fillMaxWidth()
                 .height(15.dp)
         )
-        DrawerItem(item = Destinations.Login, selected = currentRoute ==
+        DrawerItem(item = Destinations.Logout, selected = currentRoute ==
                 Destinations.Login.route
         ) {
             navController.popBackStack(Destinations.Login.route, inclusive =

@@ -5,18 +5,29 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.currentBackStackEntryAsState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import pe.edu.upeu.R
+import pe.edu.upeu.ui.navigation.Destinations
 
 @Composable
 fun TopBar(
+    navController: NavHostController,
     scope: CoroutineScope,
     scaffoldState: ScaffoldState,
     openDialog: () -> Unit,
     displaySnackBar: () -> Unit
 ) {
+
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRouteX = navBackStackEntry?.destination?.route
+    if (currentRouteX == null || currentRouteX == Destinations.Login.route) {
+        return
+    }
 
     TopAppBar(
         title = {

@@ -27,9 +27,8 @@ fun BottomNavigationBar(
 
     val currentRoute = currentRoute(navController)
     BottomNavigation(
-
-        backgroundColor = Color(0.0f, 0.8f, 0.8f),
-        contentColor = Color.White
+        //backgroundColor = Color(0.0f, 0.8f, 0.8f),
+        //contentColor = Color.White
     ) {
         items.forEach { screen -> BottomNavigationItem( icon = {
             Icon(
