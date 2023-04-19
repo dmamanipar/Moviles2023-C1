@@ -20,6 +20,6 @@ class Actividad extends Model
     //Relacion de 1 a muchos
     public function asistenciapas()
     {
-        return $this->hasMany(Asistenciapa::class);
+        return $this->hasMany(Asisteciapa::class);
     }
 }
