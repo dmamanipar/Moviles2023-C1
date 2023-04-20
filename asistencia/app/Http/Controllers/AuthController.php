@@ -107,8 +107,8 @@ class AuthController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'User found',
-            'data' => "Holasss"
-            //'data' => auth('api')->user()
+            //'data' => "Holasss"
+            'data' => auth('api')->user()
         ], 200);
     }
     /**
