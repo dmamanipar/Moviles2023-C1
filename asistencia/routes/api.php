@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Controllers\ActividadController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -27,7 +29,7 @@ Route::group(['middleware' => 'api'], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
    // Route::get('/profile', [AuthController::class, 'userProfile']);
-    //Route::resource('/actividad', ActividadController::class);
+    Route::resource('/act', ActividadController::class);
     //Route::resource('/asistenciapa', AsistenciapaController::class);
     });
 
