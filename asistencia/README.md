@@ -1,5 +1,8 @@
 # Ejecutar en otra maquina
+Una vez instalado el Xammp con la version 8.2.4 de php  e instalado el Composer; realizar lo siguiente
+
 ```console
+composer global require laravel/installer
 CD TEMPORAL
 git clone https://github.com/dmamanipar/Moviles2023-C1.git
 cd Moviles2023-C1
