@@ -35,13 +35,36 @@ class ActividadController extends Controller
         'estado'=>$actividad->estado,
         'evaluar'=>$actividad->evaluar,
         'user_create'=>$actividad->user_create,
-        'asistenciapas'=>$actividad->asistenciapas,
+        'asistenciapas'=>$actividad->asisteciapas,
         ];
         });
         return response()->json(['success' => true,
         'data' => $mappedcollection,
         //'data' => Persona::all(),
         'message' => 'lista de actividades'], 200);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, Actividad $actividad)
+    {
+        $input = $request->all();
+        $actividad->periodo_id = $input['periodo_id'];
+        $actividad->nombre_actividad = $input['nombre_actividad'];
+        $actividad->fecha = $input['fecha'];
+        $actividad->horai = $input['horai'];
+        $actividad->min_toler = $input['min_toler'];
+        $actividad->latitud = $input['latitud'];
+        $actividad->longitud = $input['longitud']; //estado
+        $actividad->estado = $input['estado'];
+        $actividad->evaluar = $input['evaluar'];
+        $actividad->user_create = $input['user_create'];
+
+        $actividad->save();
+        return response()->json(['success' => true,
+        'data' => Actividad::all(),
+        'message' => 'Lista de Actividades'], 200);
     }
 
     /**
@@ -58,7 +81,7 @@ class ActividadController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-        //Log::channel('stderr')->info($input);
+        Log::channel('stderr')->info($request);
         Actividad::create($input);
         return response()->json(['success' => true,
         'data' => Actividad::all(),
@@ -81,19 +104,16 @@ class ActividadController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Actividad $actividad)
-    {
-        //
-    }
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Actividad $actividad)
     {
-        //
+        $actividad->delete();
+        return response()->json(['success' => true,
+        'data' => Actividad::all(),
+        'message' => 'Lista de Actividad'], 200);
     }
 }
