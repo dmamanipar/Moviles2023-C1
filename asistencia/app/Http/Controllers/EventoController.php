@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Evento;
 use Illuminate\Http\Request;
 
-class EventotoController extends Controller
+class EventoController extends Controller
 {
     public function __construct()
     {
@@ -21,7 +21,7 @@ class EventotoController extends Controller
                 'nom_evento' => $evento->nom_evento,
                 'horai' => $evento->horai,
                 'min_toler' => $evento->min_toler,
-                'latituda' => $evento->latituda,
+                'latitud' => $evento->latitud,
                 'longitud' => $evento->longitud,
                 'estado' => $evento->estado,
                 'evaluar' => $evento->evaluar,

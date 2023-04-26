@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('perfil_evento',20);
             $table->string('offline',5);
             $table->unsignedBigInteger('periodo_id');
-            $table->foreign('periodo_id')->references('id')->on('periodos')->onDelete('cascade');
+            //$table->foreign('periodo_id')->references('id')->on('periodos')->onDelete('cascade');
             $table->timestamps();
         });
     }

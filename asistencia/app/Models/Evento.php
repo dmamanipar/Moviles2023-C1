@@ -8,19 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class Evento extends Model
 {
     use HasFactory;
-    protected $table = 'asistencia';
+    protected $table = 'eventos';
     public $timestamps = false;
     protected $primaryKey = 'id';
-    protected $foreignKey = ['id_matricula', 'id_evento'];
-    protected $fillable = ['id', 'nom_evento','fecha', 'horai', 'min_toler', 'latitud', 'longitud', "estado", 'evaluar', 'perfil_evento', 'periodo_id'];
+    protected $fillable = ['id', 'nom_evento','fecha', 'horai', 'min_toler', 'latitud', 'longitud',
+    "estado", 'evaluar', 'perfil_evento', 'offline'];
 
-    public function periodos()
+   /* public function periodo()
     {
         return $this->belongsTo(Periodo::class);
     }
 
-    public function asistencias()
+    public function asistencia()
     {
         return $this->hasMany(Asistencia::class);
-    }
+    }*/
 }

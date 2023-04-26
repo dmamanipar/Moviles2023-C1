@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ActividadController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\EventoController;
+use App\Http\Controllers\EventotoController;
 use App\Models\Evento;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -31,7 +33,7 @@ Route::group(['middleware' => 'api'], function () {
     Route::post('/refresh', [AuthController::class, 'refresh']);
    // Route::get('/profile', [AuthController::class, 'userProfile']);
     Route::resource('/act', ActividadController::class);
-    Route::resource('/evento', Evento::class);
+    Route::resource('/evento', EventoController::class);
     //Route::resource('/asistenciapa', AsistenciapaController::class);
     });
 
