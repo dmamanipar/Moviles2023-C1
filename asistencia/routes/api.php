@@ -2,6 +2,7 @@
 
 //use App\Http\Controllers\AsistenciaController;
 use App\Http\Controllers\ActividadController;
+use App\Http\Controllers\AsisteciapaController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +33,6 @@ Route::group(['middleware' => 'api'], function () {
    // Route::get('/profile', [AuthController::class, 'userProfile']);
     Route::resource('/act', ActividadController::class);
     //Route::resource('/asistencia', AsistenciaController::class);
-    //Route::resource('/asistenciapa', AsistenciapaController::class);
+    Route::resource('/asispa', AsisteciapaController::class);
     });
 
