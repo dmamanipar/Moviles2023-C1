@@ -35,6 +35,7 @@ class AuthController extends Controller
             'email' => 'required|email',
             'password' => 'required|string|min:6'
         ]);
+        Log::channel('stderr')->info("Pasa aqui");
         if ($validator->fails()) {
             return response()->json([
                 'status' => false,
@@ -42,12 +43,15 @@ class AuthController extends Controller
                 'error' => $validator->errors()
             ], 422);
         }
+        Log::channel('stderr')->info("token ant");
         if (!$token = auth('api')->attempt($validator->validated())) {
+            Log::channel('stderr')->info("entro error");
             return response()->json([
                 'status' => false,
                 'message' => 'Invalid Credentials',
             ], 400);
         }
+        Log::channel('stderr')->info("token ant post");
         return $this->respondWithToken($token);
     }
     /**
@@ -126,6 +130,7 @@ class AuthController extends Controller
      */
     protected function respondWithToken($token)
     {
+        Log::channel('stderr')->info("token");
         $minutes = auth('api')->factory()->getTTL() * 60;
         $timestamp = now()->addMinute($minutes);
         $expires_at = date('M d, Y H:i A', strtotime($timestamp));

@@ -14,12 +14,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.view.WindowCompat
 import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import pe.edu.upeu.ui.navigation.Destinations
 import pe.edu.upeu.ui.navigation.NavigationHost
 import pe.edu.upeu.ui.presentation.components.*
 import pe.edu.upeu.ui.theme.*
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
