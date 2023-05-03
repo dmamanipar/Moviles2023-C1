@@ -2,6 +2,7 @@
 
 //use App\Http\Controllers\AsistenciaController;
 use App\Http\Controllers\ActividadController;
+use App\Http\Controllers\PersonaController;
 use App\Http\Controllers\AsisteciapaController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
@@ -34,5 +35,6 @@ Route::group(['middleware' => 'api'], function () {
     Route::resource('/act', ActividadController::class);
     //Route::resource('/asistencia', AsistenciaController::class);
     Route::resource('/asispa', AsisteciapaController::class);
+    Route::resource('/persona', PersonaController::class);
     });
 
