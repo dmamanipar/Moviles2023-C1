@@ -20,6 +20,7 @@ import pe.edu.upeu.ui.navigation.Destinations
 import pe.edu.upeu.ui.navigation.NavigationHost
 import pe.edu.upeu.ui.presentation.components.*
 import pe.edu.upeu.ui.theme.*
+import pe.edu.upeu.utils.ComposeReal
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -97,6 +98,7 @@ fun MainScreen(
         Destinations.Pantalla2,
         Destinations.Pantalla3,
     )
+    ComposeReal.TITLE_TOP=Destinations.Login.title
     Scaffold(
         scaffoldState = scaffoldState,
 
