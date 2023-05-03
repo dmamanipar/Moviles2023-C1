@@ -9,6 +9,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import pe.edu.upeu.ui.presentation.screens.*
+import pe.edu.upeu.ui.presentation.screens.actividad.ActividadUI
+import pe.edu.upeu.ui.presentation.screens.login.LoginScreen
 import pe.edu.upeu.utils.ComposeReal
 
 @OptIn(ExperimentalPermissionsApi::class)
@@ -21,7 +23,7 @@ fun NavigationHost(
         navController = navController, startDestination = Destinations.Login.route
     ) {
         composable(Destinations.Login.route){
-            ComposeReal.TITLE_TOP=Destinations.Login.title
+            //ComposeReal.TITLE_TOP=Destinations.Login.title
             LoginScreen( navigateToHome = {
                 navController.navigate(Destinations.Pantalla1.route)
             })
@@ -53,6 +55,15 @@ fun NavigationHost(
         composable(Destinations.Pantalla4.route) {
             ComposeReal.TITLE_TOP=Destinations.Pantalla4.title
             Pantalla4()
+        }
+
+        composable(Destinations.ActividadUI.route){
+            ComposeReal.TITLE_TOP=Destinations.ActividadUI.title
+            ActividadUI(
+                navegarEditarAct = { newText ->
+                    navController.navigate(Destinations.ActividadForm.passId(newText))
+                }
+            )
         }
 
     }

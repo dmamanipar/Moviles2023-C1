@@ -92,13 +92,14 @@ fun MainScreen(
         Destinations.Pantalla2,
         Destinations.Pantalla3,
         Destinations.Pantalla4,
+        Destinations.ActividadUI
     )
     val navigationItems2 = listOf(
         Destinations.Pantalla1,
         Destinations.Pantalla2,
         Destinations.Pantalla3,
     )
-    ComposeReal.TITLE_TOP=Destinations.Login.title
+
     Scaffold(
         scaffoldState = scaffoldState,
 

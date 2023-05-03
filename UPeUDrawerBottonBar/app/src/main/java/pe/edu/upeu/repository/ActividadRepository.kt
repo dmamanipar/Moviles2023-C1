@@ -39,10 +39,11 @@ class ActividadRepositoryImp @Inject constructor(
         try {
             CoroutineScope(Dispatchers.IO).launch {
                 delay(3000)
-                val totek=restActividad.login(User("",
+                /*val totek=restActividad.login(User("",
                     "davidmp@upeu.edu.pe", "12345678")).body()
                 TokenUtils.TOKEN_CONTENT=totek?.token_type+""+totek?.access_token
-                Log.i("VERX", "Token:"+TokenUtils.TOKEN_CONTENT)
+                Log.i("VERX", "Token:"+TokenUtils.TOKEN_CONTENT)*/
+
                 val data=restActividad.reportarActividad(TokenUtils.TOKEN_CONTENT).body()!!.data
                 actividadDao.insertarActividades(data)
             }
