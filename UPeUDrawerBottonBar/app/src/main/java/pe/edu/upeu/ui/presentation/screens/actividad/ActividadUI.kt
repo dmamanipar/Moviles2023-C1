@@ -15,6 +15,8 @@ import androidx.compose.material.icons.filled.Edit
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -32,6 +34,7 @@ import pe.edu.upeu.ui.presentation.components.BottomNavigationBar
 import pe.edu.upeu.ui.presentation.components.LoadingCard
 import java.time.format.DateTimeFormatter
 import pe.edu.upeu.R
+import pe.edu.upeu.ui.presentation.components.ConfirmDialog
 import pe.edu.upeu.utils.TokenUtils
 import java.time.LocalDate
 
@@ -148,11 +151,27 @@ fun MyApp(
                             MaterialTheme.colors.primary)
                         }
                         pe.edu.upeu.ui.presentation.components.Spacer()
+
+                        val showDialog = remember { mutableStateOf(false) }
                         IconButton(onClick = {
-                            onDeleteClick?.invoke(actividad)
+                            showDialog.value = true
                         }) {
-                            Icon(Icons.Filled.Delete, "Remove", tint =
-                            MaterialTheme.colors.primary)}
+                            Icon(Icons.Filled.Delete, "Remove", tint = MaterialTheme.colors.primary)
+                        }
+                        if (showDialog.value){
+                            ConfirmDialog(
+                                message = "Esta seguro de eliminar?",
+                                onConfirm = {
+                                    onDeleteClick?.invoke(actividad)
+                                    showDialog.value=false
+                                },
+                                onDimins = {
+                                    showDialog.value=false
+                                }
+                            )
+                        }
+
+
                         IconButton(onClick = {
                                 //onDeleteClick?.invoke(persona)
                             Log.i("VERTOKEN", "Holas")

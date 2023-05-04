@@ -1,8 +1,9 @@
 package pe.edu.upeu
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,6 +14,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.view.WindowCompat
 import androidx.navigation.compose.rememberNavController
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -21,9 +24,11 @@ import pe.edu.upeu.ui.navigation.NavigationHost
 import pe.edu.upeu.ui.presentation.components.*
 import pe.edu.upeu.ui.theme.*
 import pe.edu.upeu.utils.ComposeReal
+import pe.edu.upeu.utils.TokenUtils
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    @OptIn(ExperimentalPermissionsApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, true)
@@ -33,6 +38,26 @@ class MainActivity : ComponentActivity() {
             val darkMode = remember { mutableStateOf(false) }
             val themeType = remember {mutableStateOf(ThemeType.PURPLE)}
             val isDarkMode = remember {mutableStateOf(false)}
+
+            val otorgarp = rememberMultiplePermissionsState(permissions = listOf(
+                Manifest.permission.ACCESS_NETWORK_STATE,
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.CAMERA,
+            ))
+            LaunchedEffect(true){
+                if (otorgarp.allPermissionsGranted){
+                    Toast.makeText(this@MainActivity, "Permiso concedido", Toast.LENGTH_SHORT).show()
+                }else{
+                    if (otorgarp.shouldShowRationale){
+                        Toast.makeText(this@MainActivity, "La aplicacion requiere este permiso",
+                            Toast.LENGTH_SHORT).show()
+                    }else{
+                        Toast.makeText(this@MainActivity, "El permiso fue denegado", Toast.LENGTH_SHORT).show()
+                    }
+                    otorgarp.launchMultiplePermissionRequest()
+                }
+            }
 
             val themeFunction: @Composable (isDarkMode: Boolean, content:
             @Composable () -> Unit) -> Unit =
@@ -49,6 +74,7 @@ class MainActivity : ComponentActivity() {
                         DrownTheme(isDarkMode, content)}
                 }
             themeFunction.invoke(isDarkMode.value) {
+                TokenUtils.CONTEXTO_APPX=this@MainActivity
                 MainScreen(darkMode = isDarkMode, themeType = themeType)
             }
 

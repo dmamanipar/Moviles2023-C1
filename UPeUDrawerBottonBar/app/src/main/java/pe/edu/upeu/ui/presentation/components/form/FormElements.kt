@@ -43,7 +43,8 @@ fun ComboBox(
     val text = state.state
     val isOpen = state.isOpen
     if (textv != "") {
-        text.value = textv
+        val seleccionado = list.find { it.code == textv }
+        text.value = seleccionado!!.name
     }
     Log.i("DATAXXX",text.value )
     Box{
@@ -86,7 +87,8 @@ fun ComboBoxTwo(
     val text = state.state
     val isOpen = state.isOpen
     if (textv != "") {
-        text.value = textv
+        val seleccionado = list.find { it.code == textv }
+        text.value = seleccionado!!.name
     }
     Box{
         Column {

@@ -4,17 +4,12 @@ import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Looper
 import android.util.Log
+import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Scaffold
-
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.getValue
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.*
+import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -27,13 +22,14 @@ import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
+
 import com.google.gson.Gson
 import kotlinx.coroutines.launch
 import pe.edu.upeu.modelo.Actividad
 import pe.edu.upeu.modelo.ComboModel
 import pe.edu.upeu.ui.navigation.Destinations
-import pe.edu.upeu.ui.presentation.components.Spacer
 import pe.edu.upeu.ui.presentation.components.form.*
+import pe.edu.upeu.ui.presentation.components.Spacer
 import pe.edu.upeu.utils.TokenUtils
 
 
@@ -44,6 +40,8 @@ fun ActividadForm(
     navController: NavHostController,
     viewModel: ActividadFormViewModel= hiltViewModel()
 ) {
+
+
     val actividadD:Actividad
     if (text!="0"){
         actividadD = Gson().fromJson(text, Actividad::class.java)
@@ -58,10 +56,8 @@ fun ActividadForm(
         viewModel
     )
 }
-
 @RequiresApi(Build.VERSION_CODES.O)
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter",
-    "MissingPermission",
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter", "MissingPermission",
     "CoroutineCreationDuringComposition"
 )
 @Composable
@@ -69,127 +65,99 @@ fun formulario(id:Int,
                darkMode: MutableState<Boolean>,
                navController: NavHostController,
                actividad:Actividad,
-               viewModel: ActividadFormViewModel) {
-    Log.i("VERRR", "d: " + actividad?.id!!)
-    val person = Actividad(0, 1, "", "", "", "", "", "", "", "", "")
+               viewModel: ActividadFormViewModel){
+
+    Log.i("VERRR", "d: "+actividad?.id!!)
+    val person=Actividad(0,1,"", "","","","","","","","")
+
     val scope = rememberCoroutineScope()
+
     var locationCallback: LocationCallback? = null
     var fusedLocationClient: FusedLocationProviderClient? = null
-    fusedLocationClient = LocationServices.getFusedLocationProviderClient(TokenUtils.CONTEXTO_APPX)
+    fusedLocationClient = LocationServices.getFusedLocationProviderClient(
+        TokenUtils.CONTEXTO_APPX)
     locationCallback = object : LocationCallback() {
         override fun onLocationResult(p0: LocationResult) {
             for (lo in p0.locations) {
                 Log.e("LATLON", "Lat: ${lo.latitude} Lon: ${lo.longitude}")
-                person.latitud = lo.latitude.toString()
-                person.longitud = lo.longitude.toString()
+                person.latitud=lo.latitude.toString()
+                person.longitud=lo.longitude.toString()
             }
         }
     }
-    scope.launch {
+    scope.launch{
         val locationRequest = LocationRequest.create().apply {
             interval = 10000
             fastestInterval = 5000
             priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         }
-        fusedLocationClient!!.requestLocationUpdates(
-            locationRequest,
-            locationCallback, Looper.getMainLooper()
-        )
+        fusedLocationClient!!.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper())
+
         Log.e("LATLON", "Lat: ${person.latitud} Lon: ${person.longitud}")
         //delay(2000L)
     }
-    Scaffold(modifier = Modifier.padding(8.dp)) {
+
+
+    Scaffold(modifier = Modifier.padding(8.dp)){
         BuildEasyForms { easyForm ->
             Column {
-                NameTextField(
-                    easyForms = easyForm, text
-                    = actividad?.nombre_actividad!!, "Nomb. Actividad:", MyFormKeys.NAME
-                )
+                NameTextField(easyForms = easyForm, text =actividad?.nombre_actividad!!,"Nomb. Actividad:", MyFormKeys.NAME )
                 var listE = listOf(
-                    ComboModel("Activo", "Activo"),
-                    ComboModel("Desactivo", "Desactivo"),
+                    ComboModel("Activo","Activo"),
+                    ComboModel("Desactivo","Desactivo"),
                 )
-                ComboBox(
-                    easyForm = easyForm, "Estado:",
-                    actividad?.estado!!, listE
-                )
+                ComboBox(easyForm = easyForm, "Estado:", actividad?.estado!!, listE)
+
                 var listEv = listOf(
-                    ComboModel("SI", "SI"),
-                    ComboModel("NO", "NO"),
+                    ComboModel("SI","SI"),
+                    ComboModel("NO","NO"),
                 )
-                ComboBoxTwo(
-                    easyForm = easyForm, "Evaluar:",
-                    actividad?.evaluar!!, listEv
-                )
-                DatePickerCustom(
-                    easyForm = easyForm, label = "Fecha",
-                    texts = actividad?.fecha!!, MyFormKeys.FECHA, "yyyy-MM-dd"
-                )
-                TimePickerCustom(
-                    easyForm = easyForm, label = "Hora",
-                    texts = actividad?.horai!!, MyFormKeys.TIME, "HH:mm:ss"
-                )
-                TimePickerCustom(
-                    easyForm = easyForm,
-                    label = "Min.Toler",
-                    texts = actividad?.min_toler!!,
-                    MyFormKeys.TIME_TOLER,
-                    "HH:mm:ss"
-                )
-                Row(Modifier.align(Alignment.CenterHorizontally)) {
-                    AccionButtonSuccess(easyForms = easyForm, "Guardar") {
-                        val lista = easyForm.formData()
-                        lista.forEach {
-                            println(
-                                (it as
-                                        EasyFormsResult.StringResult).value
-                            )
-                            person.nombre_actividad = (lista.get(0) as
-                                    EasyFormsResult.StringResult).value
-                            person.estado = splitCadena(
-                                (lista.get(1) as
-                                        EasyFormsResult.GenericStateResult<String>).value
-                            )
-                            person.evaluar = splitCadena(
-                                (lista.get(2) as
-                                        EasyFormsResult.GenericStateResult<String>).value
-                            )
-                            person.fecha = (lista.get(3) as
-                                    EasyFormsResult.GenericStateResult<String>).value
-                            person.horai = (lista.get(4) as
-                                    EasyFormsResult.GenericStateResult<String>).value
-                            person.min_toler = (lista.get(5) as
-                                    EasyFormsResult.GenericStateResult<String>).value
-                            person.user_create = TokenUtils.USER_LOGIN
-                            if (id == 0) {
-                                Log.i("MODIFICAR", "M:" + person)
-                                viewModel.addActividad(person)
-                            } else {
-                                person.id = id
-                                Log.i("MODIFICAR", "M:" + person)
-                                viewModel.editActividad(person)
-                            }
-                            scope.launch {
-                                if (fusedLocationClient != null) {
+                ComboBoxTwo(easyForm = easyForm, "Evaluar:", actividad?.evaluar!!, listEv)
 
-                                    fusedLocationClient!!.removeLocationUpdates(locationCallback);
-                                    fusedLocationClient = null;
-                                }
-                            }
-                            navController.navigate(Destinations.ActividadUI.route)
-                             }
+
+                DatePickerCustom(easyForm = easyForm, label = "Fecha", texts = actividad?.fecha!!, MyFormKeys.FECHA,"yyyy-MM-dd")
+                TimePickerCustom(easyForm = easyForm, label = "Hora", texts = actividad?.horai!!, MyFormKeys.TIME, "HH:mm:ss")
+                TimePickerCustom(easyForm = easyForm, label = "Min. Toler", texts = actividad?.min_toler!!, MyFormKeys.TIME_TOLER,"HH:mm:ss")
+
+                Row(Modifier.align(Alignment.CenterHorizontally)){
+                    AccionButtonSuccess(easyForms = easyForm, "Guardar"){
+                        val lista=easyForm.formData()
+                        //lista.forEach{ println((it as EasyFormsResult.StringResult).value) }
+
+                        person.nombre_actividad=(lista.get(0) as EasyFormsResult.StringResult).value
+                        person.estado=splitCadena((lista.get(1) as EasyFormsResult.GenericStateResult<String>).value)
+                        person.evaluar=splitCadena((lista.get(2) as EasyFormsResult.GenericStateResult<String>).value)
+                        person.fecha=(lista.get(3) as EasyFormsResult.GenericStateResult<String>).value
+                        person.horai=(lista.get(4) as EasyFormsResult.GenericStateResult<String>).value
+                        person.min_toler=(lista.get(5) as EasyFormsResult.GenericStateResult<String>).value
+                        person.user_create= TokenUtils.USER_LOGIN
+
+                        if (id==0){
+                            Log.i("MODIFICAR", "M:"+person)
+                            viewModel.addActividad(person)
+                        }else{
+                            person.id=id
+                            Log.i("MODIFICAR", "M:"+person)
+                            viewModel.editActividad(person)
                         }
-                        Spacer()
-                        AccionButtonCancel(easyForms = easyForm, "Cancelar") {
-
-                            navController.navigate(Destinations.ActividadUI.route)
+                        scope.launch {
+                            if (fusedLocationClient != null) {
+                                fusedLocationClient!!.removeLocationUpdates(locationCallback);
+                                fusedLocationClient = null;
+                            }
                         }
-
+                        navController.navigate(Destinations.ActividadUI.route)
+                    }
+                    Spacer()
+                    AccionButtonCancel(easyForms = easyForm, "Cancelar"){
+                        navController.navigate(Destinations.ActividadUI.route)
+                    }
                 }
             }
         }
     }
 }
+
 fun splitCadena(data:String):String{
     return if(data!="") data.split("-")[0] else ""
 }
