@@ -9,6 +9,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import pe.edu.upeu.ui.presentation.screens.*
+import pe.edu.upeu.ui.presentation.screens.actividad.ActividadForm
 import pe.edu.upeu.ui.presentation.screens.actividad.ActividadUI
 import pe.edu.upeu.ui.presentation.screens.login.LoginScreen
 import pe.edu.upeu.utils.ComposeReal
@@ -65,6 +66,18 @@ fun NavigationHost(
                 }
             )
         }
+        composable(
+            Destinations.ActividadForm.route,
+            arguments = listOf(navArgument("actId") {
+                defaultValue = "actId"
+            })
+        ) { navBackStackEntry ->
+            var actId = navBackStackEntry.arguments?.getString("actId")
+            requireNotNull(actId)
+            ComposeReal.TITLE_TOP = Destinations.ActividadForm.title
+            ActividadForm(actId, darkMode, navController)
+        }
+
 
     }
 }

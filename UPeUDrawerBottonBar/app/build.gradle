@@ -124,6 +124,7 @@ dependencies {
 //Manager permissions
     implementation "com.google.accompanist:accompanist-permissions:0.30.1"
 
+
 //Moshi
     implementation "com.squareup.moshi:moshi-kotlin:1.12.0"
     implementation "com.squareup.moshi:moshi-kotlin-codegen:1.12.0"

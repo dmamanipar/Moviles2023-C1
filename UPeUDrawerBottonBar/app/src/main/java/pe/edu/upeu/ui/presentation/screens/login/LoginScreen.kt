@@ -51,7 +51,7 @@ fun LoginScreen(
         DefaultButton(
             text = "Log In",
             onClick= {
-                viewModel.loginSys(User("","davidmp@upeu.edu.pe","12345678"))
+                viewModel.loginSys(User("","mamanipari@gmail.com","12345678"))
                 scope.launch {
                     delay(3600)
                     if(isLogin){
