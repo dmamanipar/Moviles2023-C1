@@ -8,15 +8,19 @@ import android.widget.TimePicker
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.github.k0shk0sh.compose.easyforms.*
 import pe.edu.upeu.modelo.ComboModel
 import java.text.SimpleDateFormat
@@ -202,9 +206,10 @@ fun DatePickerCustom(
         },
         label = { Text(text = label) },
         placeholder = { Text(text = label) },
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
             .onFocusChanged {
-                if (it.isFocused){
+                if (it.isFocused) {
                     datePickerDialog.show()
                     Log.i("VERRR", "LLEGO AQUI: ")
                 }
@@ -273,9 +278,10 @@ fun TimePickerCustom(
         },
         label = { Text(text = label) },
         placeholder = { Text(text = label) },
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
             .onFocusChanged {
-                if (it.isFocused){
+                if (it.isFocused) {
                     timePickerDialog.show()
                     Log.i("VERRR", "LLEGO AQUI: ")
                 }
@@ -307,19 +313,52 @@ fun NameTextField(easyForms: EasyForms, text: String, label:String, key:MyFormKe
 
 
 @Composable
-fun EmailTextField(easyForms: EasyForms, text: String, label:String) {
+fun EmailTextField(easyForms: EasyForms, text: String, label:String, tipo:String) {
     val textFieldState = easyForms.getTextFieldState(
         key = MyFormKeys.EMAIL,
         easyFormsValidationType = EmailValidationType,
         defaultValue = text,
     )
     val state = textFieldState.state
-    TextField(
+    OutlinedTextField(
         value = state.value,
         onValueChange = textFieldState.onValueChangedCallback,
         label = { Text(text = label) },
-        modifier = Modifier.fillMaxWidth(),
+        modifier = if(tipo=="U") Modifier.wrapContentWidth() else Modifier.fillMaxWidth(),
         isError = textFieldState.errorState.value == EasyFormsErrorState.INVALID,
+    )
+}
+
+@Composable
+fun PasswordTextField(easyForms: EasyForms,text: String, label:String,
+                      passwordVisibility: MutableState<Boolean> = remember { mutableStateOf(false) }
+                      ) {
+    val textFieldState = easyForms.getTextFieldState(
+        key = MyFormKeys.PASSWORD,
+        easyFormsValidationType = PasswordValidationType,
+        defaultValue = text,
+    )
+    val state = textFieldState.state
+    //val passwordVisibility: Boolean by remember { mutableStateOf(false) }
+        OutlinedTextField(
+        value = state.value,
+        label = { Text(text = label) },
+        onValueChange = textFieldState.onValueChangedCallback,
+        isError = textFieldState.errorState.value == EasyFormsErrorState.INVALID,
+        visualTransformation = if (passwordVisibility.value) VisualTransformation.None else PasswordVisualTransformation(),
+            trailingIcon = {
+                val image = if (passwordVisibility.value)
+                    Icons.Filled.Visibility
+                else Icons.Filled.VisibilityOff
+
+                // Please provide localized description for accessibility services
+                val description = if (passwordVisibility.value) "Hide password" else "Show password"
+
+                IconButton(
+                    onClick = {passwordVisibility.value=!passwordVisibility.value }){
+                    Icon(imageVector  = image, description)
+                }
+            }
     )
 }
 
@@ -403,6 +442,23 @@ fun AccionButtonCancel(
         modifier = Modifier.wrapContentWidth(),
     ) {
         Text(label)
+    }
+}
+
+@Composable
+fun LoginButton(
+    easyForms: EasyForms,
+    onClick: () -> Unit,
+    label:String
+) {
+    val errorStates = easyForms.observeFormStates()
+    Spacer(modifier = Modifier.height(5.dp))
+    Button(
+        onClick = onClick,
+        modifier = Modifier.size(width = 200.dp, height = 70.dp),
+        enabled = errorStates.value.all {it.value == EasyFormsErrorState.VALID}
+    ) {
+        Text(label, fontSize = 40.sp)
     }
 }
 
