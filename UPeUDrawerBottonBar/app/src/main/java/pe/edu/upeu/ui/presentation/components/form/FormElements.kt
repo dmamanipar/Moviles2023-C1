@@ -369,18 +369,24 @@ fun PhoneTextField(easyForms: EasyForms, text: String, label:String) {
 fun AccionButtonSuccess(
     easyForms: EasyForms,
     label:String,
+    id:Int,
     onClick: () -> Unit,
 
 ) {
     val errorStates = easyForms.observeFormStates()
+    Log.i("DATOCC", id.toString())
+    if(id==0){
     Button(
         onClick = onClick,
         modifier = Modifier.wrapContentWidth(),
-        enabled = errorStates.value.all {
-            it.value == EasyFormsErrorState.VALID
-        }
-    ) {
-        Text(label)
+        enabled = errorStates.value.all {it.value == EasyFormsErrorState.VALID }
+    ) {Text(label)}
+    }else{
+        Button(
+            onClick = onClick,
+            modifier = Modifier.wrapContentWidth(),
+            //enabled = errorStates.value.all {it.value == EasyFormsErrorState.VALID }
+        ) {Text(label)}
     }
 }
 

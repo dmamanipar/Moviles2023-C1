@@ -24,6 +24,7 @@ import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 
 import com.google.gson.Gson
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import pe.edu.upeu.modelo.Actividad
 import pe.edu.upeu.modelo.ComboModel
@@ -79,7 +80,7 @@ fun formulario(id:Int,
     locationCallback = object : LocationCallback() {
         override fun onLocationResult(p0: LocationResult) {
             for (lo in p0.locations) {
-                Log.e("LATLON", "Lat: ${lo.latitude} Lon: ${lo.longitude}")
+                Log.e("LATLONX", "Lat: ${lo.latitude} Lon: ${lo.longitude}")
                 person.latitud=lo.latitude.toString()
                 person.longitud=lo.longitude.toString()
             }
@@ -94,9 +95,13 @@ fun formulario(id:Int,
         fusedLocationClient!!.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper())
 
         Log.e("LATLON", "Lat: ${person.latitud} Lon: ${person.longitud}")
-        //delay(2000L)
-    }
+        delay(1500L)
+        if (fusedLocationClient != null) {
+            fusedLocationClient!!.removeLocationUpdates(locationCallback);
+            fusedLocationClient = null;
+        }
 
+    }
 
     Scaffold(modifier = Modifier.padding(8.dp)){
         BuildEasyForms { easyForm ->
@@ -120,10 +125,8 @@ fun formulario(id:Int,
                 TimePickerCustom(easyForm = easyForm, label = "Min. Toler", texts = actividad?.min_toler!!, MyFormKeys.TIME_TOLER,"HH:mm:ss")
 
                 Row(Modifier.align(Alignment.CenterHorizontally)){
-                    AccionButtonSuccess(easyForms = easyForm, "Guardar"){
+                    AccionButtonSuccess(easyForms = easyForm, "Guardar", id){
                         val lista=easyForm.formData()
-                        //lista.forEach{ println((it as EasyFormsResult.StringResult).value) }
-
                         person.nombre_actividad=(lista.get(0) as EasyFormsResult.StringResult).value
                         person.estado=splitCadena((lista.get(1) as EasyFormsResult.GenericStateResult<String>).value)
                         person.evaluar=splitCadena((lista.get(2) as EasyFormsResult.GenericStateResult<String>).value)
@@ -140,12 +143,7 @@ fun formulario(id:Int,
                             Log.i("MODIFICAR", "M:"+person)
                             viewModel.editActividad(person)
                         }
-                        scope.launch {
-                            if (fusedLocationClient != null) {
-                                fusedLocationClient!!.removeLocationUpdates(locationCallback);
-                                fusedLocationClient = null;
-                            }
-                        }
+
                         navController.navigate(Destinations.ActividadUI.route)
                     }
                     Spacer()
@@ -156,6 +154,7 @@ fun formulario(id:Int,
             }
         }
     }
+
 }
 
 fun splitCadena(data:String):String{
