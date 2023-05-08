@@ -1,5 +1,6 @@
 package pe.edu.upeu.ui.presentation.components
 
+<<<<<<< HEAD
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -16,6 +17,25 @@ import com.valentinilk.shimmer.shimmer
 
 @Composable
 fun Spacer(size: Int = 8) = Spacer(modifier = Modifier.size(size.dp))
+=======
+import android.inputmethodservice.Keyboard.Row
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.unit.dp
+import com.valentinilk.shimmer.shimmer
+
+@Composable
+fun Spacer(size: Int = 8) = Spacer(
+    modifier = Modifier.size(size.dp)
+)
+
+>>>>>>> DevDocent
 @Composable
 fun ImageLoading() {
     Box(modifier = Modifier.shimmer()) {
@@ -30,7 +50,11 @@ fun ImageLoading() {
 fun LoadingCard() {
     Card(
         shape = RoundedCornerShape(8.dp),
+<<<<<<< HEAD
         elevation = 1.dp,
+=======
+        //elevation = 1.dp,
+>>>>>>> DevDocent
         modifier = Modifier
             .padding(horizontal = 8.dp, vertical = 4.dp)
             .fillMaxWidth()
