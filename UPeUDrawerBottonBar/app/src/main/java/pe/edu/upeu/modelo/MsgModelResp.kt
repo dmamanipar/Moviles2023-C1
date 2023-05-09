@@ -26,5 +26,9 @@ data class ComboModel(
 }
 abstract class PickerValue {
     abstract fun searchFilter(query: String): Boolean
+<<<<<<< HEAD
+}
+>>>>>>> DevDocent
+=======
 }
 >>>>>>> DevDocent
