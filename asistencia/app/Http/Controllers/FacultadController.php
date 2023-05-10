@@ -78,7 +78,17 @@ class FacultaControllerd extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        Log::channel('stderr')->info($request);
+        $input = $request->all();
+        $facultad=Facultad::find($id);
+        $facultad->nombrefac = $input['nombrefac'];
+        $facultad->estado = $input['estado'];
+        $facultad->iniciales = $input['iniciales'];
+
+        $facultad->save();
+        return response()->json(['success' => true,
+        'data' => Facultad::all(),
+        'message' => 'Lista de facultades'], 200);
     }
 
     /**
@@ -86,6 +96,10 @@ class FacultaControllerd extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Log::channel('stderr')->info($id);
+        Facultad::find($id)->delete();
+        return response()->json(['success' => true,
+        'data' => Facultad::all(),
+        'message' => 'eliminado correctamente'], 200);
     }
 }

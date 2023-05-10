@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Actividad;
 use App\Models\Asisteciapa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -38,7 +39,7 @@ class AsisteciapaController extends Controller
         ];
         });*/
         return response()->json(['success' => true,
-        'data' => $mappedcollection,
+        //'data' => $mappedcollection,
         //'data' => Persona::all(),
         'message' => 'lista de actividades'], 200);
     }
