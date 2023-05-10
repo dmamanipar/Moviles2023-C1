@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('tipo_cui', 12);
             $table->unsignedBigInteger('actividad_id');
             $table->foreign('actividad_id')->references('id')->on('actividads')->onDelete('cascade');
-            //$table->timestamps();
+            
         });
     }
 

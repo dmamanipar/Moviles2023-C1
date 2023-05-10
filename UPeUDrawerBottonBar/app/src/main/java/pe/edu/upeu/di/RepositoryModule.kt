@@ -4,10 +4,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import pe.edu.upeu.repository.ActividadRepository
-import pe.edu.upeu.repository.ActividadRepositoryImp
-import pe.edu.upeu.repository.UserRepository
-import pe.edu.upeu.repository.UserRepositoryImp
+import pe.edu.upeu.repository.*
 import javax.inject.Singleton
 
 @Module
@@ -17,6 +14,7 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract  fun actividadRepository(actRepos:ActividadRepositoryImp): ActividadRepository
+    abstract fun asisteciapaRepository(actRepos:AsisteciapaRepositoryImp): AsisteciapaRepository
 
     @Binds
     @Singleton

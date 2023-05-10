@@ -12,8 +12,15 @@ class Asisteciapa extends Model
     public $timestamps = false;
     protected $primaryKey = 'id';
     protected $fillable = [
-        'id', 'fecha', 'hora_reg', 'latituda', "longituda",
-        'tipo', 'calificacion', 'cui', 'tipo_cui',
+        'id',
+        'fecha',
+        'hora_reg',
+        'latituda',
+        "longituda",
+        'tipo',
+        'calificacion',
+        'cui',
+        'tipo_cui',
         'actividad_id'
     ];
 

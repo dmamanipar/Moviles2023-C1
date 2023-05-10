@@ -18,10 +18,10 @@ class AsisteciapaController extends Controller
      */
     public function index()
     {
-        Log::channel('stderr')->info("Si llega aqui");
+        //Log::channel('stderr')->info("Si llega aqui");
 
         $actividades=Actividad::all();
-        /*$mappedcollection = $actividades->map(function($actividad, $key) {
+        $mappedcollection = $actividades->map(function($actividad, $key) {
         return [
         'id' => $actividad->id,
         'periodo_id' => $actividad->periodo_id,
@@ -36,10 +36,10 @@ class AsisteciapaController extends Controller
         'user_create'=>$actividad->user_create,
         'asistenciapas'=>$actividad->asisteciapas,
         ];
-        });*/
+        });
         return response()->json(['success' => true,
         'data' => $mappedcollection,
-        //'data' => Persona::all(),
+        'data' => Persona::all(),
         'message' => 'lista de actividades'], 200);
     }
 
@@ -56,7 +56,13 @@ class AsisteciapaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+        Log::channel('stderr')->info($request);
+        Asisteciapa::create($input);
+
+        return response()->json(['success' => true,
+        'data' => Asisteciapa::all(),
+        'message' => 'Lista de Asisteciapa'], 200);
     }
 
     /**
@@ -88,6 +94,10 @@ class AsisteciapaController extends Controller
      */
     public function destroy(Asisteciapa $asisteciapa)
     {
-        //
+        Log::channel('stderr')->info($asisteciapa);
+        Asisteciapa::find($id)->delete();
+        return response()->json(['success' => true,
+        'data' => Asisteciapa::all(),
+        'message' => 'Lista de Asisteciapa'], 200);
     }
 }

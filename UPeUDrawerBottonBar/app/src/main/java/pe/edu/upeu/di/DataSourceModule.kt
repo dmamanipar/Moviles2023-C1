@@ -9,7 +9,9 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import pe.edu.upeu.data.local.DbDataSource
 import pe.edu.upeu.data.local.dao.ActividadDao
+import pe.edu.upeu.data.local.dao.AsisteciapaDao
 import pe.edu.upeu.data.remote.RestActividad
+import pe.edu.upeu.data.remote.RestAsisteciapa
 import pe.edu.upeu.utils.TokenUtils
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -37,7 +39,9 @@ class DataSourceModule {
     fun restActividad(retrofit: Retrofit):RestActividad{
         return retrofit.create(RestActividad::class.java)
     }
-
+    fun restAsisteciapa(retrofit: Retrofit):RestAsisteciapa{
+        return retrofit.create(RestAsisteciapa::class.java)
+    }
 
     @Singleton
     @Provides
@@ -46,9 +50,13 @@ class DataSourceModule {
             "asistencia_db")
             .fallbackToDestructiveMigration().build()
     }
+
     @Singleton
     @Provides
     fun actividadDao(db:DbDataSource):ActividadDao{
         return db.actividadDao();
+    }
+    fun asisteciaDao(db:DbDataSource):AsisteciapaDao{
+        return db.asisteciapaDao();
     }
 }

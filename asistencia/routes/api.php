@@ -32,7 +32,7 @@ Route::group(['middleware' => 'api'], function () {
     Route::post('/refresh', [AuthController::class, 'refresh']);
    // Route::get('/profile', [AuthController::class, 'userProfile']);
     Route::resource('/act', ActividadController::class);
-    //Route::resource('/asistencia', AsistenciaController::class);
+    
     Route::resource('/asispa', AsisteciapaController::class);
     });
 
