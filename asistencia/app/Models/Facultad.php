@@ -10,7 +10,7 @@ class Facultad extends Model
     use HasFactory;
 
     protected $table = 'facultads';
-    public $timestamps = false;
+    public $timestamps = true;
     protected $primaryKey = 'id';
     protected $fillable = [
         'id', 'nombrefac','estado','iniciales'
