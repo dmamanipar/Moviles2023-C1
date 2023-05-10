@@ -23,6 +23,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import pe.edu.upeu.ui.navigation.Destinations
 import pe.edu.upeu.ui.theme.ThemeType
+import pe.edu.upeu.utils.ComposeReal
 
 @Composable
 fun CustomTopAppBar(darkMode: MutableState<Boolean>,
@@ -52,7 +53,7 @@ fun CustomTopAppBar(darkMode: MutableState<Boolean>,
             elevation = 0.dp,
             title = {
                 Text(
-                    text = "AppBar",
+                    text = if (ComposeReal.TITLE_TOP=="") "App Bar" else ComposeReal.TITLE_TOP,
                     color = Color.White,
                     modifier = Modifier.clickable {
                         themeType!!.value = ThemeType.RED
