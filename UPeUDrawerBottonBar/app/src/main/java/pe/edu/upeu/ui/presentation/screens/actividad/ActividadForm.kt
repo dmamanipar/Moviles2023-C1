@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Looper
 import android.util.Log
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -143,7 +142,6 @@ fun formulario(id:Int,
                             Log.i("MODIFICAR", "M:"+person)
                             viewModel.editActividad(person)
                         }
-
                         navController.navigate(Destinations.ActividadUI.route)
                     }
                     Spacer()

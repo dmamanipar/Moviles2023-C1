@@ -100,7 +100,6 @@ class MainActivity : ComponentActivity() {
 }
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun MainScreen(
     darkMode: MutableState<Boolean>,
