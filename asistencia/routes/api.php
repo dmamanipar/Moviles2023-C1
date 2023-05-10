@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
+Route::apiResource('/facu', FacultadController::class);
 Route::group(['middleware' => 'api'], function () {
     Route::group(['prefix' => 'auth'], function () {
     Route::post('/login', [AuthController::class, 'login']);
