@@ -109,8 +109,8 @@ fun MyApp(
         Box(modifier = Modifier.fillMaxSize()){
             LazyColumn(modifier = Modifier
                 .padding(all = 16.dp)
-                .align(alignment = Alignment.BottomCenter)
-                .offset(x = (16).dp, y = (-32).dp),
+                .align(alignment = Alignment.TopCenter),
+                //.offset(x = (16).dp, y = (-32).dp),
                 userScrollEnabled= true,
                 ){
                 var itemCount = actividades.size
