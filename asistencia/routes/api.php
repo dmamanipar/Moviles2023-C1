@@ -36,6 +36,6 @@ Route::group(['middleware' => 'api'], function () {
     //Route::resource('/asistencia', AsistenciaController::class);
     Route::resource('/asispa', AsisteciapaController::class);
 
-    Route::resource('/facultad', FacultaController::class);
+    Route::resource('/facu', FacultaController::class);
     });
 
