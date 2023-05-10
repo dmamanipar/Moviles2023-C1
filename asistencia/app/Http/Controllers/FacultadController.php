@@ -7,7 +7,7 @@ use App\Models\Facultad;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-class FacultaControllerd extends Controller
+class FacultadController extends Controller
 {
     /**
      * Display a listing of the resource.
