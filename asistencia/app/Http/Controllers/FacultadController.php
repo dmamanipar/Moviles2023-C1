@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\FacultadPostRequest;
 use App\Models\Facultad;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -22,30 +23,30 @@ class FacultaControllerd extends Controller
         return response()->json($facultads);
     }
 
-    public function show(matricula $facultad){
-        $matricula=matricula::find($matricula);
-        return response()->json($matricula);
+    public function show(Facultad $facultad){
+        $facultad=Facultad::find($facultad);
+        return response()->json($facultad);
     }
-    public function store(MatriculaPostRequest $request){
-        $matricula = Matricula::create($request->all());
+    public function store(FacultadPostRequest $request){
+        $facultad = Facultad::create($request->all());
 
         return response()->json([
             'message' => "record saved successfully!",
-            'name' => $matricula
+            'name' => $facultad
         ], 200);
     }
 
-    public function update(MatriculaPostRequest $request, matricula $matricula){
-        $matricula->update($request->all());
+    public function update(FacultadPostRequest $request, facultad $facultad){
+        $facultad->update($request->all());
 
         return response()->json([
             'message' => "record updated successfully!",
-            'name' => $matricula
+            'name' => $facultad
         ], 200);
     }
 
-    public function destroy(matricula $matricula){
-        $matricula->delete();
+    public function destroy(facultad $facultad){
+        $facultad->delete();
         return response()->json([
             'message' => "record deleted successfully!",
         ], 200);
