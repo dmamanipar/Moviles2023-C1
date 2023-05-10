@@ -21,11 +21,9 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.github.k0shk0sh.compose.easyforms.BuildEasyForms
 import com.github.k0shk0sh.compose.easyforms.EasyFormsResult
-import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import pe.edu.upeu.modelo.User
-import pe.edu.upeu.ui.common.DefaultButton
 import pe.edu.upeu.ui.presentation.components.ErrorImageAuth
 import pe.edu.upeu.ui.presentation.components.ImageLogin
 import pe.edu.upeu.ui.presentation.components.ProgressBarLoading
@@ -80,24 +78,6 @@ fun LoginScreen(
                 ComposeReal.COMPOSE_TOP.invoke()
             }
         }
-
-
-        /*DefaultButton(
-            text = "Log In",
-            onClick= {
-                viewModel.loginSys(User("","mamanipari@gmail.com","12345678"))
-                scope.launch {
-                    delay(3600)
-                    if(isLogin){
-                        Log.i("TOKENV", TokenUtils.TOKEN_CONTENT)
-                        Log.i("DATA", loginResul!!.message)
-                        navigateToHome.invoke()
-                    }else{
-                        Toast.makeText(TokenUtils.CONTEXTO_APPX,"Error al conectar",Toast.LENGTH_LONG)
-                    }
-                } }
-        )
-        ComposeReal.COMPOSE_TOP.invoke()*/
     }
     ErrorImageAuth(isImageValidate = isError)
     ProgressBarLoading(isLoading = isLoading)

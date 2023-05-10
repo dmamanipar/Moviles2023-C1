@@ -58,7 +58,7 @@ ActividadViewModel= hiltViewModel()
     }
     )
 }
-val formatoFecha:DateTimeFormatter? = DateTimeFormatter.ofPattern("dd-MMyyyy")
+val formatoFecha:DateTimeFormatter? = DateTimeFormatter.ofPattern("dd-MM-yyyy")
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun MyApp(
@@ -106,82 +106,87 @@ fun MyApp(
         isFloatingActionButtonDocked = false,
 //floatingActionButtonPosition = FabPosition.Center,
     ) {
-        LazyColumn{
-            var itemCount = actividades.size
-            if (isLoading) itemCount++
-            items(count = itemCount) { index ->
-                var auxIndex = index;
-                if (isLoading) {
-                    if (auxIndex == 0)
-                        return@items LoadingCard()
-                    auxIndex--
-                }
-                val actividad = actividades[auxIndex]
-                Card(
-                    shape = RoundedCornerShape(8.dp),
-                    elevation = 1.dp,
-                    modifier = Modifier
-                        .padding(horizontal = 8.dp, vertical = 4.dp)
-                        .fillMaxWidth(),
-                ) {
-                    Row(modifier = Modifier.padding(8.dp)) {
-                        Image(
-                            modifier = Modifier
-                                .size(50.dp)
-                                //.clip(CircleShape)
-                                .clip(RoundedCornerShape(8.dp)),
-                            painter = rememberImagePainter(
-                                data = actividad.evaluar,
-                                builder = {
-                                    placeholder(R.drawable.bg)
-                                    error(R.drawable.bg)
-                                }
-                            ),
-                            contentDescription = null,
-                            contentScale = ContentScale.FillHeight
-                        )
-                        pe.edu.upeu.ui.presentation.components.Spacer()
-                        Column(
-                            Modifier.weight(1f),
-                        ) {
-                            Text("${actividad.nombre_actividad} - ${actividad.estado}", fontWeight = FontWeight.Bold)
-                            val datex =LocalDate.parse(actividad.fecha!!, DateTimeFormatter.ISO_DATE)
-                            var fecha=formatoFecha?.format(datex)
-                            Text(""+fecha, color =
-                            MaterialTheme.colors.primary)
-                        }
-                        pe.edu.upeu.ui.presentation.components.Spacer()
-
-                        val showDialog = remember { mutableStateOf(false) }
-                        IconButton(onClick = {
-                            showDialog.value = true
-                        }) {
-                            Icon(Icons.Filled.Delete, "Remove", tint = MaterialTheme.colors.primary)
-                        }
-                        if (showDialog.value){
-                            ConfirmDialog(
-                                message = "Esta seguro de eliminar?",
-                                onConfirm = {
-                                    onDeleteClick?.invoke(actividad)
-                                    showDialog.value=false
-                                },
-                                onDimins = {
-                                    showDialog.value=false
-                                }
+        Box(modifier = Modifier.fillMaxSize()){
+            LazyColumn(modifier = Modifier
+                .padding(all = 16.dp)
+                .align(alignment = Alignment.BottomCenter)
+                .offset(x = (16).dp, y = (-32).dp),
+                userScrollEnabled= true,
+                ){
+                var itemCount = actividades.size
+                if (isLoading) itemCount++
+                items(count = itemCount) { index ->
+                    var auxIndex = index;
+                    if (isLoading) {
+                        if (auxIndex == 0)
+                            return@items LoadingCard()
+                        auxIndex--
+                    }
+                    val actividad = actividades[auxIndex]
+                    Card(
+                        shape = RoundedCornerShape(8.dp),
+                        elevation = 1.dp,
+                        modifier = Modifier
+                            .padding(horizontal = 8.dp, vertical = 4.dp)
+                            .fillMaxWidth(),
+                    ) {
+                        Row(modifier = Modifier.padding(8.dp)) {
+                            Image(
+                                modifier = Modifier
+                                    .size(50.dp)
+                                    //.clip(CircleShape)
+                                    .clip(RoundedCornerShape(8.dp)),
+                                painter = rememberImagePainter(
+                                    data = actividad.evaluar,
+                                    builder = {
+                                        placeholder(R.drawable.bg)
+                                        error(R.drawable.bg)
+                                    }
+                                ),
+                                contentDescription = null,
+                                contentScale = ContentScale.FillHeight
                             )
-                        }
+                            pe.edu.upeu.ui.presentation.components.Spacer()
+                            Column(
+                                Modifier.weight(1f),
+                            ) {
+                                Text("${actividad.nombre_actividad} - ${actividad.estado}", fontWeight = FontWeight.Bold)
+                                val datex =LocalDate.parse(actividad.fecha!!, DateTimeFormatter.ISO_DATE)
+                                var fecha=formatoFecha?.format(datex)
+                                Text(""+fecha, color =
+                                MaterialTheme.colors.primary)
+                            }
+                            pe.edu.upeu.ui.presentation.components.Spacer()
+
+                            val showDialog = remember { mutableStateOf(false) }
+                            IconButton(onClick = {
+                                showDialog.value = true
+                            }) {
+                                Icon(Icons.Filled.Delete, "Remove", tint = MaterialTheme.colors.primary)
+                            }
+                            if (showDialog.value){
+                                ConfirmDialog(
+                                    message = "Esta seguro de eliminar?",
+                                    onConfirm = {
+                                        onDeleteClick?.invoke(actividad)
+                                        showDialog.value=false
+                                    },
+                                    onDimins = {
+                                        showDialog.value=false
+                                    }
+                                )
+                            }
 
 
-                        IconButton(onClick = {
+                            IconButton(onClick = {
                                 //onDeleteClick?.invoke(persona)
-                            Log.i("VERTOKEN", "Holas")
-                            Log.i("VERTOKEN", TokenUtils.TOKEN_CONTENT)
-                                //var estado = isInternetAvailable(context)
-                                //Log.i("CONEXION", "VEr: " + estado)
-                            onEditClick?.invoke(actividad)
-                        }) {
-                            Icon(Icons.Filled.Edit, "Editar", tint =
-                            MaterialTheme.colors.secondary)
+                                Log.i("VERTOKEN", "Holas")
+                                Log.i("VERTOKEN", TokenUtils.TOKEN_CONTENT)
+                                onEditClick?.invoke(actividad)
+                            }) {
+                                Icon(Icons.Filled.Edit, "Editar", tint =
+                                MaterialTheme.colors.secondary)
+                            }
                         }
                     }
                 }
