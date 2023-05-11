@@ -8,7 +8,7 @@ import androidx.navigation.compose.composable
 //import androidx.navigation.compose.navArgument
 import androidx.navigation.navArgument
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
-import pe.edu.upeu.modelo.Asisteciapa
+import pe.edu.upeu.ui.presentation.screens.asisteciapa.AsisteciapaForm
 import pe.edu.upeu.ui.presentation.screens.*
 import pe.edu.upeu.ui.presentation.screens.actividad.ActividadForm
 import pe.edu.upeu.ui.presentation.screens.actividad.ActividadUI

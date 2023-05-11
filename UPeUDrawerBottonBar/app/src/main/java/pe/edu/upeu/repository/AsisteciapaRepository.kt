@@ -17,8 +17,8 @@ interface AsisteciapaRepository {
     suspend fun deleteAsisteciapa(asisteciapa: Asisteciapa)
     fun reportarAsisteciapas(): LiveData<List<Asisteciapa>>
     fun buscarAsisteciapaId(id:Int): LiveData<Asisteciapa>
-    suspend fun insertarAsisteciapa(actividad: Asisteciapa):Boolean
-    suspend fun modificarRemoteAsisteciapa(actividad: Asisteciapa) :Boolean
+    suspend fun insertarAsisteciapa(asisteciapa: Asisteciapa):Boolean
+    suspend fun modificarRemoteAsisteciapa(asisteciapa: Asisteciapa) :Boolean
 }
 
 class AsisteciapaRepositoryImp @Inject constructor(
