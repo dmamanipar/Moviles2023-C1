@@ -17,34 +17,15 @@ fun ErrorImageAuth(
     isImageValidate: Boolean
 ) {
     if (isImageValidate) {
-<<<<<<< HEAD
-<<<<<<< HEAD
-        Box( modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center
-=======
         Box(
             modifier = modifier.fillMaxSize(),
             contentAlignment = Alignment.Center
->>>>>>> DevDocent
-=======
-        Box(
-            modifier = modifier.fillMaxSize(),
-            contentAlignment = Alignment.Center
->>>>>>> DevDocent
         ) {
             Image(
                 painter = painterResource(id = R.drawable.ic_error_imagen),
                 contentDescription = "Image Error",
-<<<<<<< HEAD
-<<<<<<< HEAD
-                modifier = modifier.size(250.dp) )
-=======
                 modifier = modifier.size(250.dp)
             )
->>>>>>> DevDocent
-=======
-                modifier = modifier.size(250.dp)
-            )
->>>>>>> DevDocent
         }
     }
 }
