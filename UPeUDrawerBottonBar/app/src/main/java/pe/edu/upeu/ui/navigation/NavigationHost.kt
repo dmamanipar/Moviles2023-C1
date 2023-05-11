@@ -58,6 +58,11 @@ fun NavigationHost(
             Pantalla4()
         }
 
+        composable(Destinations.Pantalla4.route) {
+            ComposeReal.TITLE_TOP=Destinations.Pantalla4.title
+            Pantalla4()
+        }
+
         composable(Destinations.ActividadUI.route){
             ComposeReal.TITLE_TOP=Destinations.ActividadUI.title
             ActividadUI(

@@ -17,7 +17,9 @@ sealed class Destinations(
         fun createRoute(newText: String) = "pantalla2/?newText=$newText"
     }
     object Pantalla3 : Destinations("pantalla3", "Pantalla 3", Icons.Filled.Favorite)
-    object Pantalla4 : Destinations("pantalla4", "Pantalla 4x", Icons.Filled.Face )
+    object Pantalla4 : Destinations("pantalla4", "Pantalla 4dfsx", Icons.Filled.Face )
+
+    object Pantalla5 : Destinations("pantalla5", "Facultades", Icons.Filled.Fastfood )
 
     object ActividadUI: Destinations("actividadUI", "Adm. Actividad", Icons.Filled.Fastfood)
 

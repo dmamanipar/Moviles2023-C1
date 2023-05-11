@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun Pantalla4() {
+fun Pantalla5() {
     var textValue by remember { mutableStateOf("") }
     Column(
         modifier = Modifier
@@ -25,7 +25,7 @@ fun Pantalla4() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "PANTALLA 4xd",
+            text = "Facultad",
             style = TextStyle(
                 color = Color.Black, fontSize = 42.sp,
                 fontWeight = FontWeight.Black
