@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -26,11 +27,13 @@ import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import com.google.gson.Gson
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import pe.edu.upeu.modelo.Asisteciapa
-import pe.edu.upeu.ui.presentation.components.form.*
 import pe.edu.upeu.utils.TokenUtils
+import kotlinx.coroutines.delay
+import pe.edu.upeu.modelo.ComboModel
+import pe.edu.upeu.ui.navigation.Destinations
+import pe.edu.upeu.ui.presentation.components.form.*
 
 @Composable
 fun AsisteciapaForm(
@@ -45,7 +48,7 @@ fun AsisteciapaForm(
     if (text!="0"){
         asisteciapaD = Gson().fromJson(text, Asisteciapa::class.java)
     }else{
-        asisteciapaD= Asisteciapa(0,0,"", "","","","","","","","")
+        asisteciapaD= Asisteciapa(0,0,"", "","","","","","","")
     }
     val isLoading by viewModel.isLoading.observeAsState(false)
     formulario(asisteciapaD.id_asisteciapa!!,
@@ -67,8 +70,8 @@ fun formulario(id:Int,
                viewModel: AsisteciapaFormViewModel
 ){
 
-    Log.i("VERRR", "d: "+asisteciapa?.id!!)
-    val person= Asisteciapa(0,1,"", "","","","","","","","")
+    Log.i("VERRR", "d: "+asisteciapa?.id_asisteciapa!!)
+    val person= Asisteciapa(0,1,"", "","","","","","","")
 
     val scope = rememberCoroutineScope()
 
@@ -104,30 +107,44 @@ fun formulario(id:Int,
 
     Scaffold(modifier = Modifier.padding(8.dp)){
         BuildEasyForms() { easyForm ->
-            Column() {
+            Column {
+                NameTextField(easyForms = easyForm, text =asisteciapa?.id_asisteciapa!!,"ID. Asisteciapa:", MyFormKeys.NAME )
+                var listE = listOf(
+                    ComboModel("Activo","Activo"),
+                    ComboModel("Desactivo","Desactivo"),
+                )
+                ComboBox(easyForm = easyForm, "Calificacion:", asisteciapa?.calificacion!!, listE)
+
+                var listEv = listOf(
+                    ComboModel("SI","SI"),
+                    ComboModel("NO","NO"),
+                )
+                ComboBoxTwo(easyForm = easyForm, "Cui:", asisteciapa?.cui!!, listEv)
+
+
                 DatePickerCustom(easyForm = easyForm, label = "Fecha", texts = asisteciapa?.fecha!!, MyFormKeys.FECHA,"yyyy-MM-dd")
                 TimePickerCustom(easyForm = easyForm, label = "Hora", texts = asisteciapa?.hora_reg!!, MyFormKeys.TIME, "HH:mm:ss")
 
                 Row(Modifier.align(Alignment.CenterHorizontally)){
                     AccionButtonSuccess(easyForms = easyForm, "Guardar", id){
                         val lista=easyForm.formData()
-                        asisteciapa.id_actividad=(lista.get(0) as EasyFormsResult.StringResult).value
-                        asisteciapa.fecha=splitCadena((lista.get(1) as EasyFormsResult.GenericStateResult<String>).value)
-                        asisteciapa.hora_reg=splitCadena((lista.get(2) as EasyFormsResult.GenericStateResult<String>).value)
-                        asisteciapa.latituda=(lista.get(3) as EasyFormsResult.GenericStateResult<String>).value
-                        asisteciapa.longituda=(lista.get(4) as EasyFormsResult.GenericStateResult<String>).value
-                        asisteciapa.tipo=(lista.get(5) as EasyFormsResult.GenericStateResult<String>).value
-                        asisteciapa.calificacion=(lista.get(6) as EasyFormsResult.GenericStateResult<String>).value
-                        asisteciapa.cui=(lista.get(7) as EasyFormsResult.GenericStateResult<String>).value
-                        asisteciapa.tipo_cui=(lista.get(8) as EasyFormsResult.GenericStateResult<String>).value
+                        //person.id_asisteciapa=(lista.get(0) as EasyFormsResult.Int).value
+                        person.fecha=splitCadena((lista.get(1) as EasyFormsResult.GenericStateResult<String>).value)
+                        person.hora_reg=splitCadena((lista.get(2) as EasyFormsResult.GenericStateResult<String>).value)
+                        person.latituda=(lista.get(3) as EasyFormsResult.GenericStateResult<String>).value
+                        person.longituda=(lista.get(4) as EasyFormsResult.GenericStateResult<String>).value
+                        person.tipo=(lista.get(5) as EasyFormsResult.GenericStateResult<String>).value
+                        person.cui=(lista.get(6) as EasyFormsResult.GenericStateResult<String>).value
+                        person.tipo_cui=(lista.get(7) as EasyFormsResult.GenericStateResult<String>).value
+                        person.user_create= TokenUtils.USER_LOGIN
 
                         if (id==0){
-                            Log.i("MODIFICAR", "M:"+asisteciapa)
-                            viewModel.addActividad(asisteciapa)
+                            Log.i("MODIFICAR", "M:"+person)
+                            viewModel.addAsistecipa(person)
                         }else{
-                            asisteciapa.id_asisteciapa=id
-                            Log.i("MODIFICAR", "M:"+asisteciapa)
-                            viewModel.editAsisteciapa(asisteciapa)
+                            person.id_asisteciapa=id
+                            Log.i("MODIFICAR", "M:"+person)
+                            viewModel.editActividad(person)
                         }
 
                         navController.navigate(Destinations.AsisteciapaUI.route)

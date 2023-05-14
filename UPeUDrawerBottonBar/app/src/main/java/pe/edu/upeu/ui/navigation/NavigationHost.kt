@@ -12,6 +12,7 @@ import pe.edu.upeu.ui.presentation.screens.asisteciapa.AsisteciapaForm
 import pe.edu.upeu.ui.presentation.screens.*
 import pe.edu.upeu.ui.presentation.screens.actividad.ActividadForm
 import pe.edu.upeu.ui.presentation.screens.actividad.ActividadUI
+import pe.edu.upeu.ui.presentation.screens.asisteciapa.AsisteciapaUI
 import pe.edu.upeu.ui.presentation.screens.login.LoginScreen
 import pe.edu.upeu.utils.ComposeReal
 
@@ -67,6 +68,16 @@ fun NavigationHost(
                 }
             )
         }
+
+        composable(Destinations.AsisteciapaUI.route){
+            ComposeReal.TITLE_TOP=Destinations.AsisteciapaUI.title
+            AsisteciapaUI(
+                navegarEditarAct = { newText ->
+                    navController.navigate(Destinations.AsisteciapaForm.asisId(newText))
+                }
+            )
+        }
+
         composable(
             Destinations.ActividadForm.route,
             arguments = listOf(navArgument("actId") {
