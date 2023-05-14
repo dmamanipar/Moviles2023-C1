@@ -32,5 +32,5 @@ interface RestActividad {
     suspend fun insertarActividad(@Header("Authorization") token:String,
                                   @Body actividad: Actividad): Response<MsgModelResp>
     @POST("/api/auth/login")
-    suspend fun login(@Body user: User):UserResponse
+    suspend fun login(@Body user: User):Response<UserResponse>
 }

@@ -2,9 +2,9 @@
 
 //use App\Http\Controllers\AsistenciaController;
 use App\Http\Controllers\ActividadController;
-use App\Http\Controllers\PersonaController;
 use App\Http\Controllers\AsisteciapaController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PersonaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 

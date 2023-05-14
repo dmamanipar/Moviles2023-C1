@@ -39,10 +39,11 @@ class ActividadRepositoryImp @Inject constructor(
         try {
             CoroutineScope(Dispatchers.IO).launch {
                 delay(3000)
-                val totek=restActividad.login(User("",
-                    "davidmp@upeu.edu.pe", "12345678"))
+                /*val totek=restActividad.login(User("",
+                    "davidmp@upeu.edu.pe", "12345678")).body()
                 TokenUtils.TOKEN_CONTENT=totek?.token_type+""+totek?.access_token
-                Log.i("VERX", "Token:"+TokenUtils.TOKEN_CONTENT)
+                Log.i("VERX", "Token:"+TokenUtils.TOKEN_CONTENT)*/
+
                 val data=restActividad.reportarActividad(TokenUtils.TOKEN_CONTENT).body()!!.data
                 actividadDao.insertarActividades(data)
             }
@@ -56,27 +57,16 @@ class ActividadRepositoryImp @Inject constructor(
         return actividadDao.buscarActividad(id)
     }
 
-    override suspend fun insertarActividad(actividad: Actividad): Boolean
-    {
-        var dd:Boolean=false
-        CoroutineScope(Dispatchers.IO).launch {
-            Log.i("DATA", "T:"+TokenUtils.TOKEN_CONTENT)
-            Log.i("DATA", "D:"+actividad.toString())
-
-            dd=restActividad.insertarActividad(TokenUtils.TOKEN_CONTENT,actividad).body()?.success!!
-        }
-        return dd
+    override suspend fun insertarActividad(actividad: Actividad): Boolean{
+        return restActividad.insertarActividad(TokenUtils.TOKEN_CONTENT,actividad).body()?.success!!
     }
-    override suspend fun modificarRemoteActividad(actividad: Actividad):
-            Boolean {
+
+    override suspend fun modificarRemoteActividad(actividad: Actividad): Boolean {
         var dd:Boolean=false
         CoroutineScope(Dispatchers.IO).launch {
             Log.i("DATA", "T:"+TokenUtils.TOKEN_CONTENT)
             Log.i("DATA", "D:"+actividad.toString())
-
-            dd=restActividad.actualizarActividad(TokenUtils.TOKEN_CONTENT,
-                actividad.id, actividad).body()?.success!!
         }
-        return dd
+        return restActividad.actualizarActividad(TokenUtils.TOKEN_CONTENT, actividad.id, actividad).body()?.success!!
     }
 }
