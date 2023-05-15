@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ActividadController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\EscuelaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -31,5 +32,6 @@ Route::group(['middleware' => 'api'], function () {
    // Route::get('/profile', [AuthController::class, 'userProfile']);
     Route::resource('/act', ActividadController::class);
     //Route::resource('/asistenciapa', AsistenciapaController::class);
+    Route::resource('/escuela', EscuelaController::class);
     });
 

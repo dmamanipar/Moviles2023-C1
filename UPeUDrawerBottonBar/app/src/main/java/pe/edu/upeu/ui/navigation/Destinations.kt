@@ -1,10 +1,7 @@
 package pe.edu.upeu.ui.navigation
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Face
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.*
 import androidx.compose.ui.graphics.vector.ImageVector
 
 sealed class Destinations(
@@ -21,5 +18,16 @@ sealed class Destinations(
     }
     object Pantalla3 : Destinations("pantalla3", "Pantalla 3", Icons.Filled.Favorite)
     object Pantalla4 : Destinations("pantalla4", "Pantalla 4x", Icons.Filled.Face )
+
+    object ActividadUI: Destinations("actividadUI", "Adm. Actividad", Icons.Filled.Fastfood)
+
+    object ActividadUI: Destinations("escuelaUI", "Adm. Escuela", Icons.Filled.Fastfood)
+
+    object ActividadForm: Destinations("actividadForm?actId={actId}",
+        "Actividad Form", Icons.Filled.DynamicForm){
+        fun passId(actId:String?):String{
+            return "actividadForm?actId=$actId"
+        }
+    }
 
 }
