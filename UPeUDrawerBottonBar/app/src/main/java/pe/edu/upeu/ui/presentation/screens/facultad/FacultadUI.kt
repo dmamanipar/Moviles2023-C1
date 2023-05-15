@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
@@ -28,23 +27,23 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberImagePainter
 import com.google.gson.Gson
-import pe.edu.upeu.modelo.Actividad
-import pe.edu.upeu.ui.navigation.Destinations
-import pe.edu.upeu.ui.presentation.components.BottomNavigationBar
-import pe.edu.upeu.ui.presentation.components.LoadingCard
-import java.time.format.DateTimeFormatter
 import pe.edu.upeu.R
 import pe.edu.upeu.modelo.Facultad
+
+import pe.edu.upeu.ui.navigation.Destinations
+import pe.edu.upeu.ui.presentation.components.BottomNavigationBar
 import pe.edu.upeu.ui.presentation.components.ConfirmDialog
-import pe.edu.upeu.ui.presentation.screens.actividad.ActividadViewModel
+import pe.edu.upeu.ui.presentation.components.LoadingCard
+
 import pe.edu.upeu.utils.TokenUtils
 import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 @Composable
 fun FacultadUI (navegarEditarfac: (String) -> Unit, viewModel:
 FacultadViewModel = hiltViewModel()
 ){
-    val facu by viewModel.facu.observeAsState(arrayListOf())
+    val facu by viewModel.facultades.observeAsState(arrayListOf())
     val isLoading by viewModel.isLoading.observeAsState(false)
     Log.i("VERX", ""+facu!!.size )
 
@@ -60,7 +59,7 @@ FacultadViewModel = hiltViewModel()
         }
     )
 }
-val formatoFecha:DateTimeFormatter? = DateTimeFormatter.ofPattern("dd-MM-yyyy")
+
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun MyApp(
@@ -133,13 +132,13 @@ fun MyApp(
                             .fillMaxWidth(),
                     ) {
                         Row(modifier = Modifier.padding(8.dp)) {
-                            /*Image(
+                            Image(
                                 modifier = Modifier
                                     .size(50.dp)
                                     //.clip(CircleShape)
                                     .clip(RoundedCornerShape(8.dp)),
                                 painter = rememberImagePainter(
-                                    data = /*facultades.evaluar,*/,
+                                    data = facultad,
                                     builder = {
                                         placeholder(R.drawable.bg)
                                         error(R.drawable.bg)
@@ -148,13 +147,11 @@ fun MyApp(
                                 contentDescription = null,
                                 contentScale = ContentScale.FillHeight
                             )
-                            */
                             pe.edu.upeu.ui.presentation.components.Spacer()
                             Column(
                                 Modifier.weight(1f),
                             ) {
-                                //Text("${facultad.nombrefac} - ${facultad.estado}", fontWeight = FontWeight.Bold)
-
+                                Text("${facultad.nombrefac} - ${facultad.estado} -${facultad.iniciales} ", fontWeight = FontWeight.Bold)
 
                             }
                             pe.edu.upeu.ui.presentation.components.Spacer()
@@ -185,8 +182,9 @@ fun MyApp(
                                 Log.i("VERTOKEN", TokenUtils.TOKEN_CONTENT)
                                 onEditClick?.invoke(facultad)
                             }) {
-                                Icon(Icons.Filled.Edit, "Editar", tint =
-                                MaterialTheme.colors.secondary)
+                                Icon(
+                                    Icons.Filled.Edit, "Editar", tint =
+                                    MaterialTheme.colors.secondary)
                             }
                         }
                     }

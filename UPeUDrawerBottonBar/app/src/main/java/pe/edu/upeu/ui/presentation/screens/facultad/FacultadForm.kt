@@ -74,40 +74,10 @@ fun formulario(
 
     val scope = rememberCoroutineScope()
 
-    var locationCallback: LocationCallback? = null
-    var fusedLocationClient: FusedLocationProviderClient? = null
-    fusedLocationClient = LocationServices.getFusedLocationProviderClient(
-        TokenUtils.CONTEXTO_APPX)
-
-    locationCallback = object : LocationCallback() {
-        override fun onLocationResult(p0: LocationResult) {
-            for (lo in p0.locations) {
-                Log.e("LATLONX", "Lat: ${lo.latitude} Lon: ${lo.longitude}")
-
-            }
-        }
-    }
-    scope.launch{
-        val locationRequest = LocationRequest.create().apply {
-            interval = 10000
-            fastestInterval = 5000
-            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-        }
-        fusedLocationClient!!.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper())
-
-        Log.e("LATLON", "Lat: Lon: ")
-        delay(1500L)
-        if (fusedLocationClient != null) {
-            fusedLocationClient!!.removeLocationUpdates(locationCallback);
-            fusedLocationClient = null;
-        }
-
-    }
-
     Scaffold(modifier = Modifier.padding(8.dp)){
         BuildEasyForms { easyForm ->
             Column {
-                NameTextField(easyForms = easyForm, text =facultad?.nombrefac!!,"Nomb. Facu:", MyFormKeys.NAME )
+                NameTextField(easyForms = easyForm, text =facultad?.nombrefac!!,"Nombre Facultad :", MyFormKeys.NAME )
 
                 var listE = listOf(
                     ComboModel("Activo","Activo"),
@@ -115,20 +85,15 @@ fun formulario(
                 )
                 ComboBox(easyForm = easyForm, "Estado:", facultad?.estado!!, listE)
 
-                var listEv = listOf(
-                    ComboModel("SI","SI"),
-                    ComboModel("NO","NO"),
-                )
-                ComboBoxTwo(easyForm = easyForm, "Iniciales:", facultad?.iniciales!!, listEv)
+                NameTextField(easyForms = easyForm, text =facultad?.iniciales!!,"Iniciales :", MyFormKeys.NAME )
 
 
                 Row(Modifier.align(Alignment.CenterHorizontally)){
                     AccionButtonSuccess(easyForms = easyForm, "Guardar", id){
                         val lista=easyForm.formData()
                         person.nombrefac=(lista.get(0) as EasyFormsResult.StringResult).value
-                        person.estado=splitCadena((lista.get(1) as EasyFormsResult.GenericStateResult<String>).value)
-                        person.iniciales=splitCadena((lista.get(2) as EasyFormsResult.GenericStateResult<String>).value)
-
+                        person.estado=(lista.get(1) as EasyFormsResult.StringResult).value
+                        person.iniciales=(lista.get(2) as EasyFormsResult.StringResult).value
 
                         if (id==0){
                             Log.i("MODIFICAR", "M:"+person)

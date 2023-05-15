@@ -8,9 +8,9 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import pe.edu.upeu.modelo.Actividad
+
 import pe.edu.upeu.modelo.Facultad
-import pe.edu.upeu.repository.ActividadRepository
+
 import pe.edu.upeu.repository.FacultadRepository
 import javax.inject.Inject
 
@@ -22,7 +22,7 @@ class FacultadViewModel @Inject constructor(
     private val _isLoading: MutableLiveData<Boolean> by lazy {
         MutableLiveData<Boolean>(false)
     }
-    val facu: LiveData<List<Facultad>> by lazy {
+    val facultades: LiveData<List<Facultad>> by lazy {
         facuRepo.reportarFacultad()
     }
     val isLoading: LiveData<Boolean> get() = _isLoading

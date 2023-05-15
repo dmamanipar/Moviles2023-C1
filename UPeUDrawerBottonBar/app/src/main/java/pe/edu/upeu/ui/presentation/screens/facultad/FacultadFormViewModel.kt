@@ -20,7 +20,7 @@ class FacultadFormViewModel @Inject constructor(
         MutableLiveData<Boolean>(false)
     }
 
-    fun getActividad(idX: Int): LiveData<Facultad> {
+    fun getFacultad(idX: Int): LiveData<Facultad> {
         return facuRepo.buscarFacultadId(idX)
     }
 
