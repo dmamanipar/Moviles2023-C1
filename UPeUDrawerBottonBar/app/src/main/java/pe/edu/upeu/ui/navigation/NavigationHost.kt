@@ -11,6 +11,8 @@ import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import pe.edu.upeu.ui.presentation.screens.*
 import pe.edu.upeu.ui.presentation.screens.actividad.ActividadForm
 import pe.edu.upeu.ui.presentation.screens.actividad.ActividadUI
+import pe.edu.upeu.ui.presentation.screens.facultad.FacultadForm
+import pe.edu.upeu.ui.presentation.screens.facultad.FacultadUI
 import pe.edu.upeu.ui.presentation.screens.login.LoginScreen
 import pe.edu.upeu.utils.ComposeReal
 
@@ -58,7 +60,7 @@ fun NavigationHost(
             Pantalla4()
         }
 
-        composable(Destinations.Pantalla4.route) {
+        composable(Destinations.Pantalla5.route) {
             ComposeReal.TITLE_TOP=Destinations.Pantalla4.title
             Pantalla4()
         }
@@ -71,6 +73,7 @@ fun NavigationHost(
                 }
             )
         }
+
         composable(
             Destinations.ActividadForm.route,
             arguments = listOf(navArgument("actId") {
@@ -81,6 +84,27 @@ fun NavigationHost(
             requireNotNull(actId)
             ComposeReal.TITLE_TOP = Destinations.ActividadForm.title
             ActividadForm(actId, darkMode, navController)
+        }
+
+        composable(Destinations.FacultadUI.route){
+            ComposeReal.TITLE_TOP=Destinations.FacultadUI.title
+            FacultadUI(
+                navegarEditarfac = { newText ->
+                    navController.navigate(Destinations.FacultadForm.passId(newText))
+                }
+            )
+        }
+
+        composable(
+            Destinations.FacultadForm.route,
+            arguments = listOf(navArgument("facuId") {
+                defaultValue = "facuId"
+            })
+        ) { navBackStackEntry ->
+            var facuId = navBackStackEntry.arguments?.getString("facuId")
+            requireNotNull(facuId)
+            ComposeReal.TITLE_TOP = Destinations.FacultadForm.title
+            FacultadForm(facuId, darkMode, navController)
         }
 
 

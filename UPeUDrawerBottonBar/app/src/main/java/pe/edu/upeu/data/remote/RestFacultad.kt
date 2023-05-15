@@ -19,18 +19,18 @@ import retrofit2.http.Query
 interface RestFacultad {
     @GET("/api/act")
     suspend fun reportarFacultad(@Header("Authorization") token:String):
-            Response<MsgModelResp>
-    @GET("/api/act/{id}")
+            Response<MsgModelResp2>
+    @GET("/api/facu/{id}")
     suspend fun getFacultadId(@Header("Authorization") token:String,
                                @Query("id") id:Int): Response<MsgModelResp2>
-    @DELETE("/api/act/{id}")
+    @DELETE("/api/facu/{id}")
     suspend fun deleteFacultad(@Header("Authorization") token:String,
                                 @Path("id") id:Int): Response<MsgModelResp2>
-    @PATCH("/api/act/{id}")
+    @PATCH("/api/facu/{id}")
     suspend fun actualizarFacultad(@Header("Authorization")
                                     token:String, @Path("id") id:Int, @Body facultad: Facultad):
-            Response<MsgModelResp>
-    @POST("/api/act")
+            Response<MsgModelResp2>
+    @POST("/api/facu")
     suspend fun insertarFacultad(@Header("Authorization") token:String,
                                   @Body facultad: Facultad): Response<MsgModelResp2>
     @POST("/api/auth/login")

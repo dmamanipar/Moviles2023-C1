@@ -10,6 +10,6 @@ data class Facultad(
     @PrimaryKey(autoGenerate = true) var id:Int,
     var nombrefac:String,
     var estado:String,
-    var iniciales:String
+    var iniciales:String,
 
 )
