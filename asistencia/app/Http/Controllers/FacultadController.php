@@ -16,37 +16,64 @@ class FacultadController extends Controller
 
 
     public function index(){
-        $facultads=Facultad::all();
-        //return $matriculas;
-        return response()->json($facultads);
+
+
+        Log::channel('stderr')->info("Si llega aqui");
+
+        $facultades=Facultad::all();
+        $mappedcollection = $facultades->map(function($facultad, $key) {
+        return [
+        'id' => $facultad->id,
+        'nombrefac' => $facultad->periodo_id,
+        'estado'=>$facultad->nombre_actividad,
+        'iniciales'=>$facultad->fecha,
+
+        ];
+        });
+        return response()->json(['success' => true,
+        'data' => $mappedcollection,
+        //'data' => Persona::all(),
+        'message' => 'lista de facultades'], 200);
+
     }
 
     public function show(Facultad $facultad){
         $facultad=Facultad::find($facultad);
         return response()->json($facultad);
     }
-    public function store(FacultadPostRequest $request){
-        $facultad = Facultad::create($request->all());
+    public function store(Request $request){
 
-        return response()->json([
-            'message' => "record saved successfully!",
-            'name' => $facultad
-        ], 200);
+        $input = $request->all();
+        Log::channel('stderr')->info($request);
+        Facultad::create($input);
+
+        return response()->json(['success' => true,
+        'data' => Facultad::all(),
+        'message' => 'update'], 200);
+
     }
 
-    public function update(FacultadPostRequest $request, facultad $facultad){
-        $facultad->update($request->all());
+    public function update(Request $request, $id){
 
-        return response()->json([
-            'message' => "record updated successfully!",
-            'name' => $facultad
-        ], 200);
+        Log::channel('stderr')->info($request);
+        $input = $request->all();
+        $facultad=Facultad::find($id);
+        $facultad->nombrefac = $input['nombrefac'];
+        $facultad->estado = $input['estado'];
+        $facultad->iniciales = $input['iniciales'];
+
+
+        $facultad->save();
+        return response()->json(['success' => true,
+        'data' => Facultad::all(),
+        'message' => 'record saved successfully!'], 200);
     }
 
-    public function destroy(facultad $facultad){
-        $facultad->delete();
-        return response()->json([
-            'message' => "record deleted successfully!",
-        ], 200);
+    public function destroy(facultad $facultad,$id){
+        Log::channel('stderr')->info($id);
+        Facultad::find($id)->delete();
+        return response()->json(['success' => true,
+        'data' => Facultad::all(),
+        'message' => 'Lista de fac'], 200);
     }
 }

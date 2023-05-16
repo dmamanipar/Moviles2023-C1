@@ -22,7 +22,7 @@ class FacultadPostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>'required',
+            'nombrefac'=>'required',
             'estado'=>'required',
             'iniciales'=>'required',
         ];

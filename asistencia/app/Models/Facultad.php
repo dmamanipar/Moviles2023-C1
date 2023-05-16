@@ -9,8 +9,13 @@ class Facultad extends Model
 {
     use HasFactory;
 
+    protected $table = 'facultads';
+    public $timestamps = false;
+    protected $primaryKey = 'id';
 
-    protected $guarded = ['id'];
+    protected $fillable = [
+        'id', 'nombrefac', 'estado', 'iniciales'
+        ];
 
     public function escuelas()
     {
