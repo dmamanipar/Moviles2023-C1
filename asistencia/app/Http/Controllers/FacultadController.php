@@ -48,7 +48,7 @@ class FacultadController extends Controller
 
         return response()->json(['success' => true,
         'data' => Facultad::all(),
-        'message' => 'update'], 200);
+        'message' => 'store'], 200);
 
     }
 
