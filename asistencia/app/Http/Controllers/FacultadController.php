@@ -18,29 +18,28 @@ class FacultadController extends Controller
     public function index(){
 
 
+
         Log::channel('stderr')->info("Si llega aqui");
 
         $facultades=Facultad::all();
         $mappedcollection = $facultades->map(function($facultad, $key) {
         return [
         'id' => $facultad->id,
-        'nombrefac' => $facultad->periodo_id,
-        'estado'=>$facultad->nombre_actividad,
-        'iniciales'=>$facultad->fecha,
+        'nombrefac' => $facultad->nombrefac,
+        'estado'=>$facultad->estado,
+        'iniciales'=>$facultad->iniciales,
 
         ];
         });
         return response()->json(['success' => true,
-        'data' => $mappedcollection,
+        'data' => Facultad::all(),
         //'data' => Persona::all(),
         'message' => 'lista de facultades'], 200);
 
     }
 
     public function show(Facultad $facultad){
-        $facultad=Facultad::find($facultad);
-        return response()->json($facultad);
-    }
+       }
     public function store(Request $request){
 
         $input = $request->all();
