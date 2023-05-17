@@ -6,6 +6,12 @@ data class MsgModelResp(
     var message:String
 )
 
+data class MsgModelRespAsis(
+    var success:Boolean,
+    var data:List<Asistencia>,
+    var message:String
+)
+
 data class ComboModel(
     val code: String,
     val name: String

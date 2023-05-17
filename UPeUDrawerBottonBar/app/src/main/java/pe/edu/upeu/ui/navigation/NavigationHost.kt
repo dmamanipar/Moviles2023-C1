@@ -10,7 +10,9 @@ import androidx.navigation.navArgument
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import pe.edu.upeu.ui.presentation.screens.*
 import pe.edu.upeu.ui.presentation.screens.actividad.ActividadForm
+import pe.edu.upeu.ui.presentation.screens.asistencia.AsistenciaForm
 import pe.edu.upeu.ui.presentation.screens.actividad.ActividadUI
+import pe.edu.upeu.ui.presentation.screens.asistencia.AsistenciaUI
 import pe.edu.upeu.ui.presentation.screens.login.LoginScreen
 import pe.edu.upeu.utils.ComposeReal
 
@@ -76,6 +78,26 @@ fun NavigationHost(
             requireNotNull(actId)
             ComposeReal.TITLE_TOP = Destinations.ActividadForm.title
             ActividadForm(actId, darkMode, navController)
+        }
+
+        composable(Destinations.AsistenciaUI.route){
+            ComposeReal.TITLE_TOP=Destinations.AsistenciaUI.title
+            AsistenciaUI(
+                navegarEditarAsist= { newText ->
+                    navController.navigate(Destinations.AsistenciaForm.asistId(newText))
+                }
+            )
+        }
+        composable(
+            Destinations.AsistenciaForm.route,
+            arguments = listOf(navArgument("asistId") {
+                defaultValue = "asistId"
+            })
+        ) { navBackStackEntry ->
+            var asistId = navBackStackEntry.arguments?.getString("asistId")
+            requireNotNull(asistId)
+            ComposeReal.TITLE_TOP = Destinations.AsistenciaForm.title
+            AsistenciaForm(asistId, darkMode, navController)
         }
 
 

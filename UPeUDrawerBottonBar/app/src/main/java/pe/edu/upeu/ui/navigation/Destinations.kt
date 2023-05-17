@@ -28,4 +28,14 @@ sealed class Destinations(
         }
     }
 
+    object AsistenciaUI: Destinations("asistenciaUI", "Adm. Asistencia", Icons.Filled.Fastfood)
+
+
+    object AsistenciaForm: Destinations("asistenciaForm?asistId={asistId}",
+        "Asistencia Form", Icons.Filled.DynamicForm){
+        fun asistId(asistId:String?):String{
+            return "asistenciaForm?asistId=$asistId"
+        }
+    }
+
 }

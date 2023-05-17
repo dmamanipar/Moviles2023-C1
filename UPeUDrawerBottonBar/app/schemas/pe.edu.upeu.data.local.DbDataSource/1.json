@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "eb97db350e58dfb7a331d1927c006830",
+    "identityHash": "9e66b6238d33e765409eb62d510c5f6b",
     "entities": [
       {
         "tableName": "actividad",
@@ -83,12 +83,98 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "asistencia",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_matricula` INTEGER NOT NULL, `id_evento` INTEGER NOT NULL, `fecha` TEXT NOT NULL, `hora` TEXT NOT NULL, `latituda` TEXT NOT NULL, `longituda` TEXT NOT NULL, `tipo` TEXT NOT NULL, `tipo_reg` TEXT NOT NULL, `id_persona` TEXT NOT NULL, `calificacion` TEXT NOT NULL, `offlinex` TEXT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id_matricula",
+            "columnName": "id_matricula",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id_evento",
+            "columnName": "id_evento",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fecha",
+            "columnName": "fecha",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "hora",
+            "columnName": "hora",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "latituda",
+            "columnName": "latituda",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "longituda",
+            "columnName": "longituda",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "tipo",
+            "columnName": "tipo",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "tipo_reg",
+            "columnName": "tipo_reg",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id_persona",
+            "columnName": "id_persona",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "calificacion",
+            "columnName": "calificacion",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "offlinex",
+            "columnName": "offlinex",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'eb97db350e58dfb7a331d1927c006830')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '9e66b6238d33e765409eb62d510c5f6b')"
     ]
   }
 }
