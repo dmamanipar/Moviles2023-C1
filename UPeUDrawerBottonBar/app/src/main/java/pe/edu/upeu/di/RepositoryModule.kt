@@ -14,6 +14,8 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract  fun actividadRepository(actRepos:ActividadRepositoryImp): ActividadRepository
+    @Binds
+    @Singleton
     abstract fun asisteciapaRepository(actRepos:AsisteciapaRepositoryImp): AsisteciapaRepository
 
     @Binds

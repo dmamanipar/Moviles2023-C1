@@ -31,7 +31,7 @@ class AsisteciapaFormViewModel @Inject constructor(
 
         }
 
-    fun editActividad(asisteciapa: Asisteciapa){
+    fun editAsisteciapa(asisteciapa: Asisteciapa){
         viewModelScope.launch(Dispatchers.IO){
             asisRepo.modificarRemoteAsisteciapa(asisteciapa)
         }

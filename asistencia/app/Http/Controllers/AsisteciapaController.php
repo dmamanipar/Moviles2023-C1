@@ -20,26 +20,24 @@ class AsisteciapaController extends Controller
     {
         //Log::channel('stderr')->info("Si llega aqui");
 
-        $actividades=Actividad::all();
+        $actividades=Asisteciapa::all();
         $mappedcollection = $actividades->map(function($actividad, $key) {
         return [
         'id' => $actividad->id,
-        'periodo_id' => $actividad->periodo_id,
-        'nombre_actividad'=>$actividad->nombre_actividad,
-        'fecha'=>$actividad->fecha,
-        'horai'=>$actividad->horai,
-        'min_toler'=>$actividad->min_toler,
-        'latitud'=>$actividad->latitud,
-        'longitud'=>$actividad->longitud,
-        'estado'=>$actividad->estado,
-        'evaluar'=>$actividad->evaluar,
-        'user_create'=>$actividad->user_create,
-        'asistenciapas'=>$actividad->asisteciapas,
+        'fecha' => $actividad->fecha,
+        'hora_reg'=>$actividad->hora_reg,
+        'latituda'=>$actividad->latituda,
+        'longituda'=>$actividad->longituda,
+        'tipo'=>$actividad->tipo,
+        'calificacion'=>$actividad->calificacion,
+        'cui'=>$actividad->cui,
+        'tipo_cui'=>$actividad->tipo_cui,
+        'actividad_id'=>$actividad->actividad_id,
         ];
         });
         return response()->json(['success' => true,
         'data' => $mappedcollection,
-        'data' => Persona::all(),
+        //'data' => Persona::all(),
         'message' => 'lista de actividades'], 200);
     }
 

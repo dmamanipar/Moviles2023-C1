@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -34,6 +35,7 @@ import kotlinx.coroutines.delay
 import pe.edu.upeu.modelo.ComboModel
 import pe.edu.upeu.ui.navigation.Destinations
 import pe.edu.upeu.ui.presentation.components.form.*
+import pe.edu.upeu.ui.presentation.components.Spacer
 
 @Composable
 fun AsisteciapaForm(
@@ -48,7 +50,7 @@ fun AsisteciapaForm(
     if (text!="0"){
         asisteciapaD = Gson().fromJson(text, Asisteciapa::class.java)
     }else{
-        asisteciapaD= Asisteciapa(0,0,"", "","","","","","","")
+        asisteciapaD= Asisteciapa(0,0,"", "","","","","","","","")
     }
     val isLoading by viewModel.isLoading.observeAsState(false)
     formulario(asisteciapaD.id_asisteciapa!!,
@@ -71,7 +73,7 @@ fun formulario(id:Int,
 ){
 
     Log.i("VERRR", "d: "+asisteciapa?.id_asisteciapa!!)
-    val person= Asisteciapa(0,1,"", "","","","","","","")
+    val person= Asisteciapa(0,1,"", "","","","","","","","")
 
     val scope = rememberCoroutineScope()
 
@@ -108,7 +110,7 @@ fun formulario(id:Int,
     Scaffold(modifier = Modifier.padding(8.dp)){
         BuildEasyForms() { easyForm ->
             Column {
-                NameTextField(easyForms = easyForm, text =asisteciapa?.id_asisteciapa!!,"ID. Asisteciapa:", MyFormKeys.NAME )
+                NameTextField(easyForms = easyForm, text = asisteciapa?.id_asisteciapa!!.toString(),"ID.Asisteciapa:", MyFormKeys.NAME )
                 var listE = listOf(
                     ComboModel("Activo","Activo"),
                     ComboModel("Desactivo","Desactivo"),
@@ -144,7 +146,7 @@ fun formulario(id:Int,
                         }else{
                             person.id_asisteciapa=id
                             Log.i("MODIFICAR", "M:"+person)
-                            viewModel.editActividad(person)
+                            viewModel.editAsisteciapa(person)
                         }
 
                         navController.navigate(Destinations.AsisteciapaUI.route)

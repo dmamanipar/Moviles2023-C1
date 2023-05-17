@@ -32,7 +32,7 @@ class AsisteciapaRepositoryImp @Inject constructor(
 
             restAsisteciapa.deleteAsisteciapa(TokenUtils.TOKEN_CONTENT,asisteciapa.id_asisteciapa)
         }
-        asisteciapaDao.eliminarActividad(asisteciapa)
+        asisteciapaDao.eliminarAsisteciapa(asisteciapa)
     }
 
     override fun reportarAsisteciapas(): LiveData<List<Asisteciapa>> {
@@ -50,11 +50,11 @@ class AsisteciapaRepositoryImp @Inject constructor(
         }catch (e:Exception){
             Log.i("ERRORX", "Error:"+e.message)
         }
-        return asisteciapaDao.reportarActividad()
+        return asisteciapaDao.reportarAsisteciapa()
     }
 
     override fun buscarAsisteciapaId(id: Int): LiveData<Asisteciapa> {
-        return asisteciapaDao.buscarActividad(id)
+        return asisteciapaDao.buscarAsisteciapa(id)
     }
 
     override suspend fun insertarAsisteciapa(asisteciapa: Asisteciapa): Boolean{

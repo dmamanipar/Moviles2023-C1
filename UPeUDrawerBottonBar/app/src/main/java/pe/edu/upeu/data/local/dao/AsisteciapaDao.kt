@@ -16,11 +16,11 @@ interface AsisteciapaDao {
     suspend fun modificarAsisteciapa(asisteciapa: Asisteciapa)
 
     @Delete
-    suspend fun eliminarActividad(asisteciapa: Asisteciapa)
+    suspend fun eliminarAsisteciapa(asisteciapa: Asisteciapa)
 
-    @Query("select * from asisteciapa")
-    fun reportarActividad():LiveData<List<Asisteciapa>>
+    @Query("select * from asistecipa")
+    fun reportarAsisteciapa():LiveData<List<Asisteciapa>>
 
-    @Query("select * from actividad where id=:idx")
-    fun buscarActividad(idx:Int):LiveData<Asisteciapa>
+    @Query("select * from asistecipa where id_asisteciapa=:idx")
+    fun buscarAsisteciapa(idx:Int):LiveData<Asisteciapa>
 }

@@ -7,12 +7,13 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.material.R
+
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import pe.edu.upeu.ui.navigation.Destinations
 import androidx.compose.runtime.livedata.observeAsState
@@ -35,12 +36,13 @@ import pe.edu.upeu.ui.presentation.components.LoadingCard
 import pe.edu.upeu.utils.TokenUtils
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import pe.edu.upeu.R
 
 @Composable
 fun AsisteciapaUI (navegarEditarAct: (String) -> Unit, viewModel:
 AsisteciapaViewModel = hiltViewModel()
 ){
-    val asis by viewModel.asis.observeAsState(arrayListOf())
+    val asis by viewModel.Asisteciapa.observeAsState(arrayListOf())
     val isLoading by viewModel.isLoading.observeAsState(false)
     Log.i("VERX", ""+asis!!.size )
 
@@ -129,7 +131,7 @@ fun MyApp(
                                 //.clip(CircleShape)
                                 .clip(RoundedCornerShape(8.dp)),
                             painter = rememberImagePainter(
-                                data = asisteciapa.hora_reg,
+                                data = actividad.hora_reg,
                                 builder = {
                                     placeholder(R.drawable.bg)
                                     error(R.drawable.bg)
@@ -142,8 +144,8 @@ fun MyApp(
                         Column(
                             Modifier.weight(1f),
                         ) {
-                            Text("${asisteciapa.id_actividad} - ${asisteciapa.estado}", fontWeight = FontWeight.Bold)
-                            val datex = LocalDate.parse(asisteciapa.fecha!!, DateTimeFormatter.ISO_DATE)
+                            Text("${actividad.id_actividad} - ${actividad.latituda}", fontWeight = FontWeight.Bold)
+                            val datex = LocalDate.parse(actividad.fecha!!, DateTimeFormatter.ISO_DATE)
                             var fecha=formatoFecha?.format(datex)
                             Text(""+fecha, color =
                             MaterialTheme.colors.primary)
@@ -160,7 +162,7 @@ fun MyApp(
                             ConfirmDialog(
                                 message = "Esta seguro de eliminar?",
                                 onConfirm = {
-                                    onDeleteClick?.invoke(asisteciapa)
+                                    onDeleteClick?.invoke(actividad)
                                     showDialog.value=false
                                 },
                                 onDimins = {

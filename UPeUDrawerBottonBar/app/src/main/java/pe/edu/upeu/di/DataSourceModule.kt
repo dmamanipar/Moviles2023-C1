@@ -39,6 +39,8 @@ class DataSourceModule {
     fun restActividad(retrofit: Retrofit):RestActividad{
         return retrofit.create(RestActividad::class.java)
     }
+    @Singleton
+    @Provides
     fun restAsisteciapa(retrofit: Retrofit):RestAsisteciapa{
         return retrofit.create(RestAsisteciapa::class.java)
     }
@@ -56,7 +58,9 @@ class DataSourceModule {
     fun actividadDao(db:DbDataSource):ActividadDao{
         return db.actividadDao();
     }
-    fun asisteciaDao(db:DbDataSource):AsisteciapaDao{
+    @Singleton
+    @Provides
+    fun asisteciapaDao(db:DbDataSource):AsisteciapaDao{
         return db.asisteciapaDao();
     }
 }
