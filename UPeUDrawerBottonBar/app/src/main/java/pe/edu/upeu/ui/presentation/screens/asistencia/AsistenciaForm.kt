@@ -105,26 +105,28 @@ fun formulario(id:Int,
     Scaffold(modifier = Modifier.padding(8.dp)){
         BuildEasyForms { easyForm ->
             Column {
-                NameTextField(easyForms = easyForm, text =asistencia?.tipo!!,"Tipo:", MyFormKeys.NAME )
                 var listE = listOf(
                     ComboModel("Presencial","Presencial"),
                     ComboModel("Virtual","Virtual"),
                 )
-                ComboBoxTwo (easyForm = easyForm, "Tipo de Registro:", asistencia?.tipo_reg!!, listE)
+                ComboBox(easyForm = easyForm, "Tipo:", asistencia?.tipo!!, listE)
 
                 var listEv = listOf(
                     ComboModel("Formulario","Formulario"),
                     ComboModel("Firma","Firma"),
-                    ComboModel("Foto","Foto"),
+                    ComboModel("Foto","Foto")
                 )
+                ComboBoxTwo (easyForm = easyForm, "Tipo de Registro:", asistencia?.tipo_reg!!, listEv)
+2
 
-                ComboBoxTwo(easyForm = easyForm, "Calificación:", asistencia?.calificacion!!, listEv)
+
+                NameTextField(easyForms = easyForm, text =asistencia?.calificacion!!, "Calificación:", MyFormKeys.NAME)
 
                 DatePickerCustom(easyForm = easyForm, label = "Fecha", texts = asistencia?.fecha!!, MyFormKeys.FECHA,"yyyy-MM-dd")
                 TimePickerCustom(easyForm = easyForm, label = "Hora", texts = asistencia?.hora!!, MyFormKeys.TIME, "HH:mm:ss")
 
-                //NameTextField(easyForms = easyForm, "Persona:", asistencia?.id_persona!!, listP)
-                //NameTextField(easyForms= easyForm, "Offlinex:", asistencia?.offlinex!!, listO)
+                NameTextField(easyForms = easyForm, text =asistencia?.id_persona!!, "Persona:",MyFormKeys.PERSON)
+                NameTextField(easyForms= easyForm, text =asistencia?.offlinex!!, "Offlinex:", MyFormKeys.OFFLIN)
 
                 Row(Modifier.align(Alignment.CenterHorizontally)){
                     AccionButtonSuccess(easyForms = easyForm, "Guardar", id){
@@ -134,8 +136,8 @@ fun formulario(id:Int,
                         person.calificacion=splitCadena((lista.get(2) as EasyFormsResult.GenericStateResult<String>).value)
                         person.fecha=(lista.get(3) as EasyFormsResult.GenericStateResult<String>).value
                         person.hora=(lista.get(4) as EasyFormsResult.GenericStateResult<String>).value
-                        person.id_persona=(lista.get(6) as EasyFormsResult.GenericStateResult<String>).value
-                        person.offlinex=(lista.get(7) as EasyFormsResult.GenericStateResult<String>).value
+                        person.id_persona=(lista.get(5) as EasyFormsResult.GenericStateResult<String>).value
+                        person.offlinex=(lista.get(6) as EasyFormsResult.GenericStateResult<String>).value
 
                         if (id==0){
                             Log.i("MODIFICAR", "M:"+person)

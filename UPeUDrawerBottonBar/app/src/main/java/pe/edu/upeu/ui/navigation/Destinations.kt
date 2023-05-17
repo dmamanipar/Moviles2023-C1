@@ -33,7 +33,7 @@ sealed class Destinations(
 
     object AsistenciaForm: Destinations("asistenciaForm?asistId={asistId}",
         "Asistencia Form", Icons.Filled.DynamicForm){
-        fun asistId(asistId:String?):String{
+        fun passId(asistId:String?):String{
             return "asistenciaForm?asistId=$asistId"
         }
     }
