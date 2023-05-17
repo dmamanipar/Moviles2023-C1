@@ -137,6 +137,8 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
+    final ButtonStyle style =
+    ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20));
     return Scaffold(
       appBar: AppBar(
         // TRY THIS: Try changing the color here to a specific color (to
@@ -172,6 +174,43 @@ class _MyHomePageState extends State<MyHomePage> {
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
+            ),
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                Icon(
+                  Icons.favorite,
+                  color: Colors.pink,
+                  size: 24.0,
+                  semanticLabel: 'Text to announce in accessibility modes',
+                ),
+                Icon(
+                  Icons.audiotrack,
+                  color: Colors.green,
+                  size: 30.0,
+                ),
+                Icon(
+                  Icons.beach_access,
+                  color: Colors.blue,
+                  size: 36.0,
+                ),
+              ],
+            ),
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                ElevatedButton(
+                  style: style,
+                  onPressed: null,
+                  child: const Text('Disabled'),
+                ),
+                const SizedBox(height: 30),
+                ElevatedButton(
+                  style: style,
+                  onPressed: () {},
+                  child: const Text('Enabled'),
+                ),
+              ],
             ),
           ],
         ),
