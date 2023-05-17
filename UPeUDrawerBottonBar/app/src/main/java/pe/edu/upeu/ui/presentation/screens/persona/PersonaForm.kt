@@ -25,6 +25,7 @@ import com.google.android.gms.location.*
 import com.google.gson.Gson
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import pe.edu.upeu.modelo.Actividad
 import pe.edu.upeu.modelo.Persona
 import pe.edu.upeu.modelo.ComboModel
 import pe.edu.upeu.ui.navigation.Destinations
@@ -44,9 +45,10 @@ fun PersonaForm(
 
 
     val personaD: Persona
+    Log.i("DATA", text)
     if (text!="0"){
-       personaD= Persona(0,"","", "","","","","")
-       // personaD = Gson().fromJson(text, Persona::class.java)
+       //personaD= Persona(0,"","", "","","","","")
+        personaD = Gson().fromJson(text, Persona::class.java)
     }else{
         personaD= Persona(0,"","", "","","","","")
     }
@@ -86,7 +88,7 @@ fun formulario(id:Int,
                 NameTextField(easyForms = easyForm, text =persona?.apellido_paterno!!,"APELLIDO PATERNO :", MyFormKeys.APE_PAT)
                 NameTextField(easyForms = easyForm, text =persona?.apellido_materno!!,"APELLIDO MATERNO :", MyFormKeys.APE_MAT )
                 NameTextField(easyForms = easyForm, text =persona?.telefono!!,"TELEFONO :", MyFormKeys.PHONE )
-                NameTextField(easyForms = easyForm, text =persona?.genero!!,"GENERO :", MyFormKeys.LIST_CHECKBOX )
+                NameTextField(easyForms = easyForm, text =persona?.genero!!,"GENERO :", MyFormKeys.GENERO )
                 NameTextField(easyForms = easyForm, text =persona?.correo!!,"CORREO :", MyFormKeys.EMAIL )
 
 

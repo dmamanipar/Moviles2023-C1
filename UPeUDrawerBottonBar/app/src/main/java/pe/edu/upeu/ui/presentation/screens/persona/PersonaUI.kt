@@ -179,6 +179,7 @@ fun MyApp(
                                 //onDeleteClick?.invoke(persona)
                                 Log.i("VERTOKEN", "Holas")
                                 Log.i("VERTOKEN", TokenUtils.TOKEN_CONTENT)
+                                Log.i("VERTOKEN", persona.toString())
                                 onEditClick?.invoke(persona)
                             }) {
                                 Icon(

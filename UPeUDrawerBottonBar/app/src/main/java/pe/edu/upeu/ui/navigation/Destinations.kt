@@ -28,9 +28,9 @@ sealed class Destinations(
             return "actividadForm?actId=$actId"
         }
     }
-    object PersonaForm: Destinations("personaForm?actId={persId}",
+    object PersonaForm: Destinations("personaForm?persId={persId}",
         "Persona Form", Icons.Filled.DynamicForm){
-        fun persId(persId:String?):String{
+        fun passId(persId:String?):String{
             return "personaForm?persId=$persId"
         }
     }

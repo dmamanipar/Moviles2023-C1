@@ -4,7 +4,7 @@ import android.content.Context
 
 object TokenUtils {
     var TOKEN_CONTENT="Aqui va el Token"
-    var API_URL="http://192.168.95.11:8000/"
+    var API_URL="http://172.22.10.20:8000/"
     lateinit var CONTEXTO_APPX:Context
     var USER_LOGIN=""
 }

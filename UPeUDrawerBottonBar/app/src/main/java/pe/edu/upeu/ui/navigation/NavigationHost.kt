@@ -73,7 +73,7 @@ fun NavigationHost(
             ComposeReal.TITLE_TOP=Destinations.PersonaUI.title
             PersonaUI(
                 navegarEditarPersona = { newText ->
-                    navController.navigate(Destinations.PersonaForm.persId(newText))
+                    navController.navigate(Destinations.PersonaForm.passId(newText))
                 }
             )
         }
@@ -86,6 +86,7 @@ fun NavigationHost(
             var persId = navBackStackEntry.arguments?.getString("persId")
             requireNotNull(persId)
             ComposeReal.TITLE_TOP = Destinations.PersonaForm.title
+
             PersonaForm(persId, darkMode, navController)
         }
 
