@@ -15,7 +15,7 @@ interface EscuelaDao {
     suspend fun  insertarEscuela(escuela:Escuela)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun  insertarEscuelas(escuela:List<Escuela>)
+    suspend fun  insertarEscuela(escuela:List<Escuela>)
 
     @Update
     suspend fun  modificarEscuela(escuela:Escuela)
@@ -23,10 +23,10 @@ interface EscuelaDao {
     @Delete
     suspend fun eliminarEscuela(escuela: Escuela)
 
-    @Query("select * from actividad")
+    @Query("select * from escuela")
     fun reportarEscuela():LiveData<List<Escuela>>
 
-    @Query("select * from actividad where id=:idx")
+    @Query("select * from escuela where id=:idx")
     fun buscarEscuela(idx:Int):LiveData<Escuela>
 
 }

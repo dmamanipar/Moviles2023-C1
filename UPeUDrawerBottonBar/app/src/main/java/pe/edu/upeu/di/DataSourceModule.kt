@@ -75,7 +75,7 @@ class DataSourceModule {
 
     @Singleton
     @Provides
-    fun matriculaDao(db:DbDataSource):EscuelaDao{
+    fun escuelaDao(db:DbDataSource):EscuelaDao{
         return db.escuelaDao();
     }
 }

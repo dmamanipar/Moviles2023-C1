@@ -1,4 +1,4 @@
-package pe.edu.upeu.ui.presentation.screens.actividad
+package pe.edu.upeu.ui.presentation.screens.escuela
 
 import android.util.Log
 import androidx.lifecycle.LiveData

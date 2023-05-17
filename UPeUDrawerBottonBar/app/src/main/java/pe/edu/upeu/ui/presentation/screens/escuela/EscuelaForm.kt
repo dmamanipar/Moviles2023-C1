@@ -132,13 +132,10 @@ fun formulario(id:Int,
                 Row(Modifier.align(Alignment.CenterHorizontally)){
                     AccionButtonSuccess(easyForms = easyForm, "Guardar", id){
                         val lista=easyForm.formData()
-                        person.nombre_actividad=(lista.get(0) as EasyFormsResult.StringResult).value
+                        person.nombreeap=(lista.get(0) as EasyFormsResult.StringResult).value
                         person.estado=splitCadena((lista.get(1) as EasyFormsResult.GenericStateResult<String>).value)
-                        person.evaluar=splitCadena((lista.get(2) as EasyFormsResult.GenericStateResult<String>).value)
-                        person.fecha=(lista.get(3) as EasyFormsResult.GenericStateResult<String>).value
-                        person.horai=(lista.get(4) as EasyFormsResult.GenericStateResult<String>).value
-                        person.min_toler=(lista.get(5) as EasyFormsResult.GenericStateResult<String>).value
-                        person.user_create= TokenUtils.USER_LOGIN
+                        person.inicialeseap=splitCadena((lista.get(2) as EasyFormsResult.GenericStateResult<String>).value)
+                        person.facultad_nom=(lista.get(3) as EasyFormsResult.GenericStateResult<String>).value
 
                         if (id==0){
                             Log.i("MODIFICAR", "M:"+person)

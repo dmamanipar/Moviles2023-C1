@@ -45,7 +45,7 @@ class EscuelaRepositoryImp @Inject constructor(
                 Log.i("VERX", "Token:"+TokenUtils.TOKEN_CONTENT)*/
 
                 val data=restEscuela.reportarEscuela(TokenUtils.TOKEN_CONTENT).body()!!.data
-                actividadDao.insertarEscuelas(data)
+                escuelaDao.insertarEscuelas(data)
             }
         }catch (e:Exception){
             Log.i("ERRORX", "Error:"+e.message)

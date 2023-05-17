@@ -1,4 +1,4 @@
-package pe.edu.upeu.ui.presentation.screens.actividad
+package pe.edu.upeu.ui.presentation.screens.escuela
 
 import android.util.Log
 import androidx.lifecycle.*
@@ -6,7 +6,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import pe.edu.upeu.modelo.Escuela
-import pe.edu.upeu.repository.ActividadRepository
+import pe.edu.upeu.repository.EscuelaRepository
 import javax.inject.Inject
 
 @HiltViewModel
@@ -18,20 +18,20 @@ class EscuelaFormViewModel @Inject constructor(
         MutableLiveData<Boolean>(false)
     }
 
-    fun getActividad(idX: Int): LiveData<Escuela> {
+    fun getEscuela(idX: Int): LiveData<Escuela> {
         return activRepo.buscarEscuelaId(idX)
     }
 
     val isLoading: LiveData<Boolean> get() = _isLoading
 
 
-    fun addActividad(escuela: Escuela){
+    fun addEscuela(escuela: Escuela){
         viewModelScope.launch (Dispatchers.IO){
             Log.i("REAL", escuela.toString())
             activRepo.insertarEscuela(escuela)
         }
     }
-    fun editActividad(escuela: Escuela){
+    fun editEscuela(escuela: Escuela){
         viewModelScope.launch(Dispatchers.IO){
             activRepo.modificarRemoteEscuela(Escuela)
         }

@@ -1,6 +1,6 @@
 package pe.edu.upeu.data.remote
 
-import pe.edu.upeu.modelo.Escuela
+import pe.edu.upeu.modelo.Actividad
 import pe.edu.upeu.modelo.MsgModelResp
 import pe.edu.upeu.modelo.User
 import pe.edu.upeu.modelo.UserResponse

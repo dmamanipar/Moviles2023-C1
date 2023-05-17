@@ -11,6 +11,8 @@ import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import pe.edu.upeu.ui.presentation.screens.*
 import pe.edu.upeu.ui.presentation.screens.actividad.ActividadForm
 import pe.edu.upeu.ui.presentation.screens.actividad.ActividadUI
+import pe.edu.upeu.ui.presentation.screens.escuela.EscuelaForm
+import pe.edu.upeu.ui.presentation.screens.escuela.EscuelaUI
 import pe.edu.upeu.ui.presentation.screens.login.LoginScreen
 import pe.edu.upeu.utils.ComposeReal
 
@@ -76,6 +78,27 @@ fun NavigationHost(
             requireNotNull(actId)
             ComposeReal.TITLE_TOP = Destinations.ActividadForm.title
             ActividadForm(actId, darkMode, navController)
+        }
+
+        //Aqui va escuela//
+        composable(Destinations.EscuelaUI.route){
+            ComposeReal.TITLE_TOP=Destinations.EscuelaUI.title
+            EscuelaUI(
+                navegarEditarAct = { newText ->
+                    navController.navigate(Destinations.ActividadForm.passId(newText))
+                }
+            )
+        }
+        composable(
+            Destinations.EscuelaForm.route,
+            arguments = listOf(navArgument("actId") {
+                defaultValue = "actId"
+            })
+        ) { navBackStackEntry ->
+            var actId = navBackStackEntry.arguments?.getString("actId")
+            requireNotNull(actId)
+            ComposeReal.TITLE_TOP = Destinations.EscuelaForm.title
+            EscuelaForm(actId, darkMode, navController)
         }
 
 
