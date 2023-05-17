@@ -44,8 +44,8 @@ fun FacultadForm(
 
     val facultadD:Facultad
     if (text!="0"){
-        facultadD = Facultad(0,"","", "",)
-    //Gson().fromJson(text, Facultad::class.java)
+        //facultadD = Facultad(0,"","", "",)
+        facultadD= Gson().fromJson(text, Facultad::class.java)
     }else{
         facultadD= Facultad(0,"","", "",)
     }
@@ -82,7 +82,9 @@ fun formulario(id:Int,
                     ComboModel("Activo","Activo"),
                     ComboModel("Desactivo","Desactivo"),
                 )
-                ComboBox(easyForm = easyForm, "Estado:", facultad?.estado!!, listE)
+                NameTextField(easyForms = easyForm, text =facultad?.estado!!,"Estado :", MyFormKeys.STATUS )
+
+                //ComboBox(easyForm = easyForm, "Estado:", facultad?.estado!!, MyFormKeys.STATUS)
                 NameTextField(easyForms = easyForm, text =facultad?.iniciales!!,"Iniciales :", MyFormKeys.INIC )
 
 

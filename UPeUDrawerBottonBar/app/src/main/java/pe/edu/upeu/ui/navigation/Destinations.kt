@@ -31,10 +31,10 @@ sealed class Destinations(
             return "actividadForm?actId=$actId"
         }
     }
-    object FacultadForm: Destinations("facultadForm?actId={actId}",
+    object FacultadForm: Destinations("facultadForm?facuId={facuId}",
         "Facultad Form", Icons.Filled.DynamicForm){
         fun passId(facuId:String?):String{
-            return "facultadForm?actId=$facuId"
+            return "facultadForm?facuId=$facuId"
         }
     }
 
