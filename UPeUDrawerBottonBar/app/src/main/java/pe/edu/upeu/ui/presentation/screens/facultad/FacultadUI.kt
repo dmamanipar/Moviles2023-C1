@@ -43,16 +43,16 @@ import java.time.format.DateTimeFormatter
 fun FacultadUI (navegarEditarfac: (String) -> Unit, viewModel:
 FacultadViewModel = hiltViewModel()
 ){
-    val facu by viewModel.facultades.observeAsState(arrayListOf())
+    val facultades by viewModel.facultades.observeAsState(arrayListOf())
     val isLoading by viewModel.isLoading.observeAsState(false)
-    Log.i("VERX", ""+facu!!.size )
+    Log.i("VERX", ""+facultades!!.size )
 
     MyApp(onAddClick = {
         //viewModel.addUser()
         navegarEditarfac((0).toString())
     }, onDeleteClick = {
         viewModel.deleteFacultad(it)
-    }, facu, isLoading,
+    }, facultades, isLoading,
         onEditClick = {
             val jsonString = Gson().toJson(it)
             navegarEditarfac(jsonString)
@@ -138,7 +138,7 @@ fun MyApp(
                                     //.clip(CircleShape)
                                     .clip(RoundedCornerShape(8.dp)),
                                 painter = rememberImagePainter(
-                                    data = facultad,
+                                    data = facultad.iniciales,
                                     builder = {
                                         placeholder(R.drawable.bg)
                                         error(R.drawable.bg)

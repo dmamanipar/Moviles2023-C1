@@ -6,11 +6,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import pe.edu.upeu.data.local.dao.ActividadDao
 import pe.edu.upeu.data.local.dao.FacultadDao
-import pe.edu.upeu.data.remote.RestActividad
 import pe.edu.upeu.data.remote.RestFacultad
-import pe.edu.upeu.modelo.Actividad
+
 import pe.edu.upeu.modelo.Facultad
 import pe.edu.upeu.modelo.User
 import pe.edu.upeu.utils.TokenUtils
@@ -42,7 +40,7 @@ class FacultadRepositoryImp @Inject constructor(
         try {
             CoroutineScope(Dispatchers.IO).launch {
                 delay(3000)
-                /*val totek=restActividad.login(User("",
+                /*val totek=rest.login(User("",
                     "davidmp@upeu.edu.pe", "12345678")).body()
                 TokenUtils.TOKEN_CONTENT=totek?.token_type+""+totek?.access_token
                 Log.i("VERX", "Token:"+TokenUtils.TOKEN_CONTENT)*/
@@ -53,6 +51,7 @@ class FacultadRepositoryImp @Inject constructor(
         }catch (e:Exception){
             Log.i("ERRORX", "Error:"+e.message)
         }
+
         return facultadDao.reportarFacultad()
     }
 

@@ -44,7 +44,8 @@ fun FacultadForm(
 
     val facultadD:Facultad
     if (text!="0"){
-        facultadD = Gson().fromJson(text, Facultad::class.java)
+        facultadD = Facultad(0,"","", "",)
+    //Gson().fromJson(text, Facultad::class.java)
     }else{
         facultadD= Facultad(0,"","", "",)
     }
@@ -61,8 +62,7 @@ fun FacultadForm(
     "CoroutineCreationDuringComposition"
 )
 @Composable
-fun formulario(
-    id:Int,
+fun formulario(id:Int,
     darkMode: MutableState<Boolean>,
     navController: NavHostController,
     facultad: Facultad,
@@ -78,14 +78,12 @@ fun formulario(
         BuildEasyForms { easyForm ->
             Column {
                 NameTextField(easyForms = easyForm, text =facultad?.nombrefac!!,"Nombre Facultad :", MyFormKeys.NAME )
-
                 var listE = listOf(
                     ComboModel("Activo","Activo"),
                     ComboModel("Desactivo","Desactivo"),
                 )
                 ComboBox(easyForm = easyForm, "Estado:", facultad?.estado!!, listE)
-
-                NameTextField(easyForms = easyForm, text =facultad?.iniciales!!,"Iniciales :", MyFormKeys.NAME )
+                NameTextField(easyForms = easyForm, text =facultad?.iniciales!!,"Iniciales :", MyFormKeys.INIC )
 
 
                 Row(Modifier.align(Alignment.CenterHorizontally)){

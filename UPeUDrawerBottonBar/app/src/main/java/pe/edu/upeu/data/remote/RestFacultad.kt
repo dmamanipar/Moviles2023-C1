@@ -4,7 +4,6 @@ import pe.edu.upeu.modelo.Actividad
 import pe.edu.upeu.modelo.Facultad
 
 import pe.edu.upeu.modelo.MsgModelResp2
-import pe.edu.upeu.modelo.MsgModelResp
 import pe.edu.upeu.modelo.User
 import pe.edu.upeu.modelo.UserResponse
 import retrofit2.Response
