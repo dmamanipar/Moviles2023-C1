@@ -154,7 +154,7 @@ fun MyApp(
                                     //.clip(CircleShape)
                                     .clip(RoundedCornerShape(8.dp)),
                                 painter = rememberImagePainter(
-                                    data = matricula.estado,
+                                    data = matricula.estado ,
                                     builder = {
                                         placeholder(R.drawable.bg)
                                         error(R.drawable.bg)
