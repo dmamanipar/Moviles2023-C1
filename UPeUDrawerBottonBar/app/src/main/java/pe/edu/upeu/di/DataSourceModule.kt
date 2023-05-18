@@ -53,6 +53,8 @@ class DataSourceModule {
         return retrofit.create(RestActividad::class.java)
     }
 
+    @Singleton
+    @Provides
     fun restMatricula(retrofit: Retrofit):RestMatricula{
         return retrofit.create(RestMatricula::class.java)
     }

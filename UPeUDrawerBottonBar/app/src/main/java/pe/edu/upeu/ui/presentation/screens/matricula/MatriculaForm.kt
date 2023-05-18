@@ -58,7 +58,7 @@ fun MatriculaForm(
     if (text!="0"){
         matriculaD = Gson().fromJson(text, Matricula::class.java)
     }else{
-        matriculaD= Matricula(0, 0, 0, "")
+        matriculaD= Matricula(0, "", "", "")
     }
     val isLoading by viewModel.isLoading.observeAsState(false)
     formulario(matriculaD.id!!,
@@ -81,7 +81,7 @@ fun formulario(id:Int,
 ){
 
     Log.i("VERRR", "d: "+matricula?.id!!)
-    val person= Matricula(0,0,0, "")
+    val person= Matricula(0,"","", "")
 
     val scope = rememberCoroutineScope()
 
@@ -90,6 +90,9 @@ fun formulario(id:Int,
         BuildEasyForms { easyForm ->
             Column {
 
+                NameTextField(easyForms = easyForm, text = matricula?.periodo_id!!, label = "Periodo: ", MyFormKeys.MAT)
+
+                NameTextField(easyForms = easyForm, text = matricula?.persona_id!!, label = "Periodo: ", MyFormKeys.PER)
 
                 var listE = listOf(
                     ComboModel("Matriculado","Matriculado"),
