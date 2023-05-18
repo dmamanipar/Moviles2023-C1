@@ -92,20 +92,24 @@ fun formulario(id:Int,
 
                 NameTextField(easyForms = easyForm, text = matricula?.periodo_id!!, label = "Periodo: ", MyFormKeys.MAT)
 
-                NameTextField(easyForms = easyForm, text = matricula?.persona_id!!, label = "Periodo: ", MyFormKeys.PER)
 
+                NameTextField(easyForms = easyForm, text = matricula?.persona_id!!, label = "Periodo: ", MyFormKeys.PER)
                 var listE = listOf(
                     ComboModel("Matriculado","Matriculado"),
                     ComboModel("Pendiente","Pendiente"),
                 )
-                ComboBox(easyForm = easyForm, "Estado:", matricula?.estado!!, listE)
+//
+//                ComboBox(easyForm = easyForm, "Estado:", matricula?.estado!!, listE)
 
+                NameTextField(easyForms = easyForm, text = matricula?.estado!!, label = "estado: ", MyFormKeys.EST)
 
 
                 Row(Modifier.align(Alignment.CenterHorizontally)){
                     AccionButtonSuccess(easyForms = easyForm, "Guardar", id){
                         val lista=easyForm.formData()
-                        person.estado=splitCadena((lista.get(0) as EasyFormsResult.GenericStateResult<String>).value)
+                        person.periodo_id=(lista.get(0) as EasyFormsResult.StringResult).value
+                        person.persona_id=(lista.get(1) as EasyFormsResult.StringResult).value
+                        person.estado=(lista.get(2) as EasyFormsResult.StringResult).value
 
                         if (id==0){
                             Log.i("MODIFICAR", "M:"+person)
