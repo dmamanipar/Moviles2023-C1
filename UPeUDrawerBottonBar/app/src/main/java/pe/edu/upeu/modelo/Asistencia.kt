@@ -16,7 +16,7 @@ data class Asistencia(
         var tipo:String,
         var tipo_reg:String,
         var id_persona:String,
-        var calificacion:String,
+        var calificacion:Int,
         var offlinex:String
 )
 

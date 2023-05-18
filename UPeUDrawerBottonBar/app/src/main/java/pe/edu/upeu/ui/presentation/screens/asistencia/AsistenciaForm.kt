@@ -46,7 +46,7 @@ fun AsistenciaForm(
     if (text!="0"){
         asistenciaD = Gson().fromJson(text, Asistencia::class.java)
     }else{
-        asistenciaD= Asistencia(0,0,0,"","","","","","","","","" )
+        asistenciaD= Asistencia(0,0,0,"","","","","","","",0,"" )
     }
     val isLoading by viewModel.isLoading.observeAsState(false)
     formulario(asistenciaD.id!!,
@@ -68,7 +68,7 @@ fun formulario(id:Int,
                viewModel: AsistenciaFormViewModel){
 
     Log.i("VERRR", "d: "+asistencia?.id!!)
-    val person=Asistencia(0,1,1, "","","","","","","","","")
+    val person=Asistencia(0,1,1, "","","","","","","",0,"")
 
     val scope = rememberCoroutineScope()
 
@@ -107,6 +107,7 @@ fun formulario(id:Int,
             Column {
                 NameTextField(easyForms = easyForm, text =asistencia?.tipo!!, "Tipo:", MyFormKeys.TIPO)
                 NameTextField(easyForms = easyForm, text =asistencia?.tipo_reg!!, "Tipo de Registro:", MyFormKeys.TIPO_REG)
+                NameTextField(easyForms = easyForm, text =(asistencia?.calificacion!!).toString(), "Tipo de Registro:", MyFormKeys.CAL)
                 DatePickerCustom(easyForm = easyForm, label = "Fecha", texts = asistencia?.fecha!!, MyFormKeys.FECHA,"yyyy-MM-dd")
                 TimePickerCustom(easyForm = easyForm, label = "Hora", texts = asistencia?.hora!!, MyFormKeys.TIME, "HH:mm:ss")
                 NameTextField(easyForms = easyForm, text =asistencia?.id_persona!!, "Persona:",MyFormKeys.PERSON)
@@ -117,14 +118,11 @@ fun formulario(id:Int,
                         val lista=easyForm.formData()
                         person.tipo=(lista.get(0) as EasyFormsResult.StringResult).value
                         person.tipo_reg=(lista.get(1) as EasyFormsResult.StringResult).value
-                        person.calificacion=(lista.get(2) as EasyFormsResult.StringResult).value
-                        person.fecha=(lista.get(3) as EasyFormsResult.StringResult).value
-                        person.hora=(lista.get(4) as EasyFormsResult.StringResult).value
+                        person.calificacion=((lista.get(2) as EasyFormsResult.StringResult).value).toInt()
+                        person.fecha=(lista.get(3) as EasyFormsResult.GenericStateResult<String>).value
+                        person.hora=(lista.get(4) as EasyFormsResult.GenericStateResult<String>).value
                         person.id_persona=(lista.get(5) as EasyFormsResult.StringResult).value
                         person.offlinex=(lista.get(6) as EasyFormsResult.StringResult).value
-                        Log.i("VERRR",person.latituda)
-                        Log.i("VERRR", "d: "+asistencia?.id!!)
-                        Log.i("VERRR",person.toString())
                         if (id==0){
                             Log.i("MODIFICAR", "M:"+person)
                             viewModel.addAsistencia(person)

@@ -9,7 +9,7 @@ import pe.edu.upeu.modelo.Actividad
 import pe.edu.upeu.modelo.Asistencia
 
 
-@Database(entities = [Actividad::class, Asistencia::class], version =2 )
+@Database(entities = [Actividad::class, Asistencia::class], version =3 )
 abstract class DbDataSource:RoomDatabase() {
     abstract fun actividadDao():ActividadDao
     abstract fun asistenciaDao(): AsistenciaDao
