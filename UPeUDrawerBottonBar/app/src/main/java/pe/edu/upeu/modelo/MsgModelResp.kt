@@ -5,6 +5,13 @@ data class MsgModelResp(
     var data:List<Actividad>,
     var message:String
 )
+data class MsgModelRespMat(
+    var success:Boolean,
+    var data:List<Matricula>,
+    var message:String
+)
+
+
 
 data class ComboModel(
     val code: String,

@@ -11,7 +11,9 @@ import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import pe.edu.upeu.ui.presentation.screens.*
 import pe.edu.upeu.ui.presentation.screens.actividad.ActividadForm
 import pe.edu.upeu.ui.presentation.screens.actividad.ActividadUI
+import pe.edu.upeu.ui.presentation.screens.matricula.MatriculaUI
 import pe.edu.upeu.ui.presentation.screens.login.LoginScreen
+import pe.edu.upeu.ui.presentation.screens.matricula.MatriculaForm
 import pe.edu.upeu.utils.ComposeReal
 
 @OptIn(ExperimentalPermissionsApi::class)
@@ -78,6 +80,24 @@ fun NavigationHost(
             ActividadForm(actId, darkMode, navController)
         }
 
-
+        composable(Destinations.MatriculaUI.route){
+            ComposeReal.TITLE_TOP=Destinations.MatriculaUI.title
+            MatriculaUI(
+                navegarEditarMat = { newText ->
+                    navController.navigate(Destinations.MatriculaForm.passId(newText))
+                }
+            )
+        }
+        composable(
+            Destinations.MatriculaForm.route,
+            arguments = listOf(navArgument("matriculaId") {
+                defaultValue = "matId"
+            })
+        ) { navBackStackEntry ->
+            var matId = navBackStackEntry.arguments?.getString("matId")
+            requireNotNull(matId)
+            ComposeReal.TITLE_TOP = Destinations.MatriculaForm.title
+            MatriculaForm(matId, darkMode, navController)
+        }
     }
 }

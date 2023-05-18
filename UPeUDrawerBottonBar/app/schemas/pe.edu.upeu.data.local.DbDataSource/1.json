@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "eb97db350e58dfb7a331d1927c006830",
+    "identityHash": "d16c3e03486ae314b52556cb34680af1",
     "entities": [
       {
         "tableName": "actividad",
@@ -83,12 +83,50 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "matricula",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `periodo_id` INTEGER NOT NULL, `persona_id` INTEGER NOT NULL, `estado` TEXT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "periodo_id",
+            "columnName": "periodo_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "persona_id",
+            "columnName": "persona_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "estado",
+            "columnName": "estado",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'eb97db350e58dfb7a331d1927c006830')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'd16c3e03486ae314b52556cb34680af1')"
     ]
   }
 }
