@@ -68,7 +68,7 @@ fun formulario(id:Int,
                viewModel: AsistenciaFormViewModel){
 
     Log.i("VERRR", "d: "+asistencia?.id!!)
-    val person=Asistencia(0,0,0, "","","","","","","","","")
+    val person=Asistencia(0,1,1, "","","","","","","","","")
 
     val scope = rememberCoroutineScope()
 
@@ -116,13 +116,15 @@ fun formulario(id:Int,
                     AccionButtonSuccess(easyForms = easyForm, "Guardar", id){
                         val lista=easyForm.formData()
                         person.tipo=(lista.get(0) as EasyFormsResult.StringResult).value
-                        person.tipo_reg=splitCadena((lista.get(1) as EasyFormsResult.StringResult).value)
-                        person.calificacion=splitCadena((lista.get(2) as EasyFormsResult.StringResult).value)
+                        person.tipo_reg=(lista.get(1) as EasyFormsResult.StringResult).value
+                        person.calificacion=(lista.get(2) as EasyFormsResult.StringResult).value
                         person.fecha=(lista.get(3) as EasyFormsResult.StringResult).value
                         person.hora=(lista.get(4) as EasyFormsResult.StringResult).value
                         person.id_persona=(lista.get(5) as EasyFormsResult.StringResult).value
                         person.offlinex=(lista.get(6) as EasyFormsResult.StringResult).value
-
+                        Log.i("VERRR",person.latituda)
+                        Log.i("VERRR", "d: "+asistencia?.id!!)
+                        Log.i("VERRR",person.toString())
                         if (id==0){
                             Log.i("MODIFICAR", "M:"+person)
                             viewModel.addAsistencia(person)
