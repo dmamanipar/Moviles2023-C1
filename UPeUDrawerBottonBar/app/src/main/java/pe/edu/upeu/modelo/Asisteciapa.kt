@@ -16,7 +16,6 @@ data class Asisteciapa(
     var calificacion:String,
     var cui:String,
     var tipo_cui:String,
-    var user_create: String,
 ) {
 
 }

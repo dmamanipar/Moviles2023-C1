@@ -116,7 +116,7 @@ fun MyApp(
                         return@items LoadingCard()
                     auxIndex--
                 }
-                val actividad = asisteciapa[auxIndex]
+                val asisteciapa = asisteciapa[auxIndex]
                 Card(
                     shape = RoundedCornerShape(8.dp),
                     elevation = 1.dp,
@@ -131,7 +131,7 @@ fun MyApp(
                                 //.clip(CircleShape)
                                 .clip(RoundedCornerShape(8.dp)),
                             painter = rememberImagePainter(
-                                data = actividad.hora_reg,
+                                data = asisteciapa.hora_reg,
                                 builder = {
                                     placeholder(R.drawable.bg)
                                     error(R.drawable.bg)
@@ -144,8 +144,8 @@ fun MyApp(
                         Column(
                             Modifier.weight(1f),
                         ) {
-                            Text("${actividad.id_actividad} - ${actividad.latituda}", fontWeight = FontWeight.Bold)
-                            val datex = LocalDate.parse(actividad.fecha!!, DateTimeFormatter.ISO_DATE)
+                            Text("${asisteciapa.id_asisteciapa} - ${asisteciapa.latituda} - ${asisteciapa.longituda}- ${asisteciapa.tipo}- ${asisteciapa.cui}- ${asisteciapa.tipo_cui}", fontWeight = FontWeight.Bold)
+                            val datex = LocalDate.parse(asisteciapa.fecha!!, DateTimeFormatter.ISO_DATE)
                             var fecha=formatoFecha?.format(datex)
                             Text(""+fecha, color =
                             MaterialTheme.colors.primary)
@@ -162,7 +162,7 @@ fun MyApp(
                             ConfirmDialog(
                                 message = "Esta seguro de eliminar?",
                                 onConfirm = {
-                                    onDeleteClick?.invoke(actividad)
+                                    onDeleteClick?.invoke(asisteciapa)
                                     showDialog.value=false
                                 },
                                 onDimins = {
@@ -178,7 +178,7 @@ fun MyApp(
                             Log.i("VERTOKEN", TokenUtils.TOKEN_CONTENT)
                             //var estado = isInternetAvailable(context)
                             //Log.i("CONEXION", "VEr: " + estado)
-                            onEditClick?.invoke(actividad)
+                            onEditClick?.invoke(asisteciapa)
                         }) {
                             Icon(
                                 Icons.Filled.Edit, "Editar", tint =

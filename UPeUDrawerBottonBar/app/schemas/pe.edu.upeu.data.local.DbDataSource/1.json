@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "0bbf2d52c780464e83d33393ecbb715b",
+    "identityHash": "dfa6afecd6da8dc2106bdb58b3f5a2ca",
     "entities": [
       {
         "tableName": "actividad",
@@ -86,7 +86,7 @@
       },
       {
         "tableName": "asistecipa",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_asisteciapa` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_actividad` INTEGER NOT NULL, `fecha` TEXT NOT NULL, `hora_reg` TEXT NOT NULL, `latituda` TEXT NOT NULL, `longituda` TEXT NOT NULL, `tipo` TEXT NOT NULL, `calificacion` TEXT NOT NULL, `cui` TEXT NOT NULL, `tipo_cui` TEXT NOT NULL, `user_create` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_asisteciapa` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_actividad` INTEGER NOT NULL, `fecha` TEXT NOT NULL, `hora_reg` TEXT NOT NULL, `latituda` TEXT NOT NULL, `longituda` TEXT NOT NULL, `tipo` TEXT NOT NULL, `calificacion` TEXT NOT NULL, `cui` TEXT NOT NULL, `tipo_cui` TEXT NOT NULL)",
         "fields": [
           {
             "fieldPath": "id_asisteciapa",
@@ -147,12 +147,6 @@
             "columnName": "tipo_cui",
             "affinity": "TEXT",
             "notNull": true
-          },
-          {
-            "fieldPath": "user_create",
-            "columnName": "user_create",
-            "affinity": "TEXT",
-            "notNull": true
           }
         ],
         "primaryKey": {
@@ -168,7 +162,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '0bbf2d52c780464e83d33393ecbb715b')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'dfa6afecd6da8dc2106bdb58b3f5a2ca')"
     ]
   }
 }

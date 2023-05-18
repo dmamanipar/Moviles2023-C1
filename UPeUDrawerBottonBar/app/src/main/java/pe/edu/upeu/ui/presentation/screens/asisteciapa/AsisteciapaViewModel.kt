@@ -14,14 +14,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AsisteciapaViewModel @Inject constructor(
-    private val activAsisteciapaRepository: AsisteciapaRepository,
+    private val AsisteciapaRepository: AsisteciapaRepository,
 //private val matRepo: MatriculaRepository
 ) : ViewModel(){
     private val _isLoading: MutableLiveData<Boolean> by lazy {
         MutableLiveData<Boolean>(false)
     }
     val Asisteciapa: LiveData<List<Asisteciapa>> by lazy {
-        activAsisteciapaRepository.reportarAsisteciapas()
+        AsisteciapaRepository.reportarAsisteciapas()
     }
     val isLoading: LiveData<Boolean> get() = _isLoading
     fun addAsisteciapa() {
@@ -34,7 +34,7 @@ class AsisteciapaViewModel @Inject constructor(
     fun deleteAsisteciapa(toDelete: Asisteciapa) {
         viewModelScope.launch(Dispatchers.IO) {
             Log.i("ELIMAR", toDelete.toString())
-            activAsisteciapaRepository.deleteAsisteciapa(toDelete);
+            AsisteciapaRepository.deleteAsisteciapa(toDelete);
         }
     }
 }

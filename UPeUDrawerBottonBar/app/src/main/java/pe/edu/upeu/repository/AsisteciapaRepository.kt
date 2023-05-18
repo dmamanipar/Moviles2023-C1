@@ -45,7 +45,7 @@ class AsisteciapaRepositoryImp @Inject constructor(
                 Log.i("VERX", "Token:"+TokenUtils.TOKEN_CONTENT)*/
 
                 val data=restAsisteciapa.reportarAsisteciapa(TokenUtils.TOKEN_CONTENT).body()!!.data
-                asisteciapaDao.insertarAsisteciapa(data)
+                asisteciapaDao.insertarAsisteciapas(data)
             }
         }catch (e:Exception){
             Log.i("ERRORX", "Error:"+e.message)

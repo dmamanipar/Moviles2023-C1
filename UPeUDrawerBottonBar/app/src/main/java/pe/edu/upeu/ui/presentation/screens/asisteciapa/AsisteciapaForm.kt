@@ -50,7 +50,7 @@ fun AsisteciapaForm(
     if (text!="0"){
         asisteciapaD = Gson().fromJson(text, Asisteciapa::class.java)
     }else{
-        asisteciapaD= Asisteciapa(0,0,"", "","","","","","","","")
+        asisteciapaD= Asisteciapa(0,0,"", "","","","","","","")
     }
     val isLoading by viewModel.isLoading.observeAsState(false)
     formulario(asisteciapaD.id_asisteciapa!!,
@@ -73,9 +73,9 @@ fun formulario(id:Int,
 ){
 
     Log.i("VERRR", "d: "+asisteciapa?.id_asisteciapa!!)
-    val person= Asisteciapa(0,1,"", "","","","","","","","")
+    val person= Asisteciapa(0,1,"", "","","","","","","")
 
-    val scope = rememberCoroutineScope()
+    /*val scope = rememberCoroutineScope()
 
     var locationCallback: LocationCallback? = null
     var fusedLocationClient: FusedLocationProviderClient? = null
@@ -105,40 +105,30 @@ fun formulario(id:Int,
             fusedLocationClient = null;
         }
 
-    }
+    }*/
 
     Scaffold(modifier = Modifier.padding(8.dp)){
         BuildEasyForms() { easyForm ->
             Column {
-                NameTextField(easyForms = easyForm, text = asisteciapa?.id_asisteciapa!!.toString(),"ID.Asisteciapa:", MyFormKeys.NAME )
-                var listE = listOf(
-                    ComboModel("Activo","Activo"),
-                    ComboModel("Desactivo","Desactivo"),
-                )
-                ComboBox(easyForm = easyForm, "Calificacion:", asisteciapa?.calificacion!!, listE)
-
-                var listEv = listOf(
-                    ComboModel("SI","SI"),
-                    ComboModel("NO","NO"),
-                )
-                ComboBoxTwo(easyForm = easyForm, "Cui:", asisteciapa?.cui!!, listEv)
-
-
                 DatePickerCustom(easyForm = easyForm, label = "Fecha", texts = asisteciapa?.fecha!!, MyFormKeys.FECHA,"yyyy-MM-dd")
                 TimePickerCustom(easyForm = easyForm, label = "Hora", texts = asisteciapa?.hora_reg!!, MyFormKeys.TIME, "HH:mm:ss")
+                NameTextField(easyForms = easyForm, text =asisteciapa?.latituda!!,"latituda", MyFormKeys.LATITUDA )
+                NameTextField(easyForms = easyForm, text =asisteciapa?.longituda!!,"longituda", MyFormKeys.LONGITUDA )
+                NameTextField(easyForms = easyForm, text =asisteciapa?.tipo!!,"tipo", MyFormKeys.TIPO )
+                NameTextField(easyForms = easyForm, text =asisteciapa?.cui!!,"cui", MyFormKeys.CUI )
+                NameTextField(easyForms = easyForm, text =asisteciapa?.tipo_cui!!,"tipo_cui", MyFormKeys.TIPO_CUI )
 
                 Row(Modifier.align(Alignment.CenterHorizontally)){
                     AccionButtonSuccess(easyForms = easyForm, "Guardar", id){
                         val lista=easyForm.formData()
-                        //person.id_asisteciapa=(lista.get(0) as EasyFormsResult.Int).value
-                        person.fecha=splitCadena((lista.get(1) as EasyFormsResult.GenericStateResult<String>).value)
-                        person.hora_reg=splitCadena((lista.get(2) as EasyFormsResult.GenericStateResult<String>).value)
-                        person.latituda=(lista.get(3) as EasyFormsResult.GenericStateResult<String>).value
-                        person.longituda=(lista.get(4) as EasyFormsResult.GenericStateResult<String>).value
-                        person.tipo=(lista.get(5) as EasyFormsResult.GenericStateResult<String>).value
-                        person.cui=(lista.get(6) as EasyFormsResult.GenericStateResult<String>).value
-                        person.tipo_cui=(lista.get(7) as EasyFormsResult.GenericStateResult<String>).value
-                        person.user_create= TokenUtils.USER_LOGIN
+
+                        person.fecha=splitCadena((lista.get(0) as EasyFormsResult.GenericStateResult).value)
+                        person.hora_reg=splitCadena((lista.get(1) as EasyFormsResult.GenericStateResult).value)
+                        person.latituda=(lista.get(2) as EasyFormsResult.GenericStateResult<String>).value
+                        person.longituda=(lista.get(3) as EasyFormsResult.GenericStateResult<String>).value
+                        person.tipo=(lista.get(4) as EasyFormsResult.GenericStateResult<String>).value
+                        person.cui=(lista.get(5) as EasyFormsResult.GenericStateResult<String>).value
+                        person.tipo_cui=(lista.get(5) as EasyFormsResult.GenericStateResult<String>).value
 
                         if (id==0){
                             Log.i("MODIFICAR", "M:"+person)

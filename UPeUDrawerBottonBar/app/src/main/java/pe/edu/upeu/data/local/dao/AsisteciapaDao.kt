@@ -10,7 +10,7 @@ interface AsisteciapaDao {
     suspend fun insertarAsisteciapa(asisteciapa: Asisteciapa)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertarAsisteciapa(asisteciapa:List<Asisteciapa>)
+    suspend fun insertarAsisteciapas(asisteciapa:List<Asisteciapa>)
 
     @Update
     suspend fun modificarAsisteciapa(asisteciapa: Asisteciapa)

@@ -73,7 +73,7 @@ fun NavigationHost(
             ComposeReal.TITLE_TOP=Destinations.AsisteciapaUI.title
             AsisteciapaUI(
                 navegarEditarAct = { newText ->
-                    navController.navigate(Destinations.AsisteciapaForm.asisId(newText))
+                    navController.navigate(Destinations.AsisteciapaForm.passId(newText))
                 }
             )
         }
@@ -92,8 +92,8 @@ fun NavigationHost(
 
         composable(
             Destinations.AsisteciapaForm.route,
-            arguments = listOf(navArgument("id_asisteciapa") {
-                defaultValue = "id_asisteciapa"
+            arguments = listOf(navArgument("asisId") {
+                defaultValue = "asisId"
             })
         ) { navBackStackEntry ->
             var asisId = navBackStackEntry.arguments?.getString("asisId")

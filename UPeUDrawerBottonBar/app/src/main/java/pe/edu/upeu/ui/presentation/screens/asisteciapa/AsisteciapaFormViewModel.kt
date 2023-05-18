@@ -2,12 +2,13 @@ package pe.edu.upeu.ui.presentation.screens.asisteciapa
 
 import android.util.Log
 import androidx.lifecycle.*
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import pe.edu.upeu.modelo.Asisteciapa
 import pe.edu.upeu.repository.AsisteciapaRepository
 import javax.inject.Inject
-
+@HiltViewModel
 class AsisteciapaFormViewModel @Inject constructor(
     private val asisRepo: AsisteciapaRepository,
     savedStateHandle: SavedStateHandle
