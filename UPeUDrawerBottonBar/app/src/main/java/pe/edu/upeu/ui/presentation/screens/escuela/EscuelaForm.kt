@@ -105,7 +105,7 @@ fun formulario(id:Int,
                         person.nombreeap=(lista.get(0) as EasyFormsResult.StringResult).value
                         person.estado=splitCadena((lista.get(1) as EasyFormsResult.GenericStateResult<String>).value)
                         person.inicialeseap=splitCadena((lista.get(2) as EasyFormsResult.GenericStateResult<String>).value)
-                        person.facultad_nom=(lista.get(3) as EasyFormsResult.GenericStateResult<String>).value
+                        person.facultad_nom=(lista.get(3) as EasyFormsResult.StringResult).value
 
                         if (id==0){
                             Log.i("MODIFICAR", "M:"+person)
