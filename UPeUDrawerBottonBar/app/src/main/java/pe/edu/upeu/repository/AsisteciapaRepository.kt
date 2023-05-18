@@ -28,9 +28,9 @@ class AsisteciapaRepositoryImp @Inject constructor(
 
     override suspend fun deleteAsisteciapa(asisteciapa: Asisteciapa) {
         CoroutineScope(Dispatchers.IO).launch {
-            Log.i("DELETX", ""+asisteciapa.id_asisteciapa)
+            Log.i("DELETX", ""+asisteciapa.id)
 
-            restAsisteciapa.deleteAsisteciapa(TokenUtils.TOKEN_CONTENT,asisteciapa.id_asisteciapa)
+            restAsisteciapa.deleteAsisteciapa(TokenUtils.TOKEN_CONTENT,asisteciapa.id)
         }
         asisteciapaDao.eliminarAsisteciapa(asisteciapa)
     }
@@ -58,6 +58,7 @@ class AsisteciapaRepositoryImp @Inject constructor(
     }
 
     override suspend fun insertarAsisteciapa(asisteciapa: Asisteciapa): Boolean{
+        Log.i("DATAX", "ver:"+asisteciapa.toString())
         return restAsisteciapa.insertarAsisteciapa(TokenUtils.TOKEN_CONTENT, asisteciapa).body()?.success!!
     }
 
@@ -67,6 +68,6 @@ class AsisteciapaRepositoryImp @Inject constructor(
             Log.i("DATA", "T:"+ TokenUtils.TOKEN_CONTENT)
             Log.i("DATA", "D:"+asisteciapa.toString())
         }
-        return restAsisteciapa.actualizarAsisteciapa(TokenUtils.TOKEN_CONTENT, asisteciapa.id_asisteciapa, asisteciapa).body()?.success!!
+        return restAsisteciapa.actualizarAsisteciapa(TokenUtils.TOKEN_CONTENT, asisteciapa.id, asisteciapa).body()?.success!!
     }
 }

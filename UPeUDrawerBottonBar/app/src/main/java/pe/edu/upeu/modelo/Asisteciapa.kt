@@ -6,14 +6,15 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "asistecipa")
 data class Asisteciapa(
-    @PrimaryKey(autoGenerate = true) var id_asisteciapa:Int,
-    var id_actividad: Int,
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id_asisteciapa") var id:Int,
+    var actividad_id: Int,
     var fecha:String,
     var hora_reg:String,
     var latituda:String,
     var longituda:String,
     var tipo:String,
-    var calificacion:String,
+    var calificacion:Int,
     var cui:String,
     var tipo_cui:String,
 ) {

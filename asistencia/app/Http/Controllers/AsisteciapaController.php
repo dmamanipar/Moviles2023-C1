@@ -82,17 +82,33 @@ class AsisteciapaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Asisteciapa $asisteciapa)
+    public function update(Request $request, $id)
     {
-        //
+        Log::channel('stderr')->info($request);
+        $input = $request->all();
+        $actividad=Asisteciapa::find($id);
+        $actividad->fecha = $input['fecha'];
+        $actividad->hora_reg = $input['hora_reg'];
+        $actividad->latituda = $input['latituda'];
+        $actividad->longituda = $input['longituda'];
+        $actividad->tipo = $input['tipo'];
+        $actividad->calificacion = $input['calificacion'];
+        $actividad->cui = $input['cui'];
+        $actividad->tipo_cui = $input['tipo_cui'];
+        $actividad->actividad_id = $input['actividad_id'];
+
+        $actividad->save();
+        return response()->json(['success' => true,
+        'data' => Asisteciapa::all(),
+        'message' => 'Lista de Asistencias'], 200);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Asisteciapa $asisteciapa)
+    public function destroy(Request $request, $id)
     {
-        Log::channel('stderr')->info($asisteciapa);
+        Log::channel('stderr')->info($id);
         Asisteciapa::find($id)->delete();
         return response()->json(['success' => true,
         'data' => Asisteciapa::all(),

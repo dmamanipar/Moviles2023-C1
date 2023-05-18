@@ -50,10 +50,10 @@ fun AsisteciapaForm(
     if (text!="0"){
         asisteciapaD = Gson().fromJson(text, Asisteciapa::class.java)
     }else{
-        asisteciapaD= Asisteciapa(0,0,"", "","","","","","","")
+        asisteciapaD= Asisteciapa(0,0,"", "","","","",2 ,"","")
     }
     val isLoading by viewModel.isLoading.observeAsState(false)
-    formulario(asisteciapaD.id_asisteciapa!!,
+    formulario(asisteciapaD.id!!,
         darkMode,
         navController,
         asisteciapaD,
@@ -72,8 +72,8 @@ fun formulario(id:Int,
                viewModel: AsisteciapaFormViewModel
 ){
 
-    Log.i("VERRR", "d: "+asisteciapa?.id_asisteciapa!!)
-    val person= Asisteciapa(0,1,"", "","","","","","","")
+    Log.i("VERRR", "d: "+asisteciapa?.id!!)
+    val person= Asisteciapa(0,1,"", "","","","",2,"","")
 
     /*val scope = rememberCoroutineScope()
 
@@ -122,19 +122,20 @@ fun formulario(id:Int,
                     AccionButtonSuccess(easyForms = easyForm, "Guardar", id){
                         val lista=easyForm.formData()
 
-                        person.fecha=splitCadena((lista.get(0) as EasyFormsResult.GenericStateResult).value)
-                        person.hora_reg=splitCadena((lista.get(1) as EasyFormsResult.GenericStateResult).value)
-                        person.latituda=(lista.get(2) as EasyFormsResult.GenericStateResult<String>).value
-                        person.longituda=(lista.get(3) as EasyFormsResult.GenericStateResult<String>).value
-                        person.tipo=(lista.get(4) as EasyFormsResult.GenericStateResult<String>).value
-                        person.cui=(lista.get(5) as EasyFormsResult.GenericStateResult<String>).value
-                        person.tipo_cui=(lista.get(5) as EasyFormsResult.GenericStateResult<String>).value
+                        person.fecha=(lista.get(0) as EasyFormsResult.GenericStateResult<String>).value
+                        person.hora_reg=(lista.get(1) as EasyFormsResult.GenericStateResult<String>).value
+                        person.latituda=(lista.get(2) as EasyFormsResult.StringResult).value
+                        person.longituda=(lista.get(3) as EasyFormsResult.StringResult).value
+                        person.tipo=(lista.get(4) as EasyFormsResult.StringResult).value
+                        person.cui=(lista.get(5) as EasyFormsResult.StringResult).value
+                        person.tipo_cui=(lista.get(6) as EasyFormsResult.StringResult).value
+                        person.calificacion=4
 
                         if (id==0){
                             Log.i("MODIFICAR", "M:"+person)
                             viewModel.addAsistecipa(person)
                         }else{
-                            person.id_asisteciapa=id
+                            person.id=id
                             Log.i("MODIFICAR", "M:"+person)
                             viewModel.editAsisteciapa(person)
                         }

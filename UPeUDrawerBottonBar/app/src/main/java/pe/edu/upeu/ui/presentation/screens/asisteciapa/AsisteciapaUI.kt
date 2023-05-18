@@ -144,7 +144,7 @@ fun MyApp(
                         Column(
                             Modifier.weight(1f),
                         ) {
-                            Text("${asisteciapa.id_asisteciapa} - ${asisteciapa.latituda} - ${asisteciapa.longituda}- ${asisteciapa.tipo}- ${asisteciapa.cui}- ${asisteciapa.tipo_cui}", fontWeight = FontWeight.Bold)
+                            Text("${asisteciapa.id} - ${asisteciapa.latituda} - ${asisteciapa.longituda}- ${asisteciapa.tipo}- ${asisteciapa.cui}- ${asisteciapa.tipo_cui}", fontWeight = FontWeight.Bold)
                             val datex = LocalDate.parse(asisteciapa.fecha!!, DateTimeFormatter.ISO_DATE)
                             var fecha=formatoFecha?.format(datex)
                             Text(""+fecha, color =

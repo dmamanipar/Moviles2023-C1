@@ -8,7 +8,7 @@ import pe.edu.upeu.data.local.dao.AsisteciapaDao
 import pe.edu.upeu.modelo.Actividad
 import pe.edu.upeu.modelo.Asisteciapa
 
-@Database(entities = [Actividad::class, Asisteciapa::class], version = 1)
+@Database(entities = [Actividad::class, Asisteciapa::class], version = 3)
 abstract class DbDataSource:RoomDatabase() {
     abstract fun actividadDao():ActividadDao
     abstract fun asisteciapaDao():AsisteciapaDao
