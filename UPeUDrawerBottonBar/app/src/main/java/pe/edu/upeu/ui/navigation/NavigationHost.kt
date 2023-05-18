@@ -83,7 +83,7 @@ fun NavigationHost(
         composable(Destinations.AsistenciaUI.route){
             ComposeReal.TITLE_TOP=Destinations.AsistenciaUI.title
             AsistenciaUI(
-                navegarEditarAsist= { newText ->
+                navegarEditarAsistencia= { newText ->
                     navController.navigate(Destinations.AsistenciaForm.passId(newText))
                 }
             )

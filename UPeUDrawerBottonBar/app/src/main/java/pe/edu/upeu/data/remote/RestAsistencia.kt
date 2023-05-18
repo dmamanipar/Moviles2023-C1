@@ -1,8 +1,18 @@
 package pe.edu.upeu.data.remote
 
-import pe.edu.upeu.modelo.*
+import pe.edu.upeu.modelo.Asistencia
+import pe.edu.upeu.modelo.MsgModelRespAsis
+import pe.edu.upeu.modelo.User
+import pe.edu.upeu.modelo.UserResponse
 import retrofit2.Response
-import retrofit2.http.*
+import retrofit2.http.Body
+import retrofit2.http.DELETE
+import retrofit2.http.GET
+import retrofit2.http.Header
+import retrofit2.http.PATCH
+import retrofit2.http.POST
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface RestAsistencia {
     @GET("/api/asistencia")

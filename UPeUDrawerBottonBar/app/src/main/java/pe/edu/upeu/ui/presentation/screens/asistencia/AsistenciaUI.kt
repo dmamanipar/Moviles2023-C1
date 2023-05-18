@@ -39,22 +39,22 @@ import pe.edu.upeu.utils.TokenUtils
 import java.time.LocalDate
 
 @Composable
-fun AsistenciaUI (navegarEditarAsist: (String) -> Unit, viewModel:
+fun AsistenciaUI (navegarEditarAsistencia: (String) -> Unit, viewModel:
 AsistenciaViewModel = hiltViewModel()
 ){
-    val asis by viewModel.asist.observeAsState(arrayListOf())
+    val asist by viewModel.asist.observeAsState(arrayListOf())
     val isLoading by viewModel.isLoading.observeAsState(false)
-    Log.i("VERX", ""+asis!!.size )
+    Log.i("VERX", ""+asist!!.size )
 
     MyApp(onAddClick = {
         //viewModel.addUser()
-        navegarEditarAsist((0).toString())
+        navegarEditarAsistencia((0).toString())
     }, onDeleteClick = {
         viewModel.deleteAsistencia(it)
-    }, asis, isLoading,
+    }, asist, isLoading,
         onEditClick = {
             val jsonString = Gson().toJson(it)
-            navegarEditarAsist(jsonString)
+            navegarEditarAsistencia(jsonString)
         }
     )
 }

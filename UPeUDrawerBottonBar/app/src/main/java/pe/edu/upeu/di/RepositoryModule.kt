@@ -26,6 +26,6 @@ abstract class RepositoryModule {
 
     @Binds
     @Singleton
-    abstract fun asistenciaRepository(asisRepos:AsistenciaRepositoryImp): AsistenciaRepository
+    abstract fun asistenciaRepository(asistRepos:AsistenciaRepositoryImp): AsistenciaRepository
 
 }
