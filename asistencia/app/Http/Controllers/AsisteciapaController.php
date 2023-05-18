@@ -20,7 +20,7 @@ class AsisteciapaController extends Controller
     {
         Log::channel('stderr')->info("Si llega aqui");
 
-        $actividades=Actividad::all();
+        //$actividades=Actividad::all();
         /*$mappedcollection = $actividades->map(function($actividad, $key) {
         return [
         'id' => $actividad->id,
@@ -38,7 +38,7 @@ class AsisteciapaController extends Controller
         ];
         });*/
         return response()->json(['success' => true,
-        'data' => $mappedcollection,
+        //'data' => $mappedcollection,
         //'data' => Persona::all(),
         'message' => 'lista de actividades'], 200);
     }
