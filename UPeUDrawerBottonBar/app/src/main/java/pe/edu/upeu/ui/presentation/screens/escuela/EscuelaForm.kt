@@ -30,6 +30,7 @@ import pe.edu.upeu.modelo.ComboModel
 import pe.edu.upeu.ui.navigation.Destinations
 import pe.edu.upeu.ui.presentation.components.form.*
 import pe.edu.upeu.ui.presentation.components.Spacer
+import pe.edu.upeu.ui.presentation.screens.escuela.EscuelaFormViewModel
 import pe.edu.upeu.utils.TokenUtils
 
 
@@ -38,7 +39,7 @@ fun EscuelaForm(
     text: String,
     darkMode: MutableState<Boolean>,
     navController: NavHostController,
-    viewModel: EscuelaFormViewModel= hiltViewModel()
+    viewModel: EscuelaFormViewModel = hiltViewModel()
 ) {
 
 
@@ -64,8 +65,9 @@ fun EscuelaForm(
 fun formulario(id:Int,
                darkMode: MutableState<Boolean>,
                navController: NavHostController,
-               escuela:Escuela,
-               viewModel: EscuelaFormViewModel){
+               escuela: Escuela,
+               viewModel: EscuelaFormViewModel
+){
 
     Log.i("VERRR", "d: "+escuela?.id!!)
     val person=Escuela(0,"", "","","")
@@ -76,58 +78,26 @@ fun formulario(id:Int,
     var fusedLocationClient: FusedLocationProviderClient? = null
     fusedLocationClient = LocationServices.getFusedLocationProviderClient(
         TokenUtils.CONTEXTO_APPX)
-    locationCallback = object : LocationCallback() {
-        override fun onLocationResult(p0: LocationResult) {
-            for (lo in p0.locations) {
-                Log.e("LATLONX", "Lat: ${lo.latitude} Lon: ${lo.longitude}")
-                person.latitud=lo.latitude.toString()
-                person.longitud=lo.longitude.toString()
-            }
-        }
-    }
-    scope.launch{
-        val locationRequest = LocationRequest.create().apply {
-            interval = 10000
-            fastestInterval = 5000
-            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-        }
-        fusedLocationClient!!.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper())
 
-        Log.e("LATLON", "Lat: ${person.latitud} Lon: ${person.longitud}")
-        delay(1500L)
-        if (fusedLocationClient != null) {
-            fusedLocationClient!!.removeLocationUpdates(locationCallback);
-            fusedLocationClient = null;
-        }
-
-    }
 
     Scaffold(modifier = Modifier.padding(8.dp)){
         BuildEasyForms { easyForm ->
             Column {
-                NameTextField(easyForms = easyForm, text =escuela?.facultad_nom!!,"Facultad. Nom:", MyFormKeys.NAME )
+                NameTextField(easyForms = easyForm, text =escuela?.nombreeap!!,"Nomb. Escuela:", MyFormKeys.NAME )
                 var listE = listOf(
-                    ComboModel("Ingenieria","Ingenieria"),
-                    ComboModel("Enfermeria","Enfermeria"),
+                    ComboModel("Activo","Activo"),
+                    ComboModel("Desactivo","Desactivo"),
                 )
                 ComboBox(easyForm = easyForm, "Estado:", escuela?.estado!!, listE)
 
                 var listEv = listOf(
                     ComboModel("SI","SI"),
                     ComboModel("NO","NO"),
-                    )
-                ComboBox(easyForm = easyForm, "Inicialeseap:", escuela?.inicialeseap!!, listE)
-
-                var listEv = listOf(
-                    ComboModel("Eap","Eap"),
-                    ComboModel("NOeap","Noeap"),
                 )
-                ComboBox(easyForm = easyForm, "Nombreeap:", escuela?.nombreeap!!, listE)
+                ComboBoxTwo(easyForm = easyForm, "Evaluar:", escuela?.inicialeseap!!, listEv)
 
-                var listEv = listOf(
-                    ComboModel("Ingenieria de sistemas","Ingenieria de sistemas"),
-                    ComboModel("Ingenieria","Ingenieria"),
-                )
+                NameTextField(easyForms = easyForm, text =escuela?.facultad_nom!!,"Nomb. Facultad:", MyFormKeys.URL)
+
 
                 Row(Modifier.align(Alignment.CenterHorizontally)){
                     AccionButtonSuccess(easyForms = easyForm, "Guardar", id){

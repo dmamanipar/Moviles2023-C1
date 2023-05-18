@@ -32,7 +32,7 @@ class EscuelaRepositoryImp @Inject constructor(
 
             restEscuela.deleteEscuela(TokenUtils.TOKEN_CONTENT,escuela.id)
         }
-        escuela.eliminarEscuela(escuela)
+        escuelaDao.eliminarEscuela(escuela)
     }
 
     override fun reportarEscuelas(): LiveData<List<Escuela>> {

@@ -1,4 +1,4 @@
-package pe.edu.upeu.di
+package pe.edu.upeu.ui.theme.di
 
 import dagger.Binds
 import dagger.Module
@@ -22,10 +22,11 @@ abstract class RepositoryModule {
 
     @Binds
     @Singleton
-    abstract  fun escuelaRepository(actRepos:EscuelaRepositoryImp): EscuelaRepository
+    abstract  fun userRepository(userRepos:UserRepositoryImp): UserRepository
 
     @Binds
     @Singleton
-    abstract  fun userRepository(userRepos:UserRepositoryImp): UserRepository
+    abstract  fun EscuelaRepository(escuelaRepos:EscuelaRepositoryImp): EscuelaRepository
+
 
 }

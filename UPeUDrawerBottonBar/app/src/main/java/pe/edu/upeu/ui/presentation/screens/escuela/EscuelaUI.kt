@@ -35,36 +35,36 @@ import pe.edu.upeu.ui.presentation.components.LoadingCard
 import java.time.format.DateTimeFormatter
 import pe.edu.upeu.R
 import pe.edu.upeu.ui.presentation.components.ConfirmDialog
+import pe.edu.upeu.ui.presentation.screens.escuela.EscuelaViewModel
 import pe.edu.upeu.utils.TokenUtils
 import java.time.LocalDate
 
 @Composable
-fun EscuelaUI (navegarEditarAct: (String) -> Unit, viewModel:
-EscuelaViewModel= hiltViewModel()
+fun EscuelaUI (navegarEditarEscuela: (String) -> Unit, viewModel:
+EscuelaViewModel = hiltViewModel()
 ){
     val actis by viewModel.activ.observeAsState(arrayListOf())
     val isLoading by viewModel.isLoading.observeAsState(false)
     Log.i("VERX", ""+actis!!.size )
 
     MyApp(onAddClick = {
-    //viewModel.addUser()
-        navegarEditarAct((0).toString())
+        //viewModel.addUser()
+        navegarEditarEscuela((0).toString())
     }, onDeleteClick = {
         viewModel.deleteEscuela(it)
     }, actis, isLoading,
-    onEditClick = {
-        val jsonString = Gson().toJson(it)
-        navegarEditarAct(jsonString)
-    }
+        onEditClick = {
+            val jsonString = Gson().toJson(it)
+            navegarEditarEscuela(jsonString)
+        }
     )
 }
-val formatoFecha:DateTimeFormatter? = DateTimeFormatter.ofPattern("dd-MM-yyyy")
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun MyApp(
     onAddClick: (() -> Unit)? = null,
     onDeleteClick: ((toDelete: Escuela) -> Unit)? = null,
-    actividades: List<Escuela>,
+    escuelas: List<Escuela>,
     isLoading: Boolean,
     onEditClick: ((toPersona: Escuela) -> Unit)? = null,
 ) {
@@ -112,7 +112,7 @@ fun MyApp(
                 .align(alignment = Alignment.TopCenter),
                 //.offset(x = (16).dp, y = (-32).dp),
                 userScrollEnabled= true,
-                ){
+            ){
                 var itemCount = escuelas.size
                 if (isLoading) itemCount++
                 items(count = itemCount) { index ->
@@ -137,7 +137,7 @@ fun MyApp(
                                     //.clip(CircleShape)
                                     .clip(RoundedCornerShape(8.dp)),
                                 painter = rememberImagePainter(
-                                    data = escuela.evaluar,
+                                    data = escuela.inicialeseap,
                                     builder = {
                                         placeholder(R.drawable.bg)
                                         error(R.drawable.bg)
@@ -149,7 +149,10 @@ fun MyApp(
                             pe.edu.upeu.ui.presentation.components.Spacer()
                             Column(
                                 Modifier.weight(1f),
-                            )
+                            ) {
+                                Text("${escuela.nombreeap} - ${escuela.estado} - ${escuela.facultad_nom}", fontWeight = FontWeight.Bold)
+
+                            }
                             pe.edu.upeu.ui.presentation.components.Spacer()
 
                             val showDialog = remember { mutableStateOf(false) }

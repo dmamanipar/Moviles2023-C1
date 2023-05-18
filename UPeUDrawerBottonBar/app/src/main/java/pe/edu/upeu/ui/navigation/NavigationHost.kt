@@ -79,26 +79,25 @@ fun NavigationHost(
             ComposeReal.TITLE_TOP = Destinations.ActividadForm.title
             ActividadForm(actId, darkMode, navController)
         }
-
-        //Aqui va escuela//
+        //navegación escuela//
         composable(Destinations.EscuelaUI.route){
             ComposeReal.TITLE_TOP=Destinations.EscuelaUI.title
             EscuelaUI(
-                navegarEditarAct = { newText ->
-                    navController.navigate(Destinations.ActividadForm.passId(newText))
+                navegarEditarEscuela = { newText ->
+                    navController.navigate(Destinations.EscuelaForm.passId(newText))
                 }
             )
         }
         composable(
             Destinations.EscuelaForm.route,
-            arguments = listOf(navArgument("actId") {
-                defaultValue = "actId"
+            arguments = listOf(navArgument("escuelaId") {
+                defaultValue = "escuelaId"
             })
         ) { navBackStackEntry ->
-            var actId = navBackStackEntry.arguments?.getString("actId")
-            requireNotNull(actId)
+            var escuelaId = navBackStackEntry.arguments?.getString("escuelaId")
+            requireNotNull(escuelaId)
             ComposeReal.TITLE_TOP = Destinations.EscuelaForm.title
-            EscuelaForm(actId, darkMode, navController)
+            EscuelaForm(escuelaId, darkMode, navController)
         }
 
 

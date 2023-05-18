@@ -12,21 +12,20 @@ import pe.edu.upeu.modelo.Escuela
 @Dao
 interface EscuelaDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun  insertarEscuela(escuela:Escuela)
+    suspend fun  insertarEscuela(escuela: Escuela)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun  insertarEscuela(escuela:List<Escuela>)
+    suspend fun  insertarEscuelas(escuela:List<Escuela>)
 
     @Update
-    suspend fun  modificarEscuela(escuela:Escuela)
+    suspend fun  modificarEscuela(escuela: Escuela)
 
     @Delete
     suspend fun eliminarEscuela(escuela: Escuela)
 
     @Query("select * from escuela")
-    fun reportarEscuela():LiveData<List<Escuela>>
+    fun reportarEscuela(): LiveData<List<Escuela>>
 
     @Query("select * from escuela where id=:idx")
-    fun buscarEscuela(idx:Int):LiveData<Escuela>
-
+    fun buscarEscuela(idx:Int): LiveData<Escuela>
 }

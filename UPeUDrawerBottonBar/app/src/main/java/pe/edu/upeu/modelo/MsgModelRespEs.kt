@@ -1,12 +1,11 @@
 package pe.edu.upeu.modelo
 
-data class MsgModelResp(
+data class MsgModelRespEs(
     var success:Boolean,
-    var data:List<Actividad>,
+    var data:List<Escuela>,
     var message:String
 )
-
-data class ComboModel(
+data class ComboModels(
     val code: String,
     val name: String
 ): PickerValue() {
@@ -14,6 +13,6 @@ data class ComboModel(
         return this.name.startsWith(query)
     }
 }
-abstract class PickerValue {
+abstract class PickerValues {
     abstract fun searchFilter(query: String): Boolean
 }
