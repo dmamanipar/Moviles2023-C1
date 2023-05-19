@@ -11,6 +11,8 @@ import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import pe.edu.upeu.ui.presentation.screens.*
 import pe.edu.upeu.ui.presentation.screens.actividad.ActividadForm
 import pe.edu.upeu.ui.presentation.screens.actividad.ActividadUI
+import pe.edu.upeu.ui.presentation.screens.actividad.PeriodoForm
+import pe.edu.upeu.ui.presentation.screens.actividad.PeriodoUI
 import pe.edu.upeu.ui.presentation.screens.login.LoginScreen
 import pe.edu.upeu.utils.ComposeReal
 
@@ -66,6 +68,14 @@ fun NavigationHost(
                 }
             )
         }
+        composable(Destinations.PeriodoUI.route){
+            ComposeReal.TITLE_TOP=Destinations.PeriodoUI.title
+            PeriodoUI(
+                navegarEditarAct = { newText ->
+                    navController.navigate(Destinations.PeriodoForm.passId(newText))
+                }
+            )
+        }
         composable(
             Destinations.ActividadForm.route,
             arguments = listOf(navArgument("actId") {
@@ -77,6 +87,19 @@ fun NavigationHost(
             ComposeReal.TITLE_TOP = Destinations.ActividadForm.title
             ActividadForm(actId, darkMode, navController)
         }
+        composable(
+            Destinations.PeriodoForm.route,
+            arguments = listOf(navArgument("perId") {
+                defaultValue = "perId"
+            })
+        ) { navBackStackEntry ->
+            var perId = navBackStackEntry.arguments?.getString("perId")
+            requireNotNull(perId)
+            ComposeReal.TITLE_TOP = Destinations.PeriodoForm.title
+            PeriodoForm(perId, darkMode, navController)
+        }
+
+
 
 
     }

@@ -4,6 +4,7 @@
 use App\Http\Controllers\ActividadController;
 use App\Http\Controllers\AsisteciapaController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PeriodoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -34,5 +35,6 @@ Route::group(['middleware' => 'api'], function () {
     Route::resource('/act', ActividadController::class);
     //Route::resource('/asistencia', AsistenciaController::class);
     Route::resource('/asispa', AsisteciapaController::class);
+    Route::apiresource('/periodo', PeriodoController::class);
     });
 

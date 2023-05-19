@@ -27,5 +27,13 @@ sealed class Destinations(
             return "actividadForm?actId=$actId"
         }
     }
+    object PeriodoUI: Destinations("periodoUI", "Adm. Periodo", Icons.Filled.Fastfood)
+
+    object PeriodoForm: Destinations("periodoForm?actId={actId}",
+        "Periodo Form", Icons.Filled.DynamicForm){
+        fun passId(perId:String?):String{
+            return "periodoForm?perId=$perId"
+        }
+    }
 
 }
