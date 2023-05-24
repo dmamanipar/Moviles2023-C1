@@ -180,7 +180,7 @@ class _LoginPageState extends State<LoginPage> {
             WidgetsFlutterBinding.ensureInitialized();
             Firebase.initializeApp();
             final api=Provider.of<UsuarioApi>(context,listen: false);
-            final user=UsuarioModelo(name: "", email: "mamanipari@gmail.com", password: "Da12345@");
+            final user=UsuarioModelo(name: "", email: "mamanipari@gmail.com", password: "Da12345*");
             api.login(user).then((value){
               token=value.tokenType+" "+value.accessToken;
               prefs.setString("token", token);
