@@ -1,7 +1,9 @@
-//import 'package:flutter_app/apis/persona_api.dart';
+
+import 'package:asistencia_app/apis/usuario_api.dart';
 import 'package:asistencia_app/comp/Button.dart';
 import 'package:asistencia_app/drawer/navigation_home_screen.dart';
 import 'package:asistencia_app/login/sign_in.dart';
+import 'package:asistencia_app/modelo/UsuarioModelo.dart';
 //import 'package:asistencia_app/modelo/UsuarioModelo.dart';
 import 'package:asistencia_app/util/TokenUtil.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -14,7 +16,7 @@ class MainLogin extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return Provider<PersonaApi>(create: (_)=>PersonaApi.create(),
+    return Provider<UsuarioApi>(create: (_)=>UsuarioApi.create(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(primaryColor: Colors.blue),
@@ -134,11 +136,11 @@ class _LoginPageState extends State<LoginPage> {
 
                   final prefs= await SharedPreferences.getInstance();
 
-                  final api=Provider.of<PersonaApi>(context,listen: false);
+                  final api=Provider.of<UsuarioApi>(context,listen: false);
                   final user=UsuarioModelo(name: "", email: _controllerUser.text, password: _controllerPass.text);
                   bool ingreso=false;
                   api.login(user).then((value){
-                    token=value.token_type+" "+value.access_token;
+                    token=value.tokenType+" "+value.accessToken;
                     prefs.setString("token", token);
                     TokenUtil.TOKEN=token;
                     ingreso=true;
@@ -177,10 +179,10 @@ class _LoginPageState extends State<LoginPage> {
             print("Entro Google");
             WidgetsFlutterBinding.ensureInitialized();
             Firebase.initializeApp();
-            final api=Provider.of<PersonaApi>(context,listen: false);
+            final api=Provider.of<UsuarioApi>(context,listen: false);
             final user=UsuarioModelo(name: "", email: "mamanipari@gmail.com", password: "Da12345@");
             api.login(user).then((value){
-              token=value.token_type+" "+value.access_token;
+              token=value.tokenType+" "+value.accessToken;
               prefs.setString("token", token);
               TokenUtil.TOKEN=token;
 
