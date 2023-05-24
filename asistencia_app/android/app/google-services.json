@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "771738342602",
+    "project_id": "loginappmovil-53c2d",
+    "storage_bucket": "loginappmovil-53c2d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:771738342602:android:5ffe9bf09ba7b0cf6ad033",
+        "android_client_info": {
+          "package_name": "pe.edu.upeu.asistencia_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "771738342602-4cd36pg994kcrrtiv2qcmenqpvo7c8se.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "pe.edu.upeu.asistencia_app",
+            "certificate_hash": "fa46bf932d41d966871a6982dab83714fad6a28f"
+          }
+        },
+        {
+          "client_id": "771738342602-vd114rhiij25j8lvhsq7fe04s01052na.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADc5SW_Y3017NYkbK-nidZhAgzTxTW4q8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "771738342602-vd114rhiij25j8lvhsq7fe04s01052na.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
