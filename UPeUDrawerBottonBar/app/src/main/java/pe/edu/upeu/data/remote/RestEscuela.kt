@@ -1,7 +1,7 @@
 package pe.edu.upeu.data.remote
 
 import pe.edu.upeu.modelo.Escuela
-import pe.edu.upeu.modelo.MsgModelResp
+import pe.edu.upeu.modelo.MsgModelRespEs
 import pe.edu.upeu.modelo.User
 import pe.edu.upeu.modelo.UserResponse
 import retrofit2.Response
@@ -15,22 +15,22 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface RestEscuela {
-    @GET("/api/act")
+    @GET("/api/escuela")
     suspend fun reportarEscuela(@Header("Authorization") token:String):
-            Response<MsgModelResp>
-    @GET("/api/act/{id}")
+            Response<MsgModelRespEs>
+    @GET("/api/escuela/{id}")
     suspend fun getEscuelaId(@Header("Authorization") token:String,
-                               @Query("id") id:Int): Response<MsgModelResp>
-    @DELETE("/api/act/{id}")
+                               @Query("id") id:Int): Response<MsgModelRespEs>
+    @DELETE("/api/escuela/{id}")
     suspend fun deleteEscuela(@Header("Authorization") token:String,
-                                @Path("id") id:Int): Response<MsgModelResp>
-    @PATCH("/api/act/{id}")
+                                @Path("id") id:Int): Response<MsgModelRespEs>
+    @PATCH("/api/escuela/{id}")
     suspend fun actualizarEscuela(@Header("Authorization")
                                     token:String, @Path("id") id:Int, @Body escuela: Escuela):
-            Response<MsgModelResp>
-    @POST("/api/act")
+            Response<MsgModelRespEs>
+    @POST("/api/escuela")
     suspend fun insertarEscuela(@Header("Authorization") token:String,
-                                  @Body escuela: Escuela): Response<MsgModelResp>
+                                  @Body escuela: Escuela): Response<MsgModelRespEs>
     @POST("/api/auth/login")
     suspend fun login(@Body user: User):Response<UserResponse>
 }

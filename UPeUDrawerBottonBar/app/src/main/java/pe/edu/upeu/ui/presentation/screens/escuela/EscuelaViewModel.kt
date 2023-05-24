@@ -28,11 +28,11 @@ class EscuelaViewModel @Inject constructor(
         if (_isLoading.value == false)
             viewModelScope.launch (Dispatchers.IO) {
                 _isLoading.postValue(true)
-            // userRepo._isLoading.postValue(false)
+                // userRepo._isLoading.postValue(false)
             }
     }
 
-    fun deleteActividad(toDelete: Escuela) {
+    fun deleteEscuela(toDelete: Escuela) {
         viewModelScope.launch(Dispatchers.IO) {
             Log.i("ELIMAR", toDelete.toString())
             activRepo.deleteEscuela(toDelete);

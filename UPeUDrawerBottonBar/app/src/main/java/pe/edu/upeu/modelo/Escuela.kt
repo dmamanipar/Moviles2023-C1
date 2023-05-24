@@ -6,9 +6,9 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "escuela")
 data class Escuela(
-   @PrimaryKey(autoGenerate = true) var id:Int,
-   var nombreeap:String,
-   var estado:String,
-   var inicialeseap:String,
-   var facultad_nom:String
+    @PrimaryKey(autoGenerate = true) var id:Int,
+    var nombreeap:String,
+    var estado:String,
+    var inicialeseap:String,
+    var facultad_nom:String
 )

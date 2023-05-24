@@ -33,7 +33,7 @@ class EscuelaFormViewModel @Inject constructor(
     }
     fun editEscuela(escuela: Escuela){
         viewModelScope.launch(Dispatchers.IO){
-            activRepo.modificarRemoteEscuela(Escuela)
+            activRepo.modificarRemoteEscuela(escuela)
         }
     }
 }
