@@ -5,6 +5,12 @@ data class MsgModelResp(
     var data:List<Actividad>,
     var message:String
 )
+data class MsgModelpRes(
+    var success:Boolean,
+    var data:List<Evento>,
+    var message:String
+
+)
 
 data class ComboModel(
     val code: String,

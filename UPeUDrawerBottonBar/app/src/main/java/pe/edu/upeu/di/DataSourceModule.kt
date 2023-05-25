@@ -10,7 +10,9 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import pe.edu.upeu.data.local.DbDataSource
 import pe.edu.upeu.data.local.dao.ActividadDao
+import pe.edu.upeu.data.local.dao.EventoDao
 import pe.edu.upeu.data.remote.RestActividad
+import pe.edu.upeu.data.remote.RestEvento
 import pe.edu.upeu.utils.TokenUtils
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -50,6 +52,11 @@ class DataSourceModule {
     fun restActividad(retrofit: Retrofit):RestActividad{
         return retrofit.create(RestActividad::class.java)
     }
+    @Singleton
+    @Provides
+    fun restEvento(retrofit: Retrofit):RestEvento{
+        return retrofit.create(RestEvento::class.java)
+    }
 
 
     @Singleton
@@ -63,5 +70,10 @@ class DataSourceModule {
     @Provides
     fun actividadDao(db:DbDataSource):ActividadDao{
         return db.actividadDao();
+    }
+    @Singleton
+    @Provides
+    fun eventoDao(db:DbDataSource):EventoDao{
+        return db.eventoDao();
     }
 }

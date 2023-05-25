@@ -12,6 +12,8 @@ import pe.edu.upeu.ui.presentation.screens.*
 import pe.edu.upeu.ui.presentation.screens.actividad.ActividadForm
 import pe.edu.upeu.ui.presentation.screens.actividad.ActividadUI
 import pe.edu.upeu.ui.presentation.screens.login.LoginScreen
+import pe.edu.upeu.ui.presentation.screens.evento.EventoUI
+import pe.edu.upeu.ui.presentation.screens.evento.EventoForm
 import pe.edu.upeu.utils.ComposeReal
 
 @OptIn(ExperimentalPermissionsApi::class)
@@ -66,6 +68,28 @@ fun NavigationHost(
                 }
             )
         }
+
+        composable(Destinations.EventoUI.route){
+            ComposeReal.TITLE_TOP=Destinations.EventoUI.title
+            EventoUI(
+                navegarEditarEvento = { newText ->
+                    navController.navigate(Destinations.EventoForm.passId(newText))
+                }
+            )
+        }
+        composable(
+            Destinations.EventoForm.route,
+            arguments = listOf(navArgument("evenId") {
+                defaultValue = "evenId"
+            })
+        ) { navBackStackEntry ->
+            var evenId = navBackStackEntry.arguments?.getString("evenId")
+            requireNotNull(evenId)
+            ComposeReal.TITLE_TOP = Destinations.EventoForm.title
+
+            EventoForm(evenId, darkMode, navController)
+        }
+
         composable(
             Destinations.ActividadForm.route,
             arguments = listOf(navArgument("actId") {

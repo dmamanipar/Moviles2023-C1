@@ -20,11 +20,18 @@ sealed class Destinations(
     object Pantalla4 : Destinations("pantalla4", "Pantalla 4x", Icons.Filled.Face )
 
     object ActividadUI: Destinations("actividadUI", "Adm. Actividad", Icons.Filled.Fastfood)
+    object EventoUI: Destinations("eventoUI", "Adm. Evento", Icons.Filled.Fax)
 
     object ActividadForm: Destinations("actividadForm?actId={actId}",
         "Actividad Form", Icons.Filled.DynamicForm){
         fun passId(actId:String?):String{
             return "actividadForm?actId=$actId"
+        }
+    }
+    object EventoForm: Destinations("eventoForm?evenId={evenId}",
+        "Evento Form", Icons.Filled.DynamicForm){
+        fun passId(evenId:String?):String{
+            return "eventoForm?evenId=$evenId"
         }
     }
 

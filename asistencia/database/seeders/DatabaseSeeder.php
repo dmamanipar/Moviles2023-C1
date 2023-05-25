@@ -17,8 +17,8 @@ class DatabaseSeeder extends Seeder
 
         \App\Models\User::factory()->create([
              'name' => 'Alex',
-             'email' => 'alex@alex',
-             'password' => Hash::make("12345678")
+             'email' => 'alex@gmail.com',
+             'password' => Hash::make("@Lex123456")
          ]);
     }
 }
