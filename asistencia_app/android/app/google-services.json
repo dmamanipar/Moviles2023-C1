@@ -51,6 +51,14 @@
           }
         },
         {
+          "client_id": "203718619948-vk5kuomn8la62vd4338h4vm1d4vjndcu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "pe.edu.upeu.asistencia_appdmpx",
+            "certificate_hash": "003a924652a457e834e1209ca00cb4f72d050b2a"
+          }
+        },
+        {
           "client_id": "203718619948-vvce3l76m0d9kiq31cn4tumu5jtb0tme.apps.googleusercontent.com",
           "client_type": 3
         }

@@ -2,6 +2,7 @@ import 'package:asistencia_app/comp/CustomAppBar.dart';
 import 'package:asistencia_app/theme/AppTheme.dart';
 import 'package:asistencia_app/drawer/drawer_user_controller.dart';
 import 'package:asistencia_app/drawer/home_drawer.dart';
+import 'package:asistencia_app/ui/actividad/actividad_main.dart';
 //import 'package:app_upeu/ui/beneficiario/beneficiario_main.dart';
 //import 'package:app_upeu/ui/beneficiariobloc/beneficiariob_main.dart';
 //import 'package:app_upeu/ui/beneficiariofirebloc/beneficiariof_main.dart';
@@ -67,7 +68,7 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen> {
         });
       } else if (drawerIndex == DrawerIndex.FeedBack) {
         setState(() {
-          //screenView = MainPersona();
+          screenView = MainActividad();
         });
       }else if (drawerIndex == DrawerIndex.Help) {
         setState(() {
