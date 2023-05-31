@@ -1,6 +1,8 @@
 import 'package:animated_floating_buttons/animated_floating_buttons.dart';
 import 'package:asistencia_app/apis/actividad_api.dart';
 import 'package:asistencia_app/comp/TabItem.dart';
+import 'package:asistencia_app/ui/actividad/actividad_edit.dart';
+import 'package:asistencia_app/ui/actividad/actividad_form.dart';
 import 'package:flutter/material.dart';
 import 'package:asistencia_app/modelo/ActividadModelo.dart';
 import 'package:provider/provider.dart';
@@ -94,10 +96,10 @@ class _ActividadUIState extends State<ActividadUI> {
                   //final producto=new ModeloProductos();
                   //formDialog(context, producto);
                   print("Si funciona 2");
-                  /*Navigator.push(
+                  Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => PersonaForm()),
-                  ).then(onGoBack); */
+                    MaterialPageRoute(builder: (context) => ActividadForm()),
+                  ).then(onGoBack);
                 },
                 child: Icon(Icons.add_box_sharp),
               ),
@@ -198,12 +200,11 @@ class _ActividadUIState extends State<ActividadUI> {
                                   icon: Icon(Icons.edit),
                                   color: AppTheme.themeData.colorScheme.primary,
                                   onPressed: () {
-                                   /* Navigator.push(
+                                    Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => PersonaFormEdit(
-                                              modelP: personax)),
-                                    ).then(onGoBack);*/
+                                          builder: (context) => ActividadFormEdit(modelA: personax)),
+                                    ).then(onGoBack);
                                   }),
                               IconButton(
                                   icon: Icon(Icons.delete),

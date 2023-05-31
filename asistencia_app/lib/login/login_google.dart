@@ -142,9 +142,11 @@ class _LoginPageState extends State<LoginPage> {
                   api.login(user).then((value){
                     token=value.tokenType+" "+value.accessToken;
                     prefs.setString("token", token);
+
                     TokenUtil.TOKEN=token;
                     ingreso=true;
                     if(ingreso==true){
+                      prefs.setString("usernameLogin", _controllerUser.text);
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) {
@@ -184,6 +186,7 @@ class _LoginPageState extends State<LoginPage> {
             api.login(user).then((value){
               token=value.tokenType+" "+value.accessToken;
               prefs.setString("token", token);
+              prefs.setString("usernameLogin", '${email==null?"":email}');
               TokenUtil.TOKEN=token;
 
             }).catchError((onError){

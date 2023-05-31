@@ -1,5 +1,5 @@
 class ActividadModelo {
-  late int id;
+  late int id=0;
   late int periodoId;
   late String nombreActividad;
   late String fecha;
@@ -42,7 +42,7 @@ class ActividadModelo {
     if (json['asistenciapas'] != null) {
       asistenciapas = (json['asistenciapas'] as List).map((e) =>
       AsistenciapaModelo.fromJson(e as Map<String, dynamic>)).toList();
-    }
+    }else{asistenciapas=[];}
   }
 
   Map<String, dynamic> toJson() {
