@@ -47,9 +47,11 @@ class ActividadController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Actividad $actividad)
+    public function update(Request $request, $id)
     {
+        Log::channel('stderr')->info($request);
         $input = $request->all();
+        $actividad=Actividad::find($id);
         $actividad->periodo_id = $input['periodo_id'];
         $actividad->nombre_actividad = $input['nombre_actividad'];
         $actividad->fecha = $input['fecha'];
@@ -83,6 +85,7 @@ class ActividadController extends Controller
         $input = $request->all();
         Log::channel('stderr')->info($request);
         Actividad::create($input);
+
         return response()->json(['success' => true,
         'data' => Actividad::all(),
         'message' => 'Lista de Actividad'], 200);
@@ -109,9 +112,10 @@ class ActividadController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Actividad $actividad)
+    public function destroy(Request $request, $id)
     {
-        $actividad->delete();
+        Log::channel('stderr')->info($id);
+        Actividad::find($id)->delete();
         return response()->json(['success' => true,
         'data' => Actividad::all(),
         'message' => 'Lista de Actividad'], 200);
