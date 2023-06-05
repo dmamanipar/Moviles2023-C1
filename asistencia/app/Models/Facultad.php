@@ -12,9 +12,10 @@ class Facultad extends Model
     protected $table = 'facultads';
     public $timestamps = false;
     protected $primaryKey = 'id';
+
     protected $fillable = [
-        'id', 'nombrefac','estado','iniciales'
-    ];
+        'id', 'nombrefac', 'estado', 'iniciales'
+        ];
 
     public function escuelas()
     {

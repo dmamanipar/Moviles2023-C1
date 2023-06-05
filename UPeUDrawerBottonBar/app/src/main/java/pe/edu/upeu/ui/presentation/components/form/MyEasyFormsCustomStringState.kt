@@ -13,7 +13,6 @@ import pe.edu.upeu.modelo.ComboModel
 import java.text.SimpleDateFormat
 
 
-
 class MyEasyFormsCustomDateState(
     private val defaultValue: String = "",
     easyFormsValidationType: EasyFormsValidationType,
@@ -105,5 +104,4 @@ data class MyEasyFormsCustomStringResult(
     easyFormsErrorState = easyFormsErrorState,
     value = value,
 )
-
 

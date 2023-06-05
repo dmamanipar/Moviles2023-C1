@@ -17,14 +17,24 @@ sealed class Destinations(
         fun createRoute(newText: String) = "pantalla2/?newText=$newText"
     }
     object Pantalla3 : Destinations("pantalla3", "Pantalla 3", Icons.Filled.Favorite)
-    object Pantalla4 : Destinations("pantalla4", "Pantalla 4x", Icons.Filled.Face )
+    object Pantalla4 : Destinations("pantalla4", "Pantalla 4dfsx", Icons.Filled.Face )
+
+    object Pantalla5 : Destinations("pantalla5", "Facultades", Icons.Filled.Fastfood )
 
     object ActividadUI: Destinations("actividadUI", "Adm. Actividad", Icons.Filled.Fastfood)
+
+    object FacultadUI: Destinations("facultadUI", "Adm. Facu", Icons.Filled.Fastfood)
 
     object ActividadForm: Destinations("actividadForm?actId={actId}",
         "Actividad Form", Icons.Filled.DynamicForm){
         fun passId(actId:String?):String{
             return "actividadForm?actId=$actId"
+        }
+    }
+    object FacultadForm: Destinations("facultadForm?actId={actId}",
+        "Facultad Form", Icons.Filled.DynamicForm){
+        fun passId(facuId:String?):String{
+            return "facultadForm?actId=$facuId"
         }
     }
 

@@ -8,9 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Actividad extends Model
 {
     use HasFactory;
+
     protected $table = 'actividads';
     public $timestamps = false;
     protected $primaryKey = 'id';
+
     protected $fillable = [
         'id', 'periodo_id', 'nombre_actividad', 'fecha',
         'horai', "min_toler",

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nombrefac');
             $table->string('estado');
             $table->string('iniciales');
-            $table->timestamps();
+
         });
     }
 

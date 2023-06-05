@@ -2,22 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\FacultadPostRequest;
 use App\Models\Facultad;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-class FacultaControllerd extends Controller
+class FacultadController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
 
-    public function __construct() {
-        $this->middleware('auth:api');
-        }
 
-    public function index()
-    {
+
+    public function index(){
+
+
+
         Log::channel('stderr')->info("Si llega aqui");
 
         $facultades=Facultad::all();
@@ -31,61 +32,47 @@ class FacultaControllerd extends Controller
         ];
         });
         return response()->json(['success' => true,
-        'data' => $mappedcollection,
+        'data' => Facultad::all(),
         //'data' => Persona::all(),
         'message' => 'lista de facultades'], 200);
+
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+    public function show(Facultad $facultad){
+       }
+    public function store(Request $request){
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
         $input = $request->all();
         Log::channel('stderr')->info($request);
         Facultad::create($input);
+
         return response()->json(['success' => true,
         'data' => Facultad::all(),
-        'message' => 'Lista de Facultad'], 200);
+        'message' => 'store'], 200);
+
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+    public function update(Request $request, $id){
+
+        Log::channel('stderr')->info($request);
+        $input = $request->all();
+        $facultad=Facultad::find($id);
+        $facultad->nombrefac = $input['nombrefac'];
+        $facultad->estado = $input['estado'];
+        $facultad->iniciales = $input['iniciales'];
+
+
+        $facultad->save();
+        return response()->json(['success' => true,
+        'data' => Facultad::all(),
+        'message' => 'record saved successfully!'], 200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+    public function destroy(facultad $facultad,$id){
+        Log::channel('stderr')->info($id);
+        Facultad::find($id)->delete();
+        return response()->json(['success' => true,
+        'data' => Facultad::all(),
+        'message' => 'Lista de fac'], 200);
     }
 }

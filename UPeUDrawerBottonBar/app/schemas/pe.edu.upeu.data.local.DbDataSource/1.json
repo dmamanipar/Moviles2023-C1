@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "eb97db350e58dfb7a331d1927c006830",
+    "identityHash": "8bcc6409c1a04983150552beb4d51302",
     "entities": [
       {
         "tableName": "actividad",
@@ -83,12 +83,50 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "facultad",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `nombrefac` TEXT NOT NULL, `estado` TEXT NOT NULL, `iniciales` TEXT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nombrefac",
+            "columnName": "nombrefac",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "estado",
+            "columnName": "estado",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "iniciales",
+            "columnName": "iniciales",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'eb97db350e58dfb7a331d1927c006830')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '8bcc6409c1a04983150552beb4d51302')"
     ]
   }
 }

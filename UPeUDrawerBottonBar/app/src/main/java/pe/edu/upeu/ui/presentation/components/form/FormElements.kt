@@ -26,10 +26,11 @@ import pe.edu.upeu.modelo.ComboModel
 import java.text.SimpleDateFormat
 import java.util.*
 
+
 enum class MyFormKeys {
     EMAIL, PASSWORD, SALUTATION, SALUTATION2,NAME, URL, CUSTOM_FOCUS,
     PHONE, CARD, CHECKBOX, LIST_CHECKBOX, TRI_CHECKBOX, RADIO_BUTTON,
-    SWITCH, SLIDER, RANGE_SLIDER,DNI, APE_PAT, APE_MAT, FECHA, TIME, TIME_TOLER
+    SWITCH, SLIDER, RANGE_SLIDER,DNI, APE_PAT, APE_MAT,INIC, FECHA, TIME, TIME_TOLER
 }
 
 @Composable
@@ -332,7 +333,7 @@ fun EmailTextField(easyForms: EasyForms, text: String, label:String, tipo:String
 @Composable
 fun PasswordTextField(easyForms: EasyForms,text: String, label:String,
                       passwordVisibility: MutableState<Boolean> = remember { mutableStateOf(false) }
-                      ) {
+) {
     val textFieldState = easyForms.getTextFieldState(
         key = MyFormKeys.PASSWORD,
         easyFormsValidationType = PasswordValidationType,
@@ -340,25 +341,25 @@ fun PasswordTextField(easyForms: EasyForms,text: String, label:String,
     )
     val state = textFieldState.state
     //val passwordVisibility: Boolean by remember { mutableStateOf(false) }
-        OutlinedTextField(
+    OutlinedTextField(
         value = state.value,
         label = { Text(text = label) },
         onValueChange = textFieldState.onValueChangedCallback,
         isError = textFieldState.errorState.value == EasyFormsErrorState.INVALID,
         visualTransformation = if (passwordVisibility.value) VisualTransformation.None else PasswordVisualTransformation(),
-            trailingIcon = {
-                val image = if (passwordVisibility.value)
-                    Icons.Filled.Visibility
-                else Icons.Filled.VisibilityOff
+        trailingIcon = {
+            val image = if (passwordVisibility.value)
+                Icons.Filled.Visibility
+            else Icons.Filled.VisibilityOff
 
-                // Please provide localized description for accessibility services
-                val description = if (passwordVisibility.value) "Hide password" else "Show password"
+            // Please provide localized description for accessibility services
+            val description = if (passwordVisibility.value) "Hide password" else "Show password"
 
-                IconButton(
-                    onClick = {passwordVisibility.value=!passwordVisibility.value }){
-                    Icon(imageVector  = image, description)
-                }
+            IconButton(
+                onClick = {passwordVisibility.value=!passwordVisibility.value }){
+                Icon(imageVector  = image, description)
             }
+        }
     )
 }
 
@@ -411,15 +412,15 @@ fun AccionButtonSuccess(
     id:Int,
     onClick: () -> Unit,
 
-) {
+    ) {
     val errorStates = easyForms.observeFormStates()
     Log.i("DATOCC", id.toString())
     if(id==0){
-    Button(
-        onClick = onClick,
-        modifier = Modifier.wrapContentWidth(),
-        enabled = errorStates.value.all {it.value == EasyFormsErrorState.VALID }
-    ) {Text(label)}
+        Button(
+            onClick = onClick,
+            modifier = Modifier.wrapContentWidth(),
+            enabled = errorStates.value.all {it.value == EasyFormsErrorState.VALID }
+        ) {Text(label)}
     }else{
         Button(
             onClick = onClick,
@@ -435,7 +436,7 @@ fun AccionButtonCancel(
     label:String,
     onClick: () -> Unit,
 
-) {
+    ) {
     val errorStates = easyForms.observeFormStates()
     Button(
         onClick = onClick,
