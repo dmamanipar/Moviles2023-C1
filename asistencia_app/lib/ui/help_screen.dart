@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:asistencia_app/comp/CustomAppBar.dart';
 import 'package:asistencia_app/theme/AppTheme.dart';
+import 'package:local_auth/local_auth.dart';
 
 class HelpScreen extends StatefulWidget {
   @override
@@ -9,9 +10,20 @@ class HelpScreen extends StatefulWidget {
 }
 
 class _HelpScreenState extends State<HelpScreen> {
+
+  late final LocalAuthentication auth ;
+  bool _supportState = false ;
+
   @override
   void initState() {
     super.initState();
+    auth = LocalAuthentication();
+    auth.isDeviceSupported().then(
+        (bool isSupported) => setState((){
+          _supportState = isSupported;
+        }),
+    ) ;
+
   }
   void accion(){
     setState(() {
