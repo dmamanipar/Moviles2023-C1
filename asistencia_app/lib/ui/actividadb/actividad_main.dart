@@ -204,7 +204,8 @@ class _ActividadUIState extends State<ActividadUI> {
                                     borderRadius: BorderRadius.circular(8),
                                     color: AppTheme.themeData.colorScheme.primaryContainer),
                                 child: Text(
-                                  personax.asistenciapas.isEmpty? personax.evaluar:personax.asistenciapas.first.horaReg,
+                                  //personax.asistenciapas.isEmpty? personax.evaluar:personax.asistenciapas.first.horaReg,
+                                  personax.evaluar,
                                   style: TextStyle(
                                       color: Colors.black, fontSize: 16),
                                 ),

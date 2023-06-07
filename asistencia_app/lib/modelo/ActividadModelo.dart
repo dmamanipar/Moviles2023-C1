@@ -1,15 +1,24 @@
+import 'package:floor/floor.dart';
+
+@Entity(tableName: "actividad")
 class ActividadModelo {
+  @primaryKey
   late int id=0;
+  @ColumnInfo(name: "periodo_id")
   late int periodoId;
+  @ColumnInfo(name: "nombre_actividad")
   late String nombreActividad;
   late String fecha;
   late String horai;
+  @ColumnInfo(name: "min_toler")
   late String minToler;
   late String latitud;
   late String longitud;
   late String estado;
   late String evaluar;
+  @ColumnInfo(name: "user_create")
   late String userCreate;
+  @ignore
   late List<AsistenciapaModelo> asistenciapas;
 
   ActividadModelo(
@@ -23,8 +32,8 @@ class ActividadModelo {
         required this.longitud,
         required this.estado,
         required this.evaluar,
-        required this.userCreate,
-        required this.asistenciapas});
+        required this.userCreate/*,
+        required this.asistenciapas*/});
   ActividadModelo.unlaunched();
 
   ActividadModelo.fromJson(Map<String, dynamic> json) {
