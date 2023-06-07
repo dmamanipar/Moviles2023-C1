@@ -14,4 +14,4 @@ abstract class UsuarioApi {
   }
   @POST("/api/auth/login") //davidmpx@upeu.edu.pe //D123456
   Future<TokenModelo> login(@Body() UsuarioModelo usuario);
-  }
+}

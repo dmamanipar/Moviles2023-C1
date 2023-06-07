@@ -1,5 +1,5 @@
 import 'package:google_sign_in/google_sign_in.dart';
-
+//keytool -list -v -alias androiddebugkey -keystore C:\Users\Lab-Redes\.android\debug.keystore
 GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
 //bool _isLoggedIn = false;
 String? name;

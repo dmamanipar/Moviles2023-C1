@@ -37,13 +37,13 @@ class _HomeDrawerState extends State<HomeDrawer> {
       ),
       DrawerList(
         index: DrawerIndex.FeedBack,
-        labelName: 'Persona',
+        labelName: 'Actividad',
         isAssetsImage: true,
         imageName: 'assets/imagen/man-icon.png',
       ),
       DrawerList(
         index: DrawerIndex.Help,
-        labelName: 'Persona Bloc',
+        labelName: 'Actividad Bloc',
         icon: Icon(Icons.help),
       ),
       DrawerList(

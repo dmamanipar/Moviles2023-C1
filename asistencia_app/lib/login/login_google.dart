@@ -1,8 +1,10 @@
+
 import 'package:asistencia_app/apis/usuario_api.dart';
 import 'package:asistencia_app/comp/Button.dart';
 import 'package:asistencia_app/drawer/navigation_home_screen.dart';
 import 'package:asistencia_app/login/sign_in.dart';
 import 'package:asistencia_app/modelo/UsuarioModelo.dart';
+//import 'package:asistencia_app/modelo/UsuarioModelo.dart';
 import 'package:asistencia_app/util/TokenUtil.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -140,9 +142,11 @@ class _LoginPageState extends State<LoginPage> {
                   api.login(user).then((value){
                     token=value.tokenType+" "+value.accessToken;
                     prefs.setString("token", token);
+
                     TokenUtil.TOKEN=token;
                     ingreso=true;
                     if(ingreso==true){
+                      prefs.setString("usernameLogin", _controllerUser.text);
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) {
@@ -178,10 +182,11 @@ class _LoginPageState extends State<LoginPage> {
             WidgetsFlutterBinding.ensureInitialized();
             Firebase.initializeApp();
             final api=Provider.of<UsuarioApi>(context,listen: false);
-            final user=UsuarioModelo(name: "", email: "mamanipari@gmail.com", password: "Da12345@");
+            final user=UsuarioModelo(name: "", email: "davidmp@upeu.edu.pe", password: "Da12345@");
             api.login(user).then((value){
               token=value.tokenType+" "+value.accessToken;
               prefs.setString("token", token);
+              prefs.setString("usernameLogin", '${email==null?"":email}');
               TokenUtil.TOKEN=token;
 
             }).catchError((onError){
