@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:asistencia_app/comp/CustomAppBar.dart';
 import 'package:asistencia_app/theme/AppTheme.dart';
+import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
 
 class HelpScreen extends StatefulWidget {
@@ -50,6 +51,8 @@ class _HelpScreenState extends State<HelpScreen> {
         //backgroundColor: AppTheme.nearlyWhite,
         body: Column(
           children: <Widget>[
+
+
             Container(
               padding: EdgeInsets.only(
                   top: MediaQuery.of(context).padding.top,
@@ -76,6 +79,23 @@ class _HelpScreenState extends State<HelpScreen> {
                   fontSize: 16,
                 ),
               ),
+            ),
+            if (_supportState)
+              const Text( 'This device is supported')
+            else
+              const Text( 'This device is supported'),
+            const Divider (height: 100),
+            ElevatedButton(
+              onPressed: _getAvailableBiometrics,
+              child: const Text('Get AVAVAVA'),
+            ),
+            const Divider (height: 100),
+            ElevatedButton(
+              onPressed: _authenticate,
+
+
+              child: Text('Autenticación con huella'),
+
             ),
             Expanded(
               child: Padding(
@@ -123,4 +143,33 @@ class _HelpScreenState extends State<HelpScreen> {
     ),
     );
   }
+
+  Future<void> _authenticate() async{
+    try{
+      bool authenticate = await auth.authenticate(
+          localizedReason:'Debes autenticarte para utilizar el app',
+          options: const AuthenticationOptions(
+            stickyAuth: true,
+            biometricOnly: true,
+
+          )
+
+      );
+
+    } on PlatformException catch(e){
+      print(e);
+    }
+
+  }
+  Future<void> _getAvailableBiometrics() async{
+    List<BiometricType> availableBiometrics=
+      await auth.getAvailableBiometrics();
+    print("List of avalable :$availableBiometrics");
+
+    if(!mounted) {
+      return  ;
+    }
+  }
 }
+
+
