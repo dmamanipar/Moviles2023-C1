@@ -51,11 +51,11 @@ class _HomeDrawerState extends State<HomeDrawer> {
         labelName: 'Persona Bloc Fire',
         icon: Icon(Icons.group),
       ),
-      /*DrawerList(
+      DrawerList(
         index: DrawerIndex.Share,
-        labelName: 'Rate the app',
+        labelName: 'Qr installe',
         icon: Icon(Icons.share),
-      ),*/
+      ),
       DrawerList(
         index: DrawerIndex.About,
         labelName: 'Información',

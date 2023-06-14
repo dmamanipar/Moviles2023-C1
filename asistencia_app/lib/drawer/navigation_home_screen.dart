@@ -9,6 +9,7 @@ import 'package:asistencia_app/ui/actividadb/actividad_main.dart';
 //import 'package:app_upeu/ui/beneficiariofirebloc/beneficiariof_main.dart';
 //import 'package:covidapp/drawer/feedback_screen.dart';
 import 'package:asistencia_app/ui/help_screen.dart';
+import 'package:asistencia_app/ui/scaneo/qr_code.dart';
 //import 'package:flutter_app/ui/personab/persona_main.dart';
 //import 'package:flutter_app/ui/personafire/persona_main.dart';
 
@@ -75,9 +76,9 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen> {
         setState(() {
           screenView = MainActividadB();
         });
-      }else if (drawerIndex == DrawerIndex.Invite) {
+      }else if (drawerIndex == DrawerIndex.Share) {
         setState(() {
-          //screenView = MainPersonaBFire();
+          screenView = QRCodeWidget();
         });
       } else {
         //do in your way......
