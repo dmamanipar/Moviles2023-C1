@@ -1,4 +1,4 @@
-name: asistencia_app
+name: demofirebase
 description: A new Flutter project.
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -35,34 +35,9 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  http: ^0.13.6
-  google_sign_in: ^6.0.2
-  equatable: ^2.0.4
-  flutter_bloc: ^8.1.2
-  shared_preferences: ^2.0.8
-  provider: ^6.0.4
-  toast: ^0.3.0
-  retrofit: ^4.0.1
-  json_annotation: ^4.8.1
-  dio: ^5.1.2
-  pretty_dio_logger: ^1.3.0
-  logger: ^1.3.0
-  animated_floating_buttons: ^0.0.2
-  syncfusion_flutter_charts: ^21.2.4
-  checkbox_grouped: ^1.8.2
-  sqflite: ^2.2.8
-  path_provider: ^2.0.12
-  data_connection_checker_tv: ^0.3.5-nullsafety
   cloud_firestore: ^4.8.0
   firebase_core: ^2.14.0
-  date_time_picker: "^2.0.0"
-  intl: ^0.17.0
-  geolocator: ^9.0.2
-  geocoding: ^2.1.0
-  floor: ^1.4.2
-
-dependency_overrides:
-  firebase_core_platform_interface: 4.6.0
+  http: ^0.13.6
 
 dev_dependencies:
   flutter_test:
@@ -74,11 +49,6 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
-  build_runner: ^2.4.2
-  json_serializable: ^6.6.2
-  retrofit_generator: ^6.0.0+2
-  floor_generator: ^1.4.2
-
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -91,8 +61,6 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
-  assets:
-    - assets/imagen/
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
