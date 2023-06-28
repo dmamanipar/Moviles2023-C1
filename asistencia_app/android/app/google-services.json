@@ -1,78 +1,33 @@
 {
   "project_info": {
-    "project_number": "203718619948",
-    "project_id": "loginmovil-27d61",
-    "storage_bucket": "loginmovil-27d61.appspot.com"
+    "project_number": "340613270382",
+    "project_id": "fir-crud-4d3f1",
+    "storage_bucket": "fir-crud-4d3f1.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:203718619948:android:69686c9be0247781a23289",
+        "mobilesdk_app_id": "1:340613270382:android:84ef6bf9edaf1267374f7f",
         "android_client_info": {
-          "package_name": "pe.edu.upeu.asistencia_appdmp"
+          "package_name": "pe.edu.upeu.asistencia_app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "203718619948-vvce3l76m0d9kiq31cn4tumu5jtb0tme.apps.googleusercontent.com",
+          "client_id": "340613270382-4se6du65vqr2875qch20dq2md6f4geje.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDmh8R-dVG1lA5s7rIHDU68ZXH9UiPQ5G4"
+          "current_key": "AIzaSyD3vyS7U22hOFfe-stChNojWPgWb1C3rO0"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "203718619948-vvce3l76m0d9kiq31cn4tumu5jtb0tme.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:203718619948:android:5034b60b5d2e9773a23289",
-        "android_client_info": {
-          "package_name": "pe.edu.upeu.asistencia_appdmpx"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "203718619948-dn3akhr7oavuqdkjblpilpsod9662omf.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "pe.edu.upeu.asistencia_appdmpx",
-            "certificate_hash": "fc2e6edd6de202005a6e7c071edfa5f95a7eb309"
-          }
-        },
-        {
-          "client_id": "203718619948-vk5kuomn8la62vd4338h4vm1d4vjndcu.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "pe.edu.upeu.asistencia_appdmpx",
-            "certificate_hash": "003a924652a457e834e1209ca00cb4f72d050b2a"
-          }
-        },
-        {
-          "client_id": "203718619948-vvce3l76m0d9kiq31cn4tumu5jtb0tme.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDmh8R-dVG1lA5s7rIHDU68ZXH9UiPQ5G4"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "203718619948-vvce3l76m0d9kiq31cn4tumu5jtb0tme.apps.googleusercontent.com",
+              "client_id": "340613270382-4se6du65vqr2875qch20dq2md6f4geje.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

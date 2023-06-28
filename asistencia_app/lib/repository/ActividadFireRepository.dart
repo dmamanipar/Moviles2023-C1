@@ -9,10 +9,13 @@ class ActividadFireRepository{
   CollectionReference db=FirebaseFirestore.instance.collection("actividad");
 
   Future<List<ActividadModeloFire>> getActividad() async{
+    print("Holas: Fire");
     if(await isConected()){
+      print("Holas: Fire2");
       var data=await db.get();
       var actividad=data.docs.map((e){
         //var datax=e.data() as ActividadModeloFire;
+        print("Holas: Fire2 ${json.encode(e.data())}");
         Map<String, dynamic> jsonMap = jsonDecode(json.encode(e.data()));
         ActividadModeloFire eventData = ActividadModeloFire.fromJson(jsonMap);
         eventData.id=e.id;
