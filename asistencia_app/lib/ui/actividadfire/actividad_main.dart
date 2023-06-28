@@ -1,17 +1,17 @@
 import 'package:animated_floating_buttons/animated_floating_buttons.dart';
-import 'package:asistencia_app/bloc/actividad/actividad_bloc.dart';
+import 'package:asistencia_app/bloc/actividadfire/actividad_bloc.dart';
 import 'package:asistencia_app/comp/TabItem.dart';
-import 'package:asistencia_app/repository/ActividadRepository.dart';
-import 'package:asistencia_app/ui/actividadb/actividad_edit.dart';
-import 'package:asistencia_app/ui/actividadb/actividad_form.dart';
+import 'package:asistencia_app/repository/ActividadFireRepository.dart';
+import 'package:asistencia_app/ui/actividadfire/actividad_edit.dart';
+import 'package:asistencia_app/ui/actividadfire/actividad_form.dart';
 import 'package:flutter/material.dart';
-import 'package:asistencia_app/modelo/ActividadModelo.dart';
+import 'package:asistencia_app/modelo/ActividadModeloFire.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:asistencia_app/theme/AppTheme.dart';
 import '../help_screen.dart';
 
-class MainActividadB extends StatelessWidget {
+class MainActividadBFire extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     /*return Provider<ActividadApi>(
@@ -27,7 +27,7 @@ class MainActividadB extends StatelessWidget {
 
     return MultiBlocProvider(
         providers: [
-          BlocProvider(create: (_)=>ActividadBloc(ActividadRepository())),
+          BlocProvider(create: (_)=>ActividadBlocFire(ActividadFireRepository())),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
@@ -53,7 +53,7 @@ class _ActividadUIState extends State<ActividadUI> {
   //apiService = ApiCovid();
   //api=Provider.of<PredictionApi>(context, listen: false).getPrediction();
     print("entro aqui");
-    BlocProvider.of<ActividadBloc>(context).add(ListarActividadEvent());
+    BlocProvider.of<ActividadBlocFire>(context).add(ListarActividadEvent());
   }
   final GlobalKey<AnimatedFloatingActionButtonState> key =
   GlobalKey<AnimatedFloatingActionButtonState>();
@@ -121,7 +121,7 @@ class _ActividadUIState extends State<ActividadUI> {
 
 
         backgroundColor: AppTheme.nearlyWhite,
-        body: BlocBuilder<ActividadBloc,ActividadState>(
+        body: BlocBuilder<ActividadBlocFire,ActividadState>(
             builder:(context,state){
               if(state is ActividadLoadedState){
                 return _buildListView(state.actividadList);
@@ -169,12 +169,12 @@ class _ActividadUIState extends State<ActividadUI> {
 
   }
 
-  Widget _buildListView(List<ActividadModelo> persona) {
+  Widget _buildListView(List<ActividadModeloFire> persona) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
       child: ListView.builder(
         itemBuilder: (context, index) {
-          ActividadModelo personax = persona[index];
+          ActividadModeloFire personax = persona[index];
           return Padding(
             padding: const EdgeInsets.only(top: 8.0),
             child: Card(
@@ -259,7 +259,7 @@ class _ActividadUIState extends State<ActividadUI> {
                                         }).then((value) {
                                       if (value.toString() == "Success") {
                                         print(personax.id);
-                                        BlocProvider.of<ActividadBloc>(context).add(DeleteActividadEvent(personax));
+                                        BlocProvider.of<ActividadBlocFire>(context).add(DeleteActividadEvent(personax));
                                         /*Provider.of<ActividadApi>(context,
                                             listen: false)
                                             .deleteActividad(TokenUtil.TOKEN,personax.id)

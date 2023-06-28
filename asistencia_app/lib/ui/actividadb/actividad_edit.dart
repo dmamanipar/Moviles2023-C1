@@ -1,5 +1,5 @@
 import 'package:asistencia_app/apis/actividad_api.dart';
-import 'package:asistencia_app/bloc/actividad_bloc.dart';
+import 'package:asistencia_app/bloc/actividad/actividad_bloc.dart';
 import 'package:asistencia_app/comp/DropDownFormField.dart';
 import 'package:asistencia_app/modelo/ActividadModelo.dart';
 import 'package:asistencia_app/theme/AppTheme.dart';

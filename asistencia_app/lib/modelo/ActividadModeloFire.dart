@@ -11,35 +11,35 @@ class ActividadModeloFire {
   late String evaluar;
   late String userCreate;
 
-
   ActividadModeloFire(
-      { required this.id,
-        required this.periodoId,
-        required this.nombreActividad,
-        required this.fecha,
-        required this.horai,
-        required this.minToler,
-        required this.latitud,
-        required this.longitud,
-        required this.estado,
-        required this.evaluar,
-        required this.userCreate/*,
-        required this.asistenciapas*/});
+      {required this.id,
+      required this.periodoId,
+      required this.nombreActividad,
+      required this.fecha,
+      required this.horai,
+      required this.minToler,
+      required this.latitud,
+      required this.longitud,
+      required this.estado,
+      required this.evaluar,
+      required this.userCreate /*,
+        required this.asistenciapas*/
+      });
   ActividadModeloFire.unlaunched();
 
-  ActividadModeloFire.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    periodoId = json['periodo_id'];
-    nombreActividad = json['nombre_actividad'];
-    fecha = json['fecha'];
-    horai = json['horai'];
-    minToler = json['min_toler'];
-    latitud = json['latitud'];
-    longitud = json['longitud'];
-    estado = json['estado'];
-    evaluar = json['evaluar'];
-    userCreate = json['user_create'];
-
+  factory ActividadModeloFire.fromJson(Map<String, dynamic> json) {
+    return ActividadModeloFire(
+        id: json['id']==null?"0":json['id'],
+        periodoId: json['periodo_id'],
+        nombreActividad: json['nombre_actividad'],
+        fecha: json['fecha'],
+        horai: json['horai'],
+        minToler: json['min_toler'],
+        latitud: json['latitud'],
+        longitud: json['longitud'],
+        estado: json['estado'],
+        evaluar: json['evaluar'],
+        userCreate: json['user_create']);
   }
 
   Map<String, dynamic> toJson() {
@@ -59,8 +59,8 @@ class ActividadModeloFire {
     return data;
   }
 
-  Map<String, dynamic> toMap(){
-    var data=Map<String, dynamic>();
+  Map<String, dynamic> toMap() {
+    var data = Map<String, dynamic>();
     data['id'] = this.id;
     data['periodo_id'] = this.periodoId;
     data['nombre_actividad'] = this.nombreActividad;
@@ -74,5 +74,4 @@ class ActividadModeloFire {
     data['user_create'] = this.userCreate;
     return data;
   }
-
 }

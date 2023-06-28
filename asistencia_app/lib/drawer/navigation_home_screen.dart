@@ -4,6 +4,7 @@ import 'package:asistencia_app/drawer/drawer_user_controller.dart';
 import 'package:asistencia_app/drawer/home_drawer.dart';
 import 'package:asistencia_app/ui/actividad/actividad_main.dart';
 import 'package:asistencia_app/ui/actividadb/actividad_main.dart';
+import 'package:asistencia_app/ui/actividadfire/actividad_main.dart';
 //import 'package:app_upeu/ui/beneficiario/beneficiario_main.dart';
 //import 'package:app_upeu/ui/beneficiariobloc/beneficiariob_main.dart';
 //import 'package:app_upeu/ui/beneficiariofirebloc/beneficiariof_main.dart';
@@ -77,7 +78,7 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen> {
         });
       }else if (drawerIndex == DrawerIndex.Invite) {
         setState(() {
-          //screenView = MainPersonaBFire();
+          screenView = MainActividadBFire();
         });
       } else {
         //do in your way......

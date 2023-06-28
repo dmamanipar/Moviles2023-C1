@@ -1,32 +1,37 @@
 
-import 'package:asistencia_app/bloc/actividad/actividad_bloc.dart';
+import 'package:asistencia_app/bloc/actividadfire/actividad_bloc.dart';
 import 'package:asistencia_app/comp/DropDownFormField.dart';
-import 'package:asistencia_app/modelo/ActividadModelo.dart';
+import 'package:asistencia_app/modelo/ActividadModeloFire.dart';
 import 'package:asistencia_app/theme/AppTheme.dart';
+import 'package:asistencia_app/util/TokenUtil.dart';
 import 'package:checkbox_grouped/checkbox_grouped.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-class ActividadForm extends StatefulWidget {
+class ActividadFormEdit extends StatefulWidget {
+  ActividadModeloFire modelA;
+  ActividadFormEdit({required this.modelA}):super();
   @override
-  _ActividadFormState createState() => _ActividadFormState();
+  _ActividadFormEditState createState() =>_ActividadFormEditState(modelA: modelA);
 }
-
-class _ActividadFormState extends State<ActividadForm> {
-  late int _periodoId = 0;
-  late String _nombreActividad = "";
+class _ActividadFormEditState extends State<ActividadFormEdit> {
+  ActividadModeloFire modelA;
+  _ActividadFormEditState({required this.modelA}):super();
+  late int _periodoId=0;
+  late String _nombreActividad="";
   TextEditingController _fecha = new TextEditingController();
   DateTime? selectedDate;
   TextEditingController _horai = new TextEditingController();
   TextEditingController _minToler = new TextEditingController();
   TimeOfDay? selectedTime;
-  late String _estado = "D";
+  late String _estado="D";
   Position? currentPosition;
-  final GeolocatorPlatform _geolocatorPlatform = GeolocatorPlatform.instance;
-  late String _evaluar = "NO";
+  final GeolocatorPlatform _geolocatorPlatform =
+      GeolocatorPlatform.instance;
+  late String _evaluar="NO";
   late String _userCreate;
   var _data = [];
   List<Map<String, String>> lista = [
@@ -37,56 +42,29 @@ class _ActividadFormState extends State<ActividadForm> {
     {'value': 'SI', 'display': 'SI'},
     {'value': 'NO', 'display': 'NO'}
   ];
-
   @override
   void initState() {
     super.initState();
+    print(modelA.fecha);
+    _fecha.text=modelA.fecha;
+    _horai.text=modelA.horai;
+    _minToler.text=modelA.minToler;
     print("ver: ${lista.map((item) => item['value']).toList()}");
     print("verv: ${lista.map((item) => item['display']).toList()}");
   }
-
   final _formKey = GlobalKey<FormState>();
   GroupController controller = GroupController();
   GroupController multipleCheckController = GroupController(
     isMultipleSelection: true,
-  );
-
-  void capturaNombreAct(valor) {
-    this._nombreActividad = valor;
-  }
-
-  void capturaPeriodo(valor) {
-    this._periodoId = valor;
-  }
-
-  void capturaFecha(valor) {
-    this._fecha.text = valor;
-  }
-
-  void capturaHorai(valor) {
-    this._horai.text = valor;
-  }
-
-  void capturaMinToler(valor) {
-    this._minToler.text = valor;
-  }
-
-  void capturaEstado(valor) {
-    this._estado = valor;
-  }
-
-  void capturaEvaluar(valor) {
-    this._evaluar = valor;
-  }
-
-  TextEditingController capMinToler() {
-    return this._minToler;
-  }
-
-  TextEditingController capHorai() {
-    return this._horai;
-  }
-
+  );void capturaNombreAct(valor){ this._nombreActividad=valor;}
+  void capturaPeriodo(valor){ this._periodoId=valor;}
+  void capturaFecha(valor){ this._fecha.text=valor;}
+  void capturaHorai(valor){ this._horai.text=valor;}
+  void capturaMinToler(valor){ this._minToler.text=valor;}
+  void capturaEstado(valor){ this._estado=valor;}
+  void capturaEvaluar(valor){ this._evaluar=valor;}
+  TextEditingController capMinToler(){return this._minToler;}
+  TextEditingController capHorai(){return this._horai;}
   @override
   Widget build(BuildContext context) {
     getCurrentLocation();
@@ -106,17 +84,21 @@ class _ActividadFormState extends State<ActividadForm> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    _buildDatoEntero(capturaPeriodo, "PeriodoID:"),
-                    _buildDatoCadena(capturaNombreAct, "Nombre Actividad:"),
-                    _buildDatoFecha(capturaFecha, "F.Evento"),
+                    _buildDatoEntero(capturaPeriodo,
+                        modelA.periodoId.toString(), "PeriodoID:"),
+                    _buildDatoCadena(capturaNombreAct,
+                        modelA.nombreActividad, "Nombre Actividad:"),
+                    _buildDatoFecha(capturaFecha,"F.Evento"),
                     _buildDatoHora(capturaHorai, capHorai, "H.Inicio:"),
-                    _buildDatoHora(
-                        capturaMinToler, capMinToler, "M.Tolerancia:"),
-                    _buildDatoLista(capturaEstado, _estado, "Estado:", lista),
-                    _buildDatoLista(
-                        capturaEvaluar, _evaluar, "Evaluar:", listaEva),
+                    _buildDatoHora(capturaMinToler, capMinToler,
+                        "M.Tolerancia:"),
+                    _buildDatoLista(capturaEstado,_estado=modelA.estado,
+                        "Estado:", lista),
+                    _buildDatoLista(capturaEvaluar,_evaluar=modelA.evaluar, "Evaluar:",
+                        listaEva),
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 16.0),
+                      padding: const EdgeInsets.symmetric(vertical:
+                      16.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -125,47 +107,52 @@ class _ActividadFormState extends State<ActividadForm> {
                                 Navigator.pop(context, true);
                               },
                               child: Text('Cancelar')),
-                          ElevatedButton(
-                            onPressed: () async {
-                              if (_formKey.currentState!.validate()) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text('Processing Data'),
-                                  ),
-                                );
-                                _formKey.currentState!.save();
-                                ActividadModelo mp = new ActividadModelo.unlaunched();
-                                mp.periodoId = _periodoId;
-                                mp.nombreActividad = _nombreActividad;
-                                mp.fecha = _fecha.value.text;
-                                mp.horai = _horai.value.text;
-                                mp.minToler = _minToler.value.text;
-                                mp.latitud = currentPosition!.latitude.toString();
-                                mp.longitud =currentPosition!.longitude.toString();
-                                mp.estado = _estado;
-                                mp.evaluar = _evaluar;
-                                final prefs = await SharedPreferences.getInstance();
-                                mp.userCreate ="${prefs.getString('usernameLogin')}";
-                                mp.asistenciapas = [];
-                                BlocProvider.of<ActividadBloc>(context).add(CreateActividadEvent(mp));
-                                Navigator.pop(context,(){});
-                               /* var api = await Provider.of<ActividadApi>(context,listen: false)
-                                    .createActividad(TokenUtil.TOKEN, mp);
-                                print("ver: ${api.toJson()['success']}");
-                                if (api.toJson()['success'] == true) {
-                                  Navigator.pop(context, () {
-                                    setState(() {});
-                                  });
-                                }*/
-                              } else {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text(
-                                        'No estan bien los datos de los campos!'),
-                                  ),
-                                );
-                              }
-                            },
+                          ElevatedButton(onPressed: () async {
+                            if (_formKey.currentState!.validate()) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Processing Data'),
+                                ),
+                              );
+                              _formKey.currentState!.save();
+                              ActividadModeloFire mp = ActividadModeloFire.unlaunched();
+                              mp.periodoId = _periodoId;
+                              mp.nombreActividad = _nombreActividad;
+                              mp.fecha=_fecha.value.text;
+                              mp.horai=_horai.value.text;
+                              mp.minToler=_minToler.value.text;
+                              mp.latitud=currentPosition!.latitude.toString();
+                              mp.longitud=currentPosition!.longitude.toString();
+                              mp.estado=_estado;
+                              mp.evaluar=_evaluar;
+                              mp.id=modelA.id;
+                              final prefs= await
+                              SharedPreferences.getInstance();
+                              mp.userCreate ="${prefs.getString('usernameLogin')}";
+                              //mp.asistenciapas=[];
+                              BlocProvider.of<ActividadBlocFire>(context).add(UpdateActividadEvent(mp));
+                              Navigator.pop(context,(){});
+                            /*var api = await
+                            Provider.of<ActividadApi>(
+                            context,
+                            listen: false)
+                                .updateActividad(TokenUtil.TOKEN,modelA.id.toInt(), mp);
+                            print("ver: ${api.toJson()['success']}");
+                            if (api.toJson()['success'] ==
+                            true) {
+                            Navigator.pop(context, () {
+                            setState(() {});
+                            });
+// Navigator.push(context,MaterialPageRoute(builder: (context) => NavigationHomeScreen()));
+                            }*/
+                            } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                            content: Text('No estan bien los datos de los campos!'),
+                            ),
+                            );
+                            }
+                          },
                             child: const Text('Guardar'),
                           ),
                         ],
@@ -176,10 +163,10 @@ class _ActividadFormState extends State<ActividadForm> {
               ))),
     );
   }
-
-  Widget _buildDatoEntero(Function obtValor, String label) {
+  Widget _buildDatoEntero(Function obtValor, String _dato,String label) {
     return TextFormField(
       decoration: InputDecoration(labelText: label),
+      initialValue: _dato,
       keyboardType: TextInputType.number,
       validator: (String? value) {
         if (value!.isEmpty) {
@@ -192,10 +179,10 @@ class _ActividadFormState extends State<ActividadForm> {
       },
     );
   }
-
-  Widget _buildDatoCadena(Function obtValor, String label) {
+  Widget _buildDatoCadena(Function obtValor,String _dato, String label) {
     return TextFormField(
       decoration: InputDecoration(labelText: label),
+      initialValue: _dato,
       keyboardType: TextInputType.text,
       validator: (String? value) {
         if (value!.isEmpty) {
@@ -208,18 +195,16 @@ class _ActividadFormState extends State<ActividadForm> {
       },
     );
   }
-
-  Widget _buildDatoLista(
-      Function obtValor, _dato, String label, List<dynamic> listaDato) {
+  Widget _buildDatoLista(Function obtValor,_dato, String label,
+      List<dynamic> listaDato) {
     return DropDownFormField(
       titleText: label,
       hintText: 'Seleccione',
-      value: _dato,
-      onSaved: (value) {
-        setState(() {
-          obtValor(value);
-        });
-      },
+      value: _dato,onSaved: (value) {
+      setState(() {
+        obtValor(value);
+      });
+    },
       onChanged: (value) {
         setState(() {
           obtValor(value);
@@ -230,8 +215,8 @@ class _ActividadFormState extends State<ActividadForm> {
       valueField: 'value',
     );
   }
-
-  Future<void> _selectDate(BuildContext context, Function obtValor) async {
+  Future<void> _selectDate(BuildContext context, Function obtValor) async
+  {
     final DateTime? pickedDate = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
@@ -245,7 +230,6 @@ class _ActividadFormState extends State<ActividadForm> {
       });
     }
   }
-
   Widget _buildDatoFecha(Function obtValor, String label) {
     return TextFormField(
       decoration: InputDecoration(labelText: label),
@@ -257,25 +241,26 @@ class _ActividadFormState extends State<ActividadForm> {
         }
         return null;
       },
-      onTap: () {
-        _selectDate(context, obtValor);
+      onTap: (){
+        _selectDate(context,obtValor);
       },
       onSaved: (String? value) {
         obtValor(value!);
       },
     );
   }
-
-  Future<void> _selectTime(BuildContext context, Function obtValor) async {
+  Future<void> _selectTime(BuildContext context,Function obtValor) async
+  {
     final TimeOfDay? picked = await showTimePicker(
         context: context,
         initialTime: TimeOfDay.now(),
-        builder: (BuildContext? context, Widget? child) {
-          return MediaQuery(
-            data: MediaQuery.of(context!).copyWith(alwaysUse24HourFormat: true),
-            child: child!,
-          );
-        });
+        builder: (BuildContext? context, Widget? child){return MediaQuery(
+          data: MediaQuery.of(context!).copyWith(alwaysUse24HourFormat:
+          true),
+          child: child!,
+        );
+        }
+    );
     if (picked != null && picked != selectedTime) {
       setState(() {
         selectedTime = picked;
@@ -284,8 +269,8 @@ class _ActividadFormState extends State<ActividadForm> {
       });
     }
   }
-
-  Widget _buildDatoHora(Function obtValor, Function capControl, String label) {
+  Widget _buildDatoHora(Function obtValor, Function capControl, String
+  label) {
     return TextFormField(
       decoration: InputDecoration(labelText: label),
       controller: capControl(),
@@ -296,7 +281,7 @@ class _ActividadFormState extends State<ActividadForm> {
         }
         return null;
       },
-      onTap: () {
+      onTap: (){
         _selectTime(context, obtValor);
       },
       onSaved: (String? value) {
@@ -305,11 +290,11 @@ class _ActividadFormState extends State<ActividadForm> {
       },
     );
   }
-
-  Future<bool> permiso() async {
+  Future<bool> permiso() async{
     bool serviceEnabled;
     LocationPermission permission;
-    serviceEnabled = await _geolocatorPlatform.isLocationServiceEnabled();
+    serviceEnabled = await
+    _geolocatorPlatform.isLocationServiceEnabled();
     if (!serviceEnabled) {
       return false;
     }
@@ -323,17 +308,15 @@ class _ActividadFormState extends State<ActividadForm> {
     if (permission == LocationPermission.deniedForever) {
       return false;
     }
-    return true;
-  }
-
+    return true;}
   Future<void> getCurrentLocation() async {
     final hasPermission = await permiso();
     if (!hasPermission) {
       return;
     }
     Geolocator.getCurrentPosition(
-            desiredAccuracy: LocationAccuracy.best,
-            forceAndroidLocationManager: true)
+        desiredAccuracy: LocationAccuracy.best,
+        forceAndroidLocationManager: true)
         .then((Position position) {
       setState(() {
         currentPosition = position;

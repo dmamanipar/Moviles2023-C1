@@ -1,4 +1,6 @@
 
+import 'dart:convert';
+
 import 'package:asistencia_app/modelo/ActividadModeloFire.dart';
 import 'package:asistencia_app/util/NetworConnection.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -10,9 +12,11 @@ class ActividadFireRepository{
     if(await isConected()){
       var data=await db.get();
       var actividad=data.docs.map((e){
-        var datax=e.data() as ActividadModeloFire;
-        datax.id=e.id;
-        return datax;
+        //var datax=e.data() as ActividadModeloFire;
+        Map<String, dynamic> jsonMap = jsonDecode(json.encode(e.data()));
+        ActividadModeloFire eventData = ActividadModeloFire.fromJson(jsonMap);
+        eventData.id=e.id;
+        return eventData;
       }).toList();
       return actividad;
     }else{

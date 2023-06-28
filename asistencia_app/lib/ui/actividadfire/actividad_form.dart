@@ -1,7 +1,9 @@
 
-import 'package:asistencia_app/bloc/actividad/actividad_bloc.dart';
+
+import 'package:asistencia_app/bloc/actividadfire/actividad_bloc.dart';
 import 'package:asistencia_app/comp/DropDownFormField.dart';
-import 'package:asistencia_app/modelo/ActividadModelo.dart';
+import 'package:asistencia_app/modelo/ActividadModeloFire.dart';
+
 import 'package:asistencia_app/theme/AppTheme.dart';
 import 'package:checkbox_grouped/checkbox_grouped.dart';
 import 'package:flutter/cupertino.dart';
@@ -134,7 +136,7 @@ class _ActividadFormState extends State<ActividadForm> {
                                   ),
                                 );
                                 _formKey.currentState!.save();
-                                ActividadModelo mp = new ActividadModelo.unlaunched();
+                                ActividadModeloFire mp = new ActividadModeloFire.unlaunched();
                                 mp.periodoId = _periodoId;
                                 mp.nombreActividad = _nombreActividad;
                                 mp.fecha = _fecha.value.text;
@@ -146,8 +148,8 @@ class _ActividadFormState extends State<ActividadForm> {
                                 mp.evaluar = _evaluar;
                                 final prefs = await SharedPreferences.getInstance();
                                 mp.userCreate ="${prefs.getString('usernameLogin')}";
-                                mp.asistenciapas = [];
-                                BlocProvider.of<ActividadBloc>(context).add(CreateActividadEvent(mp));
+                                //mp.asistenciapas = [];
+                                BlocProvider.of<ActividadBlocFire>(context).add(CreateActividadEvent(mp));
                                 Navigator.pop(context,(){});
                                /* var api = await Provider.of<ActividadApi>(context,listen: false)
                                     .createActividad(TokenUtil.TOKEN, mp);
