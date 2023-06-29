@@ -1,5 +1,5 @@
 class ActividadModeloFire {
-  late String id;
+  late String id="";
   late int periodoId;
   late String nombreActividad;
   late String fecha;

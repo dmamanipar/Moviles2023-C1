@@ -84,7 +84,7 @@ class _ActividadUIState extends State<ActividadUI> {
 
         appBar: new AppBar(
           title: Text(
-            'Lista de Personas',
+            'Lista de Personas BF',
           ),
           automaticallyImplyLeading: false,
           centerTitle: true,

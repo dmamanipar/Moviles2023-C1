@@ -95,7 +95,7 @@ class _ActividadFormState extends State<ActividadForm> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: const Text("Form. Reg. Actividad"),
+        title: const Text("Form. Reg. Actividad BF"),
         automaticallyImplyLeading: false,
         centerTitle: true,
       ),
